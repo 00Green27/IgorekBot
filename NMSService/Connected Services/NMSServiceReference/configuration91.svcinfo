@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="jajvEVCAEdvdc5Q3m6yYQjJgzR8=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="5ffGyzmRHpsxBp8L8WjLWaH2Dlk=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="basicHttpBinding" name="TimeSheetBotService_Binding">
       <properties>
@@ -112,7 +112,7 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="TimeSheetBotService_Port" contract="NMSSernice.TimeSheetBotService_Port" bindingType="basicHttpBinding" address="http://nmstsbot.ncdev.ru:7047/NMS_DEV/WS/PROD_2015-02-23_CUTTED/Codeunit/TimeSheetBotService" bindingConfiguration="TimeSheetBotService_Binding">
+    <endpoint name="TimeSheetBotService_Port" contract="NMSServiceReference.TimeSheetBotService_Port" bindingType="basicHttpBinding" address="http://nmstsbot.ncdev.ru:7047/NMS_DEV/WS/PROD_2015-02-23_CUTTED/Codeunit/TimeSheetBotService" bindingConfiguration="TimeSheetBotService_Binding">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>http://nmstsbot.ncdev.ru:7047/NMS_DEV/WS/PROD_2015-02-23_CUTTED/Codeunit/TimeSheetBotService</serializedValue>
@@ -127,7 +127,7 @@
           <serializedValue>TimeSheetBotService_Binding</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>NMSSernice.TimeSheetBotService_Port</serializedValue>
+          <serializedValue>NMSServiceReference.TimeSheetBotService_Port</serializedValue>
         </property>
         <property path="/headers" isComplexType="true" isExplicitlyDefined="false" clrType="System.ServiceModel.Configuration.AddressHeaderCollectionElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>System.ServiceModel.Configuration.AddressHeaderCollectionElement</serializedValue>

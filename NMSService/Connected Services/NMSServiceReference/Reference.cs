@@ -8,84 +8,84 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace NMSService.NMSSernice {
+namespace NMSService.NMSServiceReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", ConfigurationName="NMSSernice.TimeSheetBotService_Port")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", ConfigurationName="NMSServiceReference.TimeSheetBotService_Port")]
     public interface TimeSheetBotService_Port {
         
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByPhoneNo", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        NMSService.NMSSernice.GetEmployeeByPhoneNo_Result GetEmployeeByPhoneNo(NMSService.NMSSernice.GetEmployeeByPhoneNo request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByPhoneNo", ReplyAction="*")]
-        System.Threading.Tasks.Task<NMSService.NMSSernice.GetEmployeeByPhoneNo_Result> GetEmployeeByPhoneNoAsync(NMSService.NMSSernice.GetEmployeeByPhoneNo request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:TimeSheetsPerDay", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        NMSService.NMSSernice.TimeSheetsPerDay_Result TimeSheetsPerDay(NMSService.NMSSernice.TimeSheetsPerDay request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:TimeSheetsPerDay", ReplyAction="*")]
-        System.Threading.Tasks.Task<NMSService.NMSSernice.TimeSheetsPerDay_Result> TimeSheetsPerDayAsync(NMSService.NMSSernice.TimeSheetsPerDay request);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:TimeSheetsPerWeek", ReplyAction="*")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        NMSService.NMSSernice.TimeSheetsPerWeek_Result TimeSheetsPerWeek(NMSService.NMSSernice.TimeSheetsPerWeek request);
-        
-        // CODEGEN: Generating message contract since the operation has multiple return values.
-        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:TimeSheetsPerWeek", ReplyAction="*")]
-        System.Threading.Tasks.Task<NMSService.NMSSernice.TimeSheetsPerWeek_Result> TimeSheetsPerWeekAsync(NMSService.NMSSernice.TimeSheetsPerWeek request);
-        
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByID", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        NMSService.NMSSernice.GetEmployeeByID_Result GetEmployeeByID(NMSService.NMSSernice.GetEmployeeByID request);
+        NMSService.NMSServiceReference.GetEmployeeByID_Result GetEmployeeByID(NMSService.NMSServiceReference.GetEmployeeByID request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByID", ReplyAction="*")]
-        System.Threading.Tasks.Task<NMSService.NMSSernice.GetEmployeeByID_Result> GetEmployeeByIDAsync(NMSService.NMSSernice.GetEmployeeByID request);
+        System.Threading.Tasks.Task<NMSService.NMSServiceReference.GetEmployeeByID_Result> GetEmployeeByIDAsync(NMSService.NMSServiceReference.GetEmployeeByID request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByPhoneNo", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        NMSService.NMSServiceReference.GetEmployeeByPhoneNo_Result GetEmployeeByPhoneNo(NMSService.NMSServiceReference.GetEmployeeByPhoneNo request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByPhoneNo", ReplyAction="*")]
+        System.Threading.Tasks.Task<NMSService.NMSServiceReference.GetEmployeeByPhoneNo_Result> GetEmployeeByPhoneNoAsync(NMSService.NMSServiceReference.GetEmployeeByPhoneNo request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:TimeSheetsPerDay", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        NMSService.NMSServiceReference.TimeSheetsPerDay_Result TimeSheetsPerDay(NMSService.NMSServiceReference.TimeSheetsPerDay request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:TimeSheetsPerDay", ReplyAction="*")]
+        System.Threading.Tasks.Task<NMSService.NMSServiceReference.TimeSheetsPerDay_Result> TimeSheetsPerDayAsync(NMSService.NMSServiceReference.TimeSheetsPerDay request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:TimeSheetsPerWeek", ReplyAction="*")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        NMSService.NMSServiceReference.TimeSheetsPerWeek_Result TimeSheetsPerWeek(NMSService.NMSServiceReference.TimeSheetsPerWeek request);
+        
+        // CODEGEN: Generating message contract since the operation has multiple return values.
+        [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:TimeSheetsPerWeek", ReplyAction="*")]
+        System.Threading.Tasks.Task<NMSService.NMSServiceReference.TimeSheetsPerWeek_Result> TimeSheetsPerWeekAsync(NMSService.NMSServiceReference.TimeSheetsPerWeek request);
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:AddEmployeeByEMail", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        NMSService.NMSSernice.AddEmployeeByEMail_Result AddEmployeeByEMail(NMSService.NMSSernice.AddEmployeeByEMail request);
+        NMSService.NMSServiceReference.AddEmployeeByEMail_Result AddEmployeeByEMail(NMSService.NMSServiceReference.AddEmployeeByEMail request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:AddEmployeeByEMail", ReplyAction="*")]
-        System.Threading.Tasks.Task<NMSService.NMSSernice.AddEmployeeByEMail_Result> AddEmployeeByEMailAsync(NMSService.NMSSernice.AddEmployeeByEMail request);
+        System.Threading.Tasks.Task<NMSService.NMSServiceReference.AddEmployeeByEMail_Result> AddEmployeeByEMailAsync(NMSService.NMSServiceReference.AddEmployeeByEMail request);
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:ValidatePassCode", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        NMSService.NMSSernice.ValidatePassCode_Result ValidatePassCode(NMSService.NMSSernice.ValidatePassCode request);
+        NMSService.NMSServiceReference.ValidatePassCode_Result ValidatePassCode(NMSService.NMSServiceReference.ValidatePassCode request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:ValidatePassCode", ReplyAction="*")]
-        System.Threading.Tasks.Task<NMSService.NMSSernice.ValidatePassCode_Result> ValidatePassCodeAsync(NMSService.NMSSernice.ValidatePassCode request);
+        System.Threading.Tasks.Task<NMSService.NMSServiceReference.ValidatePassCode_Result> ValidatePassCodeAsync(NMSService.NMSServiceReference.ValidatePassCode request);
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeProjects", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        NMSService.NMSSernice.GetEmployeeProjects_Result GetEmployeeProjects(NMSService.NMSSernice.GetEmployeeProjects request);
+        NMSService.NMSServiceReference.GetEmployeeProjects_Result GetEmployeeProjects(NMSService.NMSServiceReference.GetEmployeeProjects request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeProjects", ReplyAction="*")]
-        System.Threading.Tasks.Task<NMSService.NMSSernice.GetEmployeeProjects_Result> GetEmployeeProjectsAsync(NMSService.NMSSernice.GetEmployeeProjects request);
+        System.Threading.Tasks.Task<NMSService.NMSServiceReference.GetEmployeeProjects_Result> GetEmployeeProjectsAsync(NMSService.NMSServiceReference.GetEmployeeProjects request);
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeTasks", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        NMSService.NMSSernice.GetEmployeeTasks_Result GetEmployeeTasks(NMSService.NMSSernice.GetEmployeeTasks request);
+        NMSService.NMSServiceReference.GetEmployeeTasks_Result GetEmployeeTasks(NMSService.NMSServiceReference.GetEmployeeTasks request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeTasks", ReplyAction="*")]
-        System.Threading.Tasks.Task<NMSService.NMSSernice.GetEmployeeTasks_Result> GetEmployeeTasksAsync(NMSService.NMSSernice.GetEmployeeTasks request);
+        System.Threading.Tasks.Task<NMSService.NMSServiceReference.GetEmployeeTasks_Result> GetEmployeeTasksAsync(NMSService.NMSServiceReference.GetEmployeeTasks request);
         
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:AddTimeSheet", ReplyAction="*")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        NMSService.NMSSernice.AddTimeSheet_Result AddTimeSheet(NMSService.NMSSernice.AddTimeSheet request);
+        NMSService.NMSServiceReference.AddTimeSheet_Result AddTimeSheet(NMSService.NMSServiceReference.AddTimeSheet request);
         
         // CODEGEN: Generating message contract since the operation has multiple return values.
         [System.ServiceModel.OperationContractAttribute(Action="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:AddTimeSheet", ReplyAction="*")]
-        System.Threading.Tasks.Task<NMSService.NMSSernice.AddTimeSheet_Result> AddTimeSheetAsync(NMSService.NMSSernice.AddTimeSheet request);
+        System.Threading.Tasks.Task<NMSService.NMSServiceReference.AddTimeSheet_Result> AddTimeSheetAsync(NMSService.NMSServiceReference.AddTimeSheet request);
     }
     
     /// <remarks/>
@@ -93,7 +93,7 @@ namespace NMSService.NMSSernice {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50070")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50073")]
     public partial class root : object, System.ComponentModel.INotifyPropertyChanged {
         
         private Employee[] employeeField;
@@ -139,7 +139,7 @@ namespace NMSService.NMSSernice {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50070")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50073")]
     public partial class Employee : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string noField;
@@ -147,8 +147,6 @@ namespace NMSService.NMSSernice {
         private string firstNameField;
         
         private string lastNameField;
-        
-        private string phoneNoField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("No.", Order=0)]
@@ -183,18 +181,6 @@ namespace NMSService.NMSSernice {
             set {
                 this.lastNameField = value;
                 this.RaisePropertyChanged("LastName");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("PhoneNo.", Order=3)]
-        public string PhoneNo {
-            get {
-                return this.phoneNoField;
-            }
-            set {
-                this.phoneNoField = value;
-                this.RaisePropertyChanged("PhoneNo");
             }
         }
         
@@ -425,112 +411,6 @@ namespace NMSService.NMSSernice {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="Employee", Namespace="urn:microsoft-dynamics-nav/xmlports/x50073")]
-    public partial class Employee1 : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private string noField;
-        
-        private string firstNameField;
-        
-        private string lastNameField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("No.", Order=0)]
-        public string No {
-            get {
-                return this.noField;
-            }
-            set {
-                this.noField = value;
-                this.RaisePropertyChanged("No");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
-        public string FirstName {
-            get {
-                return this.firstNameField;
-            }
-            set {
-                this.firstNameField = value;
-                this.RaisePropertyChanged("FirstName");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
-        public string LastName {
-            get {
-                return this.lastNameField;
-            }
-            set {
-                this.lastNameField = value;
-                this.RaisePropertyChanged("LastName");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="root", Namespace="urn:microsoft-dynamics-nav/xmlports/x50073")]
-    public partial class root3 : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private Employee1[] employeeField;
-        
-        private string[] textField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Employee", Order=0)]
-        public Employee1[] Employee {
-            get {
-                return this.employeeField;
-            }
-            set {
-                this.employeeField = value;
-                this.RaisePropertyChanged("Employee");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-                this.RaisePropertyChanged("Text");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="TimeSheet", Namespace="urn:microsoft-dynamics-nav/xmlports/x50072")]
     public partial class TimeSheet1 : object, System.ComponentModel.INotifyPropertyChanged {
         
@@ -592,7 +472,7 @@ namespace NMSService.NMSSernice {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="root", Namespace="urn:microsoft-dynamics-nav/xmlports/x50072")]
-    public partial class root2 : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class root3 : object, System.ComponentModel.INotifyPropertyChanged {
         
         private TimeSheet1[] timeSheetField;
         
@@ -782,7 +662,7 @@ namespace NMSService.NMSSernice {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="root", Namespace="urn:microsoft-dynamics-nav/xmlports/x50071")]
-    public partial class root1 : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class root2 : object, System.ComponentModel.INotifyPropertyChanged {
         
         private TimeSheet[] timeSheetField;
         
@@ -822,6 +702,178 @@ namespace NMSService.NMSSernice {
         }
     }
     
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="Employee", Namespace="urn:microsoft-dynamics-nav/xmlports/x50070")]
+    public partial class Employee1 : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private string noField;
+        
+        private string firstNameField;
+        
+        private string lastNameField;
+        
+        private string phoneNoField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("No.", Order=0)]
+        public string No {
+            get {
+                return this.noField;
+            }
+            set {
+                this.noField = value;
+                this.RaisePropertyChanged("No");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+        public string FirstName {
+            get {
+                return this.firstNameField;
+            }
+            set {
+                this.firstNameField = value;
+                this.RaisePropertyChanged("FirstName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Order=2)]
+        public string LastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                this.lastNameField = value;
+                this.RaisePropertyChanged("LastName");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("PhoneNo.", Order=3)]
+        public string PhoneNo {
+            get {
+                return this.phoneNoField;
+            }
+            set {
+                this.phoneNoField = value;
+                this.RaisePropertyChanged("PhoneNo");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="root", Namespace="urn:microsoft-dynamics-nav/xmlports/x50070")]
+    public partial class root1 : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private Employee1[] employeeField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Employee", Order=0)]
+        public Employee1[] Employee {
+            get {
+                return this.employeeField;
+            }
+            set {
+                this.employeeField = value;
+                this.RaisePropertyChanged("Employee");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+                this.RaisePropertyChanged("Text");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetEmployeeByID", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", IsWrapped=true)]
+    public partial class GetEmployeeByID {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=0)]
+        public int channelType;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=1)]
+        public string channelID;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
+        public NMSService.NMSServiceReference.root employeeByIDXMLPort;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=3)]
+        public string errorText;
+        
+        public GetEmployeeByID() {
+        }
+        
+        public GetEmployeeByID(int channelType, string channelID, NMSService.NMSServiceReference.root employeeByIDXMLPort, string errorText) {
+            this.channelType = channelType;
+            this.channelID = channelID;
+            this.employeeByIDXMLPort = employeeByIDXMLPort;
+            this.errorText = errorText;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetEmployeeByID_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", IsWrapped=true)]
+    public partial class GetEmployeeByID_Result {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=0)]
+        public int return_value;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=1)]
+        public NMSService.NMSServiceReference.root employeeByIDXMLPort;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
+        public string errorText;
+        
+        public GetEmployeeByID_Result() {
+        }
+        
+        public GetEmployeeByID_Result(int return_value, NMSService.NMSServiceReference.root employeeByIDXMLPort, string errorText) {
+            this.return_value = return_value;
+            this.employeeByIDXMLPort = employeeByIDXMLPort;
+            this.errorText = errorText;
+        }
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.MessageContractAttribute(WrapperName="GetEmployeeByPhoneNo", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", IsWrapped=true)]
@@ -831,12 +883,12 @@ namespace NMSService.NMSSernice {
         public string phoneNo;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=1)]
-        public NMSService.NMSSernice.root employeeXMLPort;
+        public NMSService.NMSServiceReference.root1 employeeXMLPort;
         
         public GetEmployeeByPhoneNo() {
         }
         
-        public GetEmployeeByPhoneNo(string phoneNo, NMSService.NMSSernice.root employeeXMLPort) {
+        public GetEmployeeByPhoneNo(string phoneNo, NMSService.NMSServiceReference.root1 employeeXMLPort) {
             this.phoneNo = phoneNo;
             this.employeeXMLPort = employeeXMLPort;
         }
@@ -848,12 +900,12 @@ namespace NMSService.NMSSernice {
     public partial class GetEmployeeByPhoneNo_Result {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=0)]
-        public NMSService.NMSSernice.root employeeXMLPort;
+        public NMSService.NMSServiceReference.root1 employeeXMLPort;
         
         public GetEmployeeByPhoneNo_Result() {
         }
         
-        public GetEmployeeByPhoneNo_Result(NMSService.NMSSernice.root employeeXMLPort) {
+        public GetEmployeeByPhoneNo_Result(NMSService.NMSServiceReference.root1 employeeXMLPort) {
             this.employeeXMLPort = employeeXMLPort;
         }
     }
@@ -871,7 +923,7 @@ namespace NMSService.NMSSernice {
         public string employeeNoP;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
-        public NMSService.NMSSernice.root1 timeSheetPerDayXMLPort;
+        public NMSService.NMSServiceReference.root2 timeSheetPerDayXMLPort;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=3)]
         public string errorText;
@@ -879,7 +931,7 @@ namespace NMSService.NMSSernice {
         public TimeSheetsPerDay() {
         }
         
-        public TimeSheetsPerDay(System.DateTime dateP, string employeeNoP, NMSService.NMSSernice.root1 timeSheetPerDayXMLPort, string errorText) {
+        public TimeSheetsPerDay(System.DateTime dateP, string employeeNoP, NMSService.NMSServiceReference.root2 timeSheetPerDayXMLPort, string errorText) {
             this.dateP = dateP;
             this.employeeNoP = employeeNoP;
             this.timeSheetPerDayXMLPort = timeSheetPerDayXMLPort;
@@ -896,7 +948,7 @@ namespace NMSService.NMSSernice {
         public int return_value;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=1)]
-        public NMSService.NMSSernice.root1 timeSheetPerDayXMLPort;
+        public NMSService.NMSServiceReference.root2 timeSheetPerDayXMLPort;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
         public string errorText;
@@ -904,7 +956,7 @@ namespace NMSService.NMSSernice {
         public TimeSheetsPerDay_Result() {
         }
         
-        public TimeSheetsPerDay_Result(int return_value, NMSService.NMSSernice.root1 timeSheetPerDayXMLPort, string errorText) {
+        public TimeSheetsPerDay_Result(int return_value, NMSService.NMSServiceReference.root2 timeSheetPerDayXMLPort, string errorText) {
             this.return_value = return_value;
             this.timeSheetPerDayXMLPort = timeSheetPerDayXMLPort;
             this.errorText = errorText;
@@ -928,7 +980,7 @@ namespace NMSService.NMSSernice {
         public string employeeNoP;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=3)]
-        public NMSService.NMSSernice.root2 timeSheetPerWeekXMLPort;
+        public NMSService.NMSServiceReference.root3 timeSheetPerWeekXMLPort;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=4)]
         public string errorText;
@@ -936,7 +988,7 @@ namespace NMSService.NMSSernice {
         public TimeSheetsPerWeek() {
         }
         
-        public TimeSheetsPerWeek(System.DateTime startDateP, System.DateTime endDateP, string employeeNoP, NMSService.NMSSernice.root2 timeSheetPerWeekXMLPort, string errorText) {
+        public TimeSheetsPerWeek(System.DateTime startDateP, System.DateTime endDateP, string employeeNoP, NMSService.NMSServiceReference.root3 timeSheetPerWeekXMLPort, string errorText) {
             this.startDateP = startDateP;
             this.endDateP = endDateP;
             this.employeeNoP = employeeNoP;
@@ -954,7 +1006,7 @@ namespace NMSService.NMSSernice {
         public int return_value;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=1)]
-        public NMSService.NMSSernice.root2 timeSheetPerWeekXMLPort;
+        public NMSService.NMSServiceReference.root3 timeSheetPerWeekXMLPort;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
         public string errorText;
@@ -962,61 +1014,9 @@ namespace NMSService.NMSSernice {
         public TimeSheetsPerWeek_Result() {
         }
         
-        public TimeSheetsPerWeek_Result(int return_value, NMSService.NMSSernice.root2 timeSheetPerWeekXMLPort, string errorText) {
+        public TimeSheetsPerWeek_Result(int return_value, NMSService.NMSServiceReference.root3 timeSheetPerWeekXMLPort, string errorText) {
             this.return_value = return_value;
             this.timeSheetPerWeekXMLPort = timeSheetPerWeekXMLPort;
-            this.errorText = errorText;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetEmployeeByID", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", IsWrapped=true)]
-    public partial class GetEmployeeByID {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=0)]
-        public int channelType;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=1)]
-        public string channelID;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
-        public NMSService.NMSSernice.root3 employeeByIDXMLPort;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=3)]
-        public string errorText;
-        
-        public GetEmployeeByID() {
-        }
-        
-        public GetEmployeeByID(int channelType, string channelID, NMSService.NMSSernice.root3 employeeByIDXMLPort, string errorText) {
-            this.channelType = channelType;
-            this.channelID = channelID;
-            this.employeeByIDXMLPort = employeeByIDXMLPort;
-            this.errorText = errorText;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetEmployeeByID_Result", WrapperNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", IsWrapped=true)]
-    public partial class GetEmployeeByID_Result {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=0)]
-        public int return_value;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=1)]
-        public NMSService.NMSSernice.root3 employeeByIDXMLPort;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
-        public string errorText;
-        
-        public GetEmployeeByID_Result() {
-        }
-        
-        public GetEmployeeByID_Result(int return_value, NMSService.NMSSernice.root3 employeeByIDXMLPort, string errorText) {
-            this.return_value = return_value;
-            this.employeeByIDXMLPort = employeeByIDXMLPort;
             this.errorText = errorText;
         }
     }
@@ -1099,7 +1099,7 @@ namespace NMSService.NMSSernice {
         public string channelID;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=4)]
-        public NMSService.NMSSernice.root3 employeeByIDXMLPort;
+        public NMSService.NMSServiceReference.root employeeByIDXMLPort;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=5)]
         public string errorText;
@@ -1107,7 +1107,7 @@ namespace NMSService.NMSSernice {
         public ValidatePassCode() {
         }
         
-        public ValidatePassCode(int channelType, string eMail, string passCode, string channelID, NMSService.NMSSernice.root3 employeeByIDXMLPort, string errorText) {
+        public ValidatePassCode(int channelType, string eMail, string passCode, string channelID, NMSService.NMSServiceReference.root employeeByIDXMLPort, string errorText) {
             this.channelType = channelType;
             this.eMail = eMail;
             this.passCode = passCode;
@@ -1126,7 +1126,7 @@ namespace NMSService.NMSSernice {
         public int return_value;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=1)]
-        public NMSService.NMSSernice.root3 employeeByIDXMLPort;
+        public NMSService.NMSServiceReference.root employeeByIDXMLPort;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
         public string errorText;
@@ -1134,7 +1134,7 @@ namespace NMSService.NMSSernice {
         public ValidatePassCode_Result() {
         }
         
-        public ValidatePassCode_Result(int return_value, NMSService.NMSSernice.root3 employeeByIDXMLPort, string errorText) {
+        public ValidatePassCode_Result(int return_value, NMSService.NMSServiceReference.root employeeByIDXMLPort, string errorText) {
             this.return_value = return_value;
             this.employeeByIDXMLPort = employeeByIDXMLPort;
             this.errorText = errorText;
@@ -1150,7 +1150,7 @@ namespace NMSService.NMSSernice {
         public string employeeNoP;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=1)]
-        public NMSService.NMSSernice.root4 employeeProjectsXMLPort;
+        public NMSService.NMSServiceReference.root4 employeeProjectsXMLPort;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
         public string errorText;
@@ -1158,7 +1158,7 @@ namespace NMSService.NMSSernice {
         public GetEmployeeProjects() {
         }
         
-        public GetEmployeeProjects(string employeeNoP, NMSService.NMSSernice.root4 employeeProjectsXMLPort, string errorText) {
+        public GetEmployeeProjects(string employeeNoP, NMSService.NMSServiceReference.root4 employeeProjectsXMLPort, string errorText) {
             this.employeeNoP = employeeNoP;
             this.employeeProjectsXMLPort = employeeProjectsXMLPort;
             this.errorText = errorText;
@@ -1174,7 +1174,7 @@ namespace NMSService.NMSSernice {
         public int return_value;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=1)]
-        public NMSService.NMSSernice.root4 employeeProjectsXMLPort;
+        public NMSService.NMSServiceReference.root4 employeeProjectsXMLPort;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
         public string errorText;
@@ -1182,7 +1182,7 @@ namespace NMSService.NMSSernice {
         public GetEmployeeProjects_Result() {
         }
         
-        public GetEmployeeProjects_Result(int return_value, NMSService.NMSSernice.root4 employeeProjectsXMLPort, string errorText) {
+        public GetEmployeeProjects_Result(int return_value, NMSService.NMSServiceReference.root4 employeeProjectsXMLPort, string errorText) {
             this.return_value = return_value;
             this.employeeProjectsXMLPort = employeeProjectsXMLPort;
             this.errorText = errorText;
@@ -1201,7 +1201,7 @@ namespace NMSService.NMSSernice {
         public string projectNoP;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
-        public NMSService.NMSSernice.root5 employeeTasksXMLPort;
+        public NMSService.NMSServiceReference.root5 employeeTasksXMLPort;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=3)]
         public string errorText;
@@ -1209,7 +1209,7 @@ namespace NMSService.NMSSernice {
         public GetEmployeeTasks() {
         }
         
-        public GetEmployeeTasks(string employeeNoP, string projectNoP, NMSService.NMSSernice.root5 employeeTasksXMLPort, string errorText) {
+        public GetEmployeeTasks(string employeeNoP, string projectNoP, NMSService.NMSServiceReference.root5 employeeTasksXMLPort, string errorText) {
             this.employeeNoP = employeeNoP;
             this.projectNoP = projectNoP;
             this.employeeTasksXMLPort = employeeTasksXMLPort;
@@ -1226,7 +1226,7 @@ namespace NMSService.NMSSernice {
         public int return_value;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=1)]
-        public NMSService.NMSSernice.root5 employeeTasksXMLPort;
+        public NMSService.NMSServiceReference.root5 employeeTasksXMLPort;
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Order=2)]
         public string errorText;
@@ -1234,7 +1234,7 @@ namespace NMSService.NMSSernice {
         public GetEmployeeTasks_Result() {
         }
         
-        public GetEmployeeTasks_Result(int return_value, NMSService.NMSSernice.root5 employeeTasksXMLPort, string errorText) {
+        public GetEmployeeTasks_Result(int return_value, NMSService.NMSServiceReference.root5 employeeTasksXMLPort, string errorText) {
             this.return_value = return_value;
             this.employeeTasksXMLPort = employeeTasksXMLPort;
             this.errorText = errorText;
@@ -1303,12 +1303,12 @@ namespace NMSService.NMSSernice {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface TimeSheetBotService_PortChannel : NMSService.NMSSernice.TimeSheetBotService_Port, System.ServiceModel.IClientChannel {
+    public interface TimeSheetBotService_PortChannel : NMSService.NMSServiceReference.TimeSheetBotService_Port, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class TimeSheetBotService_PortClient : System.ServiceModel.ClientBase<NMSService.NMSSernice.TimeSheetBotService_Port>, NMSService.NMSSernice.TimeSheetBotService_Port {
+    public partial class TimeSheetBotService_PortClient : System.ServiceModel.ClientBase<NMSService.NMSServiceReference.TimeSheetBotService_Port>, NMSService.NMSServiceReference.TimeSheetBotService_Port {
         
         public TimeSheetBotService_PortClient() {
         }
@@ -1330,180 +1330,180 @@ namespace NMSService.NMSSernice {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NMSService.NMSSernice.GetEmployeeByPhoneNo_Result NMSService.NMSSernice.TimeSheetBotService_Port.GetEmployeeByPhoneNo(NMSService.NMSSernice.GetEmployeeByPhoneNo request) {
-            return base.Channel.GetEmployeeByPhoneNo(request);
-        }
-        
-        public void GetEmployeeByPhoneNo(string phoneNo, ref NMSService.NMSSernice.root employeeXMLPort) {
-            NMSService.NMSSernice.GetEmployeeByPhoneNo inValue = new NMSService.NMSSernice.GetEmployeeByPhoneNo();
-            inValue.phoneNo = phoneNo;
-            inValue.employeeXMLPort = employeeXMLPort;
-            NMSService.NMSSernice.GetEmployeeByPhoneNo_Result retVal = ((NMSService.NMSSernice.TimeSheetBotService_Port)(this)).GetEmployeeByPhoneNo(inValue);
-            employeeXMLPort = retVal.employeeXMLPort;
-        }
-        
-        public System.Threading.Tasks.Task<NMSService.NMSSernice.GetEmployeeByPhoneNo_Result> GetEmployeeByPhoneNoAsync(NMSService.NMSSernice.GetEmployeeByPhoneNo request) {
-            return base.Channel.GetEmployeeByPhoneNoAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NMSService.NMSSernice.TimeSheetsPerDay_Result NMSService.NMSSernice.TimeSheetBotService_Port.TimeSheetsPerDay(NMSService.NMSSernice.TimeSheetsPerDay request) {
-            return base.Channel.TimeSheetsPerDay(request);
-        }
-        
-        public int TimeSheetsPerDay(System.DateTime dateP, string employeeNoP, ref NMSService.NMSSernice.root1 timeSheetPerDayXMLPort, ref string errorText) {
-            NMSService.NMSSernice.TimeSheetsPerDay inValue = new NMSService.NMSSernice.TimeSheetsPerDay();
-            inValue.dateP = dateP;
-            inValue.employeeNoP = employeeNoP;
-            inValue.timeSheetPerDayXMLPort = timeSheetPerDayXMLPort;
-            inValue.errorText = errorText;
-            NMSService.NMSSernice.TimeSheetsPerDay_Result retVal = ((NMSService.NMSSernice.TimeSheetBotService_Port)(this)).TimeSheetsPerDay(inValue);
-            timeSheetPerDayXMLPort = retVal.timeSheetPerDayXMLPort;
-            errorText = retVal.errorText;
-            return retVal.return_value;
-        }
-        
-        public System.Threading.Tasks.Task<NMSService.NMSSernice.TimeSheetsPerDay_Result> TimeSheetsPerDayAsync(NMSService.NMSSernice.TimeSheetsPerDay request) {
-            return base.Channel.TimeSheetsPerDayAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NMSService.NMSSernice.TimeSheetsPerWeek_Result NMSService.NMSSernice.TimeSheetBotService_Port.TimeSheetsPerWeek(NMSService.NMSSernice.TimeSheetsPerWeek request) {
-            return base.Channel.TimeSheetsPerWeek(request);
-        }
-        
-        public int TimeSheetsPerWeek(System.DateTime startDateP, System.DateTime endDateP, string employeeNoP, ref NMSService.NMSSernice.root2 timeSheetPerWeekXMLPort, ref string errorText) {
-            NMSService.NMSSernice.TimeSheetsPerWeek inValue = new NMSService.NMSSernice.TimeSheetsPerWeek();
-            inValue.startDateP = startDateP;
-            inValue.endDateP = endDateP;
-            inValue.employeeNoP = employeeNoP;
-            inValue.timeSheetPerWeekXMLPort = timeSheetPerWeekXMLPort;
-            inValue.errorText = errorText;
-            NMSService.NMSSernice.TimeSheetsPerWeek_Result retVal = ((NMSService.NMSSernice.TimeSheetBotService_Port)(this)).TimeSheetsPerWeek(inValue);
-            timeSheetPerWeekXMLPort = retVal.timeSheetPerWeekXMLPort;
-            errorText = retVal.errorText;
-            return retVal.return_value;
-        }
-        
-        public System.Threading.Tasks.Task<NMSService.NMSSernice.TimeSheetsPerWeek_Result> TimeSheetsPerWeekAsync(NMSService.NMSSernice.TimeSheetsPerWeek request) {
-            return base.Channel.TimeSheetsPerWeekAsync(request);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NMSService.NMSSernice.GetEmployeeByID_Result NMSService.NMSSernice.TimeSheetBotService_Port.GetEmployeeByID(NMSService.NMSSernice.GetEmployeeByID request) {
+        NMSService.NMSServiceReference.GetEmployeeByID_Result NMSService.NMSServiceReference.TimeSheetBotService_Port.GetEmployeeByID(NMSService.NMSServiceReference.GetEmployeeByID request) {
             return base.Channel.GetEmployeeByID(request);
         }
         
-        public int GetEmployeeByID(int channelType, string channelID, ref NMSService.NMSSernice.root3 employeeByIDXMLPort, ref string errorText) {
-            NMSService.NMSSernice.GetEmployeeByID inValue = new NMSService.NMSSernice.GetEmployeeByID();
+        public int GetEmployeeByID(int channelType, string channelID, ref NMSService.NMSServiceReference.root employeeByIDXMLPort, ref string errorText) {
+            NMSService.NMSServiceReference.GetEmployeeByID inValue = new NMSService.NMSServiceReference.GetEmployeeByID();
             inValue.channelType = channelType;
             inValue.channelID = channelID;
             inValue.employeeByIDXMLPort = employeeByIDXMLPort;
             inValue.errorText = errorText;
-            NMSService.NMSSernice.GetEmployeeByID_Result retVal = ((NMSService.NMSSernice.TimeSheetBotService_Port)(this)).GetEmployeeByID(inValue);
+            NMSService.NMSServiceReference.GetEmployeeByID_Result retVal = ((NMSService.NMSServiceReference.TimeSheetBotService_Port)(this)).GetEmployeeByID(inValue);
             employeeByIDXMLPort = retVal.employeeByIDXMLPort;
             errorText = retVal.errorText;
             return retVal.return_value;
         }
         
-        public System.Threading.Tasks.Task<NMSService.NMSSernice.GetEmployeeByID_Result> GetEmployeeByIDAsync(NMSService.NMSSernice.GetEmployeeByID request) {
+        public System.Threading.Tasks.Task<NMSService.NMSServiceReference.GetEmployeeByID_Result> GetEmployeeByIDAsync(NMSService.NMSServiceReference.GetEmployeeByID request) {
             return base.Channel.GetEmployeeByIDAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NMSService.NMSSernice.AddEmployeeByEMail_Result NMSService.NMSSernice.TimeSheetBotService_Port.AddEmployeeByEMail(NMSService.NMSSernice.AddEmployeeByEMail request) {
+        NMSService.NMSServiceReference.GetEmployeeByPhoneNo_Result NMSService.NMSServiceReference.TimeSheetBotService_Port.GetEmployeeByPhoneNo(NMSService.NMSServiceReference.GetEmployeeByPhoneNo request) {
+            return base.Channel.GetEmployeeByPhoneNo(request);
+        }
+        
+        public void GetEmployeeByPhoneNo(string phoneNo, ref NMSService.NMSServiceReference.root1 employeeXMLPort) {
+            NMSService.NMSServiceReference.GetEmployeeByPhoneNo inValue = new NMSService.NMSServiceReference.GetEmployeeByPhoneNo();
+            inValue.phoneNo = phoneNo;
+            inValue.employeeXMLPort = employeeXMLPort;
+            NMSService.NMSServiceReference.GetEmployeeByPhoneNo_Result retVal = ((NMSService.NMSServiceReference.TimeSheetBotService_Port)(this)).GetEmployeeByPhoneNo(inValue);
+            employeeXMLPort = retVal.employeeXMLPort;
+        }
+        
+        public System.Threading.Tasks.Task<NMSService.NMSServiceReference.GetEmployeeByPhoneNo_Result> GetEmployeeByPhoneNoAsync(NMSService.NMSServiceReference.GetEmployeeByPhoneNo request) {
+            return base.Channel.GetEmployeeByPhoneNoAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        NMSService.NMSServiceReference.TimeSheetsPerDay_Result NMSService.NMSServiceReference.TimeSheetBotService_Port.TimeSheetsPerDay(NMSService.NMSServiceReference.TimeSheetsPerDay request) {
+            return base.Channel.TimeSheetsPerDay(request);
+        }
+        
+        public int TimeSheetsPerDay(System.DateTime dateP, string employeeNoP, ref NMSService.NMSServiceReference.root2 timeSheetPerDayXMLPort, ref string errorText) {
+            NMSService.NMSServiceReference.TimeSheetsPerDay inValue = new NMSService.NMSServiceReference.TimeSheetsPerDay();
+            inValue.dateP = dateP;
+            inValue.employeeNoP = employeeNoP;
+            inValue.timeSheetPerDayXMLPort = timeSheetPerDayXMLPort;
+            inValue.errorText = errorText;
+            NMSService.NMSServiceReference.TimeSheetsPerDay_Result retVal = ((NMSService.NMSServiceReference.TimeSheetBotService_Port)(this)).TimeSheetsPerDay(inValue);
+            timeSheetPerDayXMLPort = retVal.timeSheetPerDayXMLPort;
+            errorText = retVal.errorText;
+            return retVal.return_value;
+        }
+        
+        public System.Threading.Tasks.Task<NMSService.NMSServiceReference.TimeSheetsPerDay_Result> TimeSheetsPerDayAsync(NMSService.NMSServiceReference.TimeSheetsPerDay request) {
+            return base.Channel.TimeSheetsPerDayAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        NMSService.NMSServiceReference.TimeSheetsPerWeek_Result NMSService.NMSServiceReference.TimeSheetBotService_Port.TimeSheetsPerWeek(NMSService.NMSServiceReference.TimeSheetsPerWeek request) {
+            return base.Channel.TimeSheetsPerWeek(request);
+        }
+        
+        public int TimeSheetsPerWeek(System.DateTime startDateP, System.DateTime endDateP, string employeeNoP, ref NMSService.NMSServiceReference.root3 timeSheetPerWeekXMLPort, ref string errorText) {
+            NMSService.NMSServiceReference.TimeSheetsPerWeek inValue = new NMSService.NMSServiceReference.TimeSheetsPerWeek();
+            inValue.startDateP = startDateP;
+            inValue.endDateP = endDateP;
+            inValue.employeeNoP = employeeNoP;
+            inValue.timeSheetPerWeekXMLPort = timeSheetPerWeekXMLPort;
+            inValue.errorText = errorText;
+            NMSService.NMSServiceReference.TimeSheetsPerWeek_Result retVal = ((NMSService.NMSServiceReference.TimeSheetBotService_Port)(this)).TimeSheetsPerWeek(inValue);
+            timeSheetPerWeekXMLPort = retVal.timeSheetPerWeekXMLPort;
+            errorText = retVal.errorText;
+            return retVal.return_value;
+        }
+        
+        public System.Threading.Tasks.Task<NMSService.NMSServiceReference.TimeSheetsPerWeek_Result> TimeSheetsPerWeekAsync(NMSService.NMSServiceReference.TimeSheetsPerWeek request) {
+            return base.Channel.TimeSheetsPerWeekAsync(request);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        NMSService.NMSServiceReference.AddEmployeeByEMail_Result NMSService.NMSServiceReference.TimeSheetBotService_Port.AddEmployeeByEMail(NMSService.NMSServiceReference.AddEmployeeByEMail request) {
             return base.Channel.AddEmployeeByEMail(request);
         }
         
         public int AddEmployeeByEMail(int channelType, string eMail, ref string firstName, ref string lastName, ref string errorText) {
-            NMSService.NMSSernice.AddEmployeeByEMail inValue = new NMSService.NMSSernice.AddEmployeeByEMail();
+            NMSService.NMSServiceReference.AddEmployeeByEMail inValue = new NMSService.NMSServiceReference.AddEmployeeByEMail();
             inValue.channelType = channelType;
             inValue.eMail = eMail;
             inValue.firstName = firstName;
             inValue.lastName = lastName;
             inValue.errorText = errorText;
-            NMSService.NMSSernice.AddEmployeeByEMail_Result retVal = ((NMSService.NMSSernice.TimeSheetBotService_Port)(this)).AddEmployeeByEMail(inValue);
+            NMSService.NMSServiceReference.AddEmployeeByEMail_Result retVal = ((NMSService.NMSServiceReference.TimeSheetBotService_Port)(this)).AddEmployeeByEMail(inValue);
             firstName = retVal.firstName;
             lastName = retVal.lastName;
             errorText = retVal.errorText;
             return retVal.return_value;
         }
         
-        public System.Threading.Tasks.Task<NMSService.NMSSernice.AddEmployeeByEMail_Result> AddEmployeeByEMailAsync(NMSService.NMSSernice.AddEmployeeByEMail request) {
+        public System.Threading.Tasks.Task<NMSService.NMSServiceReference.AddEmployeeByEMail_Result> AddEmployeeByEMailAsync(NMSService.NMSServiceReference.AddEmployeeByEMail request) {
             return base.Channel.AddEmployeeByEMailAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NMSService.NMSSernice.ValidatePassCode_Result NMSService.NMSSernice.TimeSheetBotService_Port.ValidatePassCode(NMSService.NMSSernice.ValidatePassCode request) {
+        NMSService.NMSServiceReference.ValidatePassCode_Result NMSService.NMSServiceReference.TimeSheetBotService_Port.ValidatePassCode(NMSService.NMSServiceReference.ValidatePassCode request) {
             return base.Channel.ValidatePassCode(request);
         }
         
-        public int ValidatePassCode(int channelType, string eMail, string passCode, string channelID, ref NMSService.NMSSernice.root3 employeeByIDXMLPort, ref string errorText) {
-            NMSService.NMSSernice.ValidatePassCode inValue = new NMSService.NMSSernice.ValidatePassCode();
+        public int ValidatePassCode(int channelType, string eMail, string passCode, string channelID, ref NMSService.NMSServiceReference.root employeeByIDXMLPort, ref string errorText) {
+            NMSService.NMSServiceReference.ValidatePassCode inValue = new NMSService.NMSServiceReference.ValidatePassCode();
             inValue.channelType = channelType;
             inValue.eMail = eMail;
             inValue.passCode = passCode;
             inValue.channelID = channelID;
             inValue.employeeByIDXMLPort = employeeByIDXMLPort;
             inValue.errorText = errorText;
-            NMSService.NMSSernice.ValidatePassCode_Result retVal = ((NMSService.NMSSernice.TimeSheetBotService_Port)(this)).ValidatePassCode(inValue);
+            NMSService.NMSServiceReference.ValidatePassCode_Result retVal = ((NMSService.NMSServiceReference.TimeSheetBotService_Port)(this)).ValidatePassCode(inValue);
             employeeByIDXMLPort = retVal.employeeByIDXMLPort;
             errorText = retVal.errorText;
             return retVal.return_value;
         }
         
-        public System.Threading.Tasks.Task<NMSService.NMSSernice.ValidatePassCode_Result> ValidatePassCodeAsync(NMSService.NMSSernice.ValidatePassCode request) {
+        public System.Threading.Tasks.Task<NMSService.NMSServiceReference.ValidatePassCode_Result> ValidatePassCodeAsync(NMSService.NMSServiceReference.ValidatePassCode request) {
             return base.Channel.ValidatePassCodeAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NMSService.NMSSernice.GetEmployeeProjects_Result NMSService.NMSSernice.TimeSheetBotService_Port.GetEmployeeProjects(NMSService.NMSSernice.GetEmployeeProjects request) {
+        NMSService.NMSServiceReference.GetEmployeeProjects_Result NMSService.NMSServiceReference.TimeSheetBotService_Port.GetEmployeeProjects(NMSService.NMSServiceReference.GetEmployeeProjects request) {
             return base.Channel.GetEmployeeProjects(request);
         }
         
-        public int GetEmployeeProjects(string employeeNoP, ref NMSService.NMSSernice.root4 employeeProjectsXMLPort, ref string errorText) {
-            NMSService.NMSSernice.GetEmployeeProjects inValue = new NMSService.NMSSernice.GetEmployeeProjects();
+        public int GetEmployeeProjects(string employeeNoP, ref NMSService.NMSServiceReference.root4 employeeProjectsXMLPort, ref string errorText) {
+            NMSService.NMSServiceReference.GetEmployeeProjects inValue = new NMSService.NMSServiceReference.GetEmployeeProjects();
             inValue.employeeNoP = employeeNoP;
             inValue.employeeProjectsXMLPort = employeeProjectsXMLPort;
             inValue.errorText = errorText;
-            NMSService.NMSSernice.GetEmployeeProjects_Result retVal = ((NMSService.NMSSernice.TimeSheetBotService_Port)(this)).GetEmployeeProjects(inValue);
+            NMSService.NMSServiceReference.GetEmployeeProjects_Result retVal = ((NMSService.NMSServiceReference.TimeSheetBotService_Port)(this)).GetEmployeeProjects(inValue);
             employeeProjectsXMLPort = retVal.employeeProjectsXMLPort;
             errorText = retVal.errorText;
             return retVal.return_value;
         }
         
-        public System.Threading.Tasks.Task<NMSService.NMSSernice.GetEmployeeProjects_Result> GetEmployeeProjectsAsync(NMSService.NMSSernice.GetEmployeeProjects request) {
+        public System.Threading.Tasks.Task<NMSService.NMSServiceReference.GetEmployeeProjects_Result> GetEmployeeProjectsAsync(NMSService.NMSServiceReference.GetEmployeeProjects request) {
             return base.Channel.GetEmployeeProjectsAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NMSService.NMSSernice.GetEmployeeTasks_Result NMSService.NMSSernice.TimeSheetBotService_Port.GetEmployeeTasks(NMSService.NMSSernice.GetEmployeeTasks request) {
+        NMSService.NMSServiceReference.GetEmployeeTasks_Result NMSService.NMSServiceReference.TimeSheetBotService_Port.GetEmployeeTasks(NMSService.NMSServiceReference.GetEmployeeTasks request) {
             return base.Channel.GetEmployeeTasks(request);
         }
         
-        public int GetEmployeeTasks(string employeeNoP, string projectNoP, ref NMSService.NMSSernice.root5 employeeTasksXMLPort, ref string errorText) {
-            NMSService.NMSSernice.GetEmployeeTasks inValue = new NMSService.NMSSernice.GetEmployeeTasks();
+        public int GetEmployeeTasks(string employeeNoP, string projectNoP, ref NMSService.NMSServiceReference.root5 employeeTasksXMLPort, ref string errorText) {
+            NMSService.NMSServiceReference.GetEmployeeTasks inValue = new NMSService.NMSServiceReference.GetEmployeeTasks();
             inValue.employeeNoP = employeeNoP;
             inValue.projectNoP = projectNoP;
             inValue.employeeTasksXMLPort = employeeTasksXMLPort;
             inValue.errorText = errorText;
-            NMSService.NMSSernice.GetEmployeeTasks_Result retVal = ((NMSService.NMSSernice.TimeSheetBotService_Port)(this)).GetEmployeeTasks(inValue);
+            NMSService.NMSServiceReference.GetEmployeeTasks_Result retVal = ((NMSService.NMSServiceReference.TimeSheetBotService_Port)(this)).GetEmployeeTasks(inValue);
             employeeTasksXMLPort = retVal.employeeTasksXMLPort;
             errorText = retVal.errorText;
             return retVal.return_value;
         }
         
-        public System.Threading.Tasks.Task<NMSService.NMSSernice.GetEmployeeTasks_Result> GetEmployeeTasksAsync(NMSService.NMSSernice.GetEmployeeTasks request) {
+        public System.Threading.Tasks.Task<NMSService.NMSServiceReference.GetEmployeeTasks_Result> GetEmployeeTasksAsync(NMSService.NMSServiceReference.GetEmployeeTasks request) {
             return base.Channel.GetEmployeeTasksAsync(request);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        NMSService.NMSSernice.AddTimeSheet_Result NMSService.NMSSernice.TimeSheetBotService_Port.AddTimeSheet(NMSService.NMSSernice.AddTimeSheet request) {
+        NMSService.NMSServiceReference.AddTimeSheet_Result NMSService.NMSServiceReference.TimeSheetBotService_Port.AddTimeSheet(NMSService.NMSServiceReference.AddTimeSheet request) {
             return base.Channel.AddTimeSheet(request);
         }
         
         public int AddTimeSheet(string employeeNoP, System.DateTime dateP, string projectNoP, string assignmentCodeP, decimal qtyP, string commentP, ref string errorText) {
-            NMSService.NMSSernice.AddTimeSheet inValue = new NMSService.NMSSernice.AddTimeSheet();
+            NMSService.NMSServiceReference.AddTimeSheet inValue = new NMSService.NMSServiceReference.AddTimeSheet();
             inValue.employeeNoP = employeeNoP;
             inValue.dateP = dateP;
             inValue.projectNoP = projectNoP;
@@ -1511,12 +1511,12 @@ namespace NMSService.NMSSernice {
             inValue.qtyP = qtyP;
             inValue.commentP = commentP;
             inValue.errorText = errorText;
-            NMSService.NMSSernice.AddTimeSheet_Result retVal = ((NMSService.NMSSernice.TimeSheetBotService_Port)(this)).AddTimeSheet(inValue);
+            NMSService.NMSServiceReference.AddTimeSheet_Result retVal = ((NMSService.NMSServiceReference.TimeSheetBotService_Port)(this)).AddTimeSheet(inValue);
             errorText = retVal.errorText;
             return retVal.return_value;
         }
         
-        public System.Threading.Tasks.Task<NMSService.NMSSernice.AddTimeSheet_Result> AddTimeSheetAsync(NMSService.NMSSernice.AddTimeSheet request) {
+        public System.Threading.Tasks.Task<NMSService.NMSServiceReference.AddTimeSheet_Result> AddTimeSheetAsync(NMSService.NMSServiceReference.AddTimeSheet request) {
             return base.Channel.AddTimeSheetAsync(request);
         }
     }

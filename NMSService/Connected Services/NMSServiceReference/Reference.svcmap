@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="98bc3943-267b-47b9-aaab-dcb09c6cb97f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="a03e035b-af3a-440b-a2f8-0057f84676aa" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -22,7 +22,7 @@
     <MetadataSource Address="https://nmstsbot.ncdev.ru/NMS_DEV/WS/PROD_2015-02-23_CUTTED/Codeunit/TimeSheetBotService" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="TimeSheetBotService.wsdl" MetadataType="Wsdl" ID="11346fcf-efd6-4a63-bd64-1279fd294f17" SourceId="1" SourceUrl="https://nmstsbot.ncdev.ru/NMS_DEV/WS/PROD_2015-02-23_CUTTED/Codeunit/TimeSheetBotService" />
+    <MetadataFile FileName="TimeSheetBotService.wsdl" MetadataType="Wsdl" ID="5e6e4ee3-1f1a-4f14-81be-6286ef19527b" SourceId="1" SourceUrl="https://nmstsbot.ncdev.ru/NMS_DEV/WS/PROD_2015-02-23_CUTTED/Codeunit/TimeSheetBotService" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

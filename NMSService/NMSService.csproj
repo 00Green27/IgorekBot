@@ -43,7 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\NMSSernice\Reference.cs">
+    <Compile Include="Connected Services\NMSServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -55,64 +55,64 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.AddEmployeeByEMail_Result.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.AddEmployeeByEMail_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.AddTimeSheet_Result.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.AddTimeSheet_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.GetEmployeeByID_Result.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.GetEmployeeByID_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.GetEmployeeByPhoneNo_Result.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.GetEmployeeByPhoneNo_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.GetEmployeeProjects_Result.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.GetEmployeeProjects_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.GetEmployeeTasks_Result.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.GetEmployeeTasks_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.root.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.root1.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.root2.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root2.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.root3.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root3.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.root4.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root4.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.root5.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root5.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.TimeSheetsPerDay_Result.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.TimeSheetsPerDay_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.TimeSheetsPerWeek_Result.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.TimeSheetsPerWeek_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\NMSService.NMSSernice.ValidatePassCode_Result.datasource">
+    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.ValidatePassCode_Result.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Connected Services\NMSSernice\TimeSheetBotService.wsdl" />
+    <None Include="Connected Services\NMSServiceReference\TimeSheetBotService.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\NMSSernice\" />
+    <WCFMetadataStorage Include="Connected Services\NMSServiceReference\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\NMSSernice\configuration91.svcinfo" />
+    <None Include="Connected Services\NMSServiceReference\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\NMSSernice\configuration.svcinfo" />
+    <None Include="Connected Services\NMSServiceReference\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\NMSSernice\Reference.svcmap">
+    <None Include="Connected Services\NMSServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
