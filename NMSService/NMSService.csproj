@@ -33,8 +33,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,79 +45,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connected Services\NMSServiceReference\Reference.cs">
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\NMSServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
+      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.AddEmployeeByEMail_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.AddTimeSheet_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.GetEmployeeByID_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.GetEmployeeByPhoneNo_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.GetEmployeeProjects_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.GetEmployeeTasks_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root1.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root2.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root3.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root4.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.root5.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.TimeSheetsPerDay_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.TimeSheetsPerWeek_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\NMSService.NMSServiceReference.ValidatePassCode_Result.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Connected Services\NMSServiceReference\TimeSheetBotService.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\NMSServiceReference\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\NMSServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\NMSServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Connected Services\NMSServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
+    <None Include="Web References\NMSServiceReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\NMSServiceReference\root.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\NMSServiceReference\root1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\NMSServiceReference\root2.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\NMSServiceReference\root3.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\NMSServiceReference\root4.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\NMSServiceReference\root5.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\NMSServiceReference\TimeSheetBotService.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="https://nmstsbot.ncdev.ru/NMS_DEV/WS/PROD_2015-02-23_CUTTED/Codeunit/TimeSheetBotService">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\NMSServiceReference\</RelPath>
+      <UpdateFromURL>https://nmstsbot.ncdev.ru/NMS_DEV/WS/PROD_2015-02-23_CUTTED/Codeunit/TimeSheetBotService</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>NMSService_NMSServiceReference_TimeSheetBotService</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
