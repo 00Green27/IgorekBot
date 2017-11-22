@@ -54,5 +54,25 @@ namespace IgorekBot.BLL.Services
 
             return response;
         }
+
+        public ValidatePasswordResponse ValidatePassword(ValidatePasswordRequest request)
+        {
+            var xmlPort = new root();
+
+            var errText = String.Empty;
+
+            var client = NMSServiceClientFactory.GetNMSServiceClient();
+
+            var result = client.ValidatePassCode(request.ChannelType, request.EMail, request.Password, request.ChannelId, ref xmlPort, ref errText);
+
+            var response = new ValidatePasswordResponse
+            {
+                Result = result,
+                ErrorText = errText,
+                XMLPort = xmlPort
+            };
+
+            return response;
+        }
     }
 }
