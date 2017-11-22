@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ITimeSheetService.cs" />
+    <Compile Include="Models\AddUserByEMailRequest.cs" />
+    <Compile Include="Models\AddUserByEMailResponse.cs" />
     <Compile Include="Models\GetUserByIdRequest.cs" />
     <Compile Include="Models\GetUserByIdResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

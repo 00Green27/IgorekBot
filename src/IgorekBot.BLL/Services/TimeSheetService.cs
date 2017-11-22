@@ -13,6 +13,29 @@ namespace IgorekBot.BLL.Services
 {
     public class TimeSheetService : ITimeSheetService
     {
+        public AddUserByEMailResponse AddUserByEMail(AddUserByEMailRequest request)
+        {
+            var errText = String.Empty;
+
+            var firstName = String.Empty;
+
+            var lastName = String.Empty;
+
+            var client = NMSServiceClientFactory.GetNMSServiceClient();
+
+            var result = client.AddEmployeeByEMail(request.ChannelType, request.EMail, ref firstName, ref lastName, ref errText);
+
+            var response = new AddUserByEMailResponse
+            {
+                Result = result,
+                ErrorText = errText,
+                FirstName = firstName,
+                LastName = lastName
+            };
+
+            return response;
+        }
+
         public GetUserByIdResponse GetUserById(GetUserByIdRequest request)
         {
             var xmlPort = new root();

@@ -10,5 +10,7 @@ namespace IgorekBot.BLL.Interfaces
     public interface ITimeSheetService
     {
         GetUserByIdResponse GetUserById(GetUserByIdRequest request);
+
+        AddUserByEMailResponse AddUserByEMail(AddUserByEMailRequest request);
     }
 }
