@@ -21,15 +21,25 @@ namespace IgorekBot.BLL.Services
 
             var client = NMSServiceClientFactory.GetNMSServiceClient();
 
-            var result= client.GetEmployeeByID(request.ChannelType, request.ChannelId, ref xmlPort, ref errText);
+            try
+            {
+                var result= client.GetEmployeeByID(request.ChannelType, request.ChannelId, ref xmlPort, ref errText);
 
-            var response = new GetUserByIdResponse {
-                Result = result,
-                ErrorText = errText,
-                XMLPort = xmlPort
-            };
 
-            return response;
+                var response = new GetUserByIdResponse
+                {
+                    Result = result,
+                    ErrorText = errText,
+                    XMLPort = xmlPort
+                };
+
+                return response;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }
