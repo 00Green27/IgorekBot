@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace IgorekBot.BLL.Services
 {
+    [Serializable]
     public class TimeSheetService : ITimeSheetService
     {
         public AddUserByEMailResponse AddUserByEMail(AddUserByEMailRequest request)

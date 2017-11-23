@@ -32,18 +32,22 @@ namespace IgorekBot
             Common.CommonConversation.Connector = new ConnectorClient(new Uri(activity.ServiceUrl));
             Common.CommonConversation.CurrentActivity = activity;
 
-            Activity reply = null;
-
-            if (activity.Type == ActivityTypes.Message)
+            if (activity.Type == ActivityTypes.ConversationUpdate)
             {
                 var userId = Common.CommonConversation.CurrentActivity?.From?.Id;
-                var reslut = _timeSheetService.GetUserById(new GetUserByIdRequest { ChannelType = (int) ChannelTypes.Telegram, ChannelId = userId});
+                var reslut = _timeSheetService.GetUserById(new GetUserByIdRequest
+                {
+                    ChannelType = (int)ChannelTypes.Telegram,
+                    ChannelId = userId
+                });
 
                 if (reslut.Result == 1)
                 {
-                    
+                    await Conversation.SendAsync(activity, () => new Dialogs.AuthenticationDialog());
                 }
-
+            }
+            else if (activity.Type == ActivityTypes.Message)
+            {
                 await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
             }
             else
@@ -66,20 +70,6 @@ namespace IgorekBot
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
-                IConversationUpdateActivity update = message;
-                var client = new ConnectorClient(new Uri(message.ServiceUrl), new MicrosoftAppCredentials());
-                if (update.MembersAdded != null && update.MembersAdded.Any())
-                {
-                    foreach (var newMember in update.MembersAdded)
-                    {
-                        if (newMember.Id != message.Recipient.Id)
-                        {
-                            var reply = message.CreateReply();
-                            reply.Text = "Игорек спешит на помощь!";
-                            client.Conversations.ReplyToActivityAsync(reply);
-                        }
-                    }
-                }
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
             {
