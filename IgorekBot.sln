@@ -5,13 +5,13 @@ VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgorekBot", "src\IgorekBot\IgorekBot.csproj", "{A90292FF-FF0D-43C6-8656-E3AD442D3E87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMSService", "NMSService\NMSService.csproj", "{8FA4C5A7-DFAA-4982-914F-1DF3522E4974}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMSService", "src\NMSService\NMSService.csproj", "{8FA4C5A7-DFAA-4982-914F-1DF3522E4974}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{5CA6E7EF-D03F-4D88-A9CF-E34EDDC216B9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{34B69E08-D714-4D11-8C32-61FB0587FA3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgorekBot.BLL", "IgorekBot.BLL\IgorekBot.BLL.csproj", "{CFFD6179-F59A-48B3-B1EA-CE53FCB6EAF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgorekBot.BLL", "src\IgorekBot.BLL\IgorekBot.BLL.csproj", "{CFFD6179-F59A-48B3-B1EA-CE53FCB6EAF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

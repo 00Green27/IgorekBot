@@ -42,8 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ITimeSheetService.cs" />
+    <Compile Include="Models\AddUserByEMailRequest.cs" />
+    <Compile Include="Models\AddUserByEMailResponse.cs" />
     <Compile Include="Models\GetUserByIdRequest.cs" />
     <Compile Include="Models\GetUserByIdResponse.cs" />
+    <Compile Include="Models\ValidatePasswordRequest.cs" />
+    <Compile Include="Models\ValidatePasswordResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TimeSheetService.cs" />
   </ItemGroup>

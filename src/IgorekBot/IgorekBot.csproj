@@ -133,7 +133,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\IgorekBot.BLL\IgorekBot.BLL.csproj">
+    <ProjectReference Include="..\IgorekBot.BLL\IgorekBot.BLL.csproj">
       <Project>{cffd6179-f59a-48b3-b1ea-ce53fcb6eaf4}</Project>
       <Name>IgorekBot.BLL</Name>
     </ProjectReference>
