@@ -8,11 +8,12 @@ using IgorekBot.BLL.Services;
 using IgorekBot.Common;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using NMSService.NMSServiceReference;
 
 namespace IgorekBot.Dialogs
 {
     [Serializable]
-    public class AuthenticationDialog : IDialog<object>
+    public class AuthenticationDialog : IDialog<Employee>
     {
         private readonly ITimeSheetService _timeSheetService;
         private string _email;
@@ -21,7 +22,6 @@ namespace IgorekBot.Dialogs
         public AuthenticationDialog()
         {
             _timeSheetService = new TimeSheetService();
-            _userId = Common.CommonConversation.CurrentActivity?.From?.Id;
         }
         public Task StartAsync(IDialogContext context)
         {
@@ -32,9 +32,25 @@ namespace IgorekBot.Dialogs
 
         public async Task MessageReceivedStart(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
-            await context.PostAsync("Укажите рабочий email");
 
-            context.Wait(MessageReceivedEmailRegistration);
+            var message = await argument;
+
+            var response = _timeSheetService.GetUserById(new GetUserByIdRequest
+            {
+                ChannelType = (int)ChannelTypes.Telegram,
+                ChannelId = message?.From?.Id
+            });
+
+            if (response.Result == 1)
+            {
+                await context.PostAsync("Укажите рабочий email");
+
+                context.Wait(MessageReceivedEmailRegistration);
+            }
+            else
+            {
+                context.Done(response.XMLPort.Employee.First());
+            }
         }
 
         public async Task MessageReceivedEmailRegistration(IDialogContext context, IAwaitable<IMessageActivity> argument)
@@ -88,7 +104,7 @@ namespace IgorekBot.Dialogs
             }
             else
             {
-                await context.PostAsync($"Приветствую, {response.XMLPort.Employee.FirstOrDefault()?.FirstName}");
+                context.Done(response.XMLPort.Employee.First());
             }
 
             context.Wait(MessageReceivedActivationCode);

@@ -8,6 +8,7 @@ using IgorekBot.BLL.Interfaces;
 using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
 using IgorekBot.Common;
+using IgorekBot.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 
@@ -29,31 +30,39 @@ namespace IgorekBot
         /// </summary>
         public async Task<HttpResponseMessage> Post([FromBody]Activity activity)
         {
-            Common.CommonConversation.Connector = new ConnectorClient(new Uri(activity.ServiceUrl));
-            Common.CommonConversation.CurrentActivity = activity;
-
-            if (activity.Type == ActivityTypes.ConversationUpdate)
+            if (activity.Type == ActivityTypes.Message)
             {
-                var userId = Common.CommonConversation.CurrentActivity?.From?.Id;
-                var reslut = _timeSheetService.GetUserById(new GetUserByIdRequest
-                {
-                    ChannelType = (int)ChannelTypes.Telegram,
-                    ChannelId = userId
-                });
-
-                if (reslut.Result == 1)
-                {
-                    await Conversation.SendAsync(activity, () => new Dialogs.AuthenticationDialog());
-                }
-            }
-            else if (activity.Type == ActivityTypes.Message)
-            {
-                await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
+                /* Creates a dialog stack for the new conversation, adds RootDialog to the stack, and forwards all 
+                 *  messages to the dialog stack. */
+                await Conversation.SendAsync(activity, () => new RootDialog());
             }
             else
             {
                 HandleSystemMessage(activity);
             }
+            
+//            if (activity.Type == ActivityTypes.ConversationUpdate)
+//            {
+//                var userId = Common.CommonConversation.CurrentActivity?.From?.Id;
+//                var reslut = _timeSheetService.GetUserById(new GetUserByIdRequest
+//                {
+//                    ChannelType = (int)ChannelTypes.Telegram,
+//                    ChannelId = userId
+//                });
+//
+//                if (reslut.Result == 1)
+//                {
+//                    await Conversation.SendAsync(activity, () => new Dialogs.AuthenticationDialog());
+//                }
+//            }
+//            else if (activity.Type == ActivityTypes.Message)
+//            {
+//                await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
+//            }
+//            else
+//            {
+//                HandleSystemMessage(activity);
+//            }
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }

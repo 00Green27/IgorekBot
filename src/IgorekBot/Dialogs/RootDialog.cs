@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Resource;
 using Microsoft.Bot.Connector;
+using NMSService.NMSServiceReference;
 
 namespace IgorekBot.Dialogs
 {
@@ -15,17 +18,53 @@ namespace IgorekBot.Dialogs
             return Task.CompletedTask;
         }
 
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
+        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            var activity = await result as Activity;
 
-            // calculate something for us to return
-            int length = (activity.Text ?? string.Empty).Length;
+            var message = await result;
 
-            // return our reply to the user
-            await context.PostAsync($"You sent {activity.Text} which was {length} characters");
+            await SendWelcomeMessageAsync(context);
 
-            context.Wait(MessageReceivedAsync);
+//            var message = await result;
+//
+//            if (message.Text == RegistrationCommand)
+//            {
+//                await this.SendRegistrationAsync(context);
+//            }
+//            else
+//            {
+//                var helloMessage = context.MakeMessage();
+//                helloMessage.InputHint = InputHints.AcceptingInput;
+//
+//                helloMessage.Attachments = new List<Attachment>
+//                {
+//                    new HeroCard("Привет, я бот!")
+//                    {
+//                        Buttons = new List<CardAction>
+//                        {
+//                            new CardAction(ActionTypes.ImBack, "Регистрация", value: RegistrationCommand)
+//                        }
+//                    }.ToAttachment()
+//                };
+//
+//                await context.PostAsync(helloMessage);
+//            }
+        }
+
+        private async Task SendWelcomeMessageAsync(IDialogContext context)
+        {
+            await context.PostAsync("Привет, я бот!");
+
+            context.Call(new AuthenticationDialog(), AuthenticationDialogResumeAfter);
+        }
+
+        public string RegistrationCommand { get; set; } = "/registration";
+
+        private async Task AuthenticationDialogResumeAfter(IDialogContext context, IAwaitable<Employee> result)
+        {
+            var employee = await result;
+
+            await context.PostAsync($"Приветствую, {employee.FirstName}");
         }
     }
 }
