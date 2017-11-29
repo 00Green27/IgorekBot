@@ -14,13 +14,6 @@ namespace IgorekBot.BLL.Services
     [Serializable]
     public class TimeSheetService : ITimeSheetService
     {
-        private TimeSheetBotService _client;
-
-
-        public TimeSheetService()
-        {
-            _client = NMSServiceClientFactory.GetNMSServiceClient();
-        }
 
         public AddUserByEMailResponse AddUserByEMail(AddUserByEMailRequest request)
         {
@@ -30,7 +23,9 @@ namespace IgorekBot.BLL.Services
 
             var lastName = String.Empty;
 
-            var result = _client.AddEmployeeByEMail(request.ChannelType, request.EMail, ref firstName, ref lastName, ref errText);
+            var client = NMSServiceClientFactory.GetNMSServiceClient();
+
+            var result = client.AddEmployeeByEMail(request.ChannelType, request.EMail, ref firstName, ref lastName, ref errText);
 
             var response = new AddUserByEMailResponse
             {
@@ -49,7 +44,9 @@ namespace IgorekBot.BLL.Services
 
             var errText = String.Empty;
 
-            var result = _client.GetEmployeeTasks(request.UserId, request.ProjectId, ref xmlPort, ref errText);
+            var client = NMSServiceClientFactory.GetNMSServiceClient();
+
+            var result = client.GetEmployeeTasks(request.UserId, request.ProjectId, ref xmlPort, ref errText);
 
             var response = new GetProjectTasksResponse
             {
@@ -67,7 +64,9 @@ namespace IgorekBot.BLL.Services
 
             var errText = String.Empty;
 
-            var result= _client.GetEmployeeByID(request.ChannelType, request.ChannelId, ref xmlPort, ref errText);
+            var client = NMSServiceClientFactory.GetNMSServiceClient();
+
+            var result= client.GetEmployeeByID(request.ChannelType, request.ChannelId, ref xmlPort, ref errText);
 
             var response = new GetUserByIdResponse
             {
@@ -85,7 +84,9 @@ namespace IgorekBot.BLL.Services
 
             var errText = String.Empty;
 
-            var result = _client.GetEmployeeProjects(request.UserId, ref xmlPort, ref errText);
+            var client = NMSServiceClientFactory.GetNMSServiceClient();
+
+            var result = client.GetEmployeeProjects(request.UserId, ref xmlPort, ref errText);
 
             var response = new GetUserProjectsResponse
             {
@@ -103,7 +104,9 @@ namespace IgorekBot.BLL.Services
 
             var errText = String.Empty;
 
-            var result = _client.ValidatePassCode(request.ChannelType, request.EMail, request.Password, request.ChannelId, ref xmlPort, ref errText);
+            var client = NMSServiceClientFactory.GetNMSServiceClient();
+
+            var result = client.ValidatePassCode(request.ChannelType, request.EMail, request.Password, request.ChannelId, ref xmlPort, ref errText);
 
             var response = new ValidatePasswordResponse
             {
