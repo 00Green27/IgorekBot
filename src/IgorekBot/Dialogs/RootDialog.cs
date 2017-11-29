@@ -53,7 +53,21 @@ namespace IgorekBot.Dialogs
 
         private async Task SendWelcomeMessageAsync(IDialogContext context)
         {
-            await context.PostAsync("Привет, я бот!");
+            var helloMessage = context.MakeMessage();
+            helloMessage.InputHint = InputHints.AcceptingInput;
+            
+            helloMessage.Attachments = new List<Attachment>
+            {
+                new HeroCard("Привет, я бот!")
+                {
+                    Buttons = new List<CardAction>
+                    {
+                        new CardAction(ActionTypes.ImBack, "Регистрация", value: RegistrationCommand)
+                    }
+                }.ToAttachment()
+            };
+            
+            await context.PostAsync(helloMessage);
 
             context.Call(new AuthenticationDialog(), AuthenticationDialogResumeAfter);
         }
