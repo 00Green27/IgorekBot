@@ -14,5 +14,9 @@ namespace IgorekBot.BLL.Interfaces
         AddUserByEMailResponse AddUserByEMail(AddUserByEMailRequest request);
 
         ValidatePasswordResponse ValidatePassword(ValidatePasswordRequest request);
+
+        GetUserProjectsResponse GetUserProjects(GetUserProjectsRequest request);
+
+        GetProjectTasksResponse GetProjectTasks(GetProjectTasksRequest request);
     }
 }
