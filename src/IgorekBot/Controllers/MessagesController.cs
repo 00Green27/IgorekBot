@@ -52,7 +52,7 @@ namespace IgorekBot
 //
 //                if (reslut.Result == 1)
 //                {
-//                    await Conversation.SendAsync(activity, () => new Dialogs.AuthenticationDialog());
+//                    await Conversation.SendAsync(activity, () => new Dialogs.RegistrationDialog());
 //                }
 //            }
 //            else if (activity.Type == ActivityTypes.Message)

@@ -14,13 +14,13 @@ using NMSService.NMSServiceReference;
 namespace IgorekBot.Dialogs
 {
     [Serializable]
-    public class AuthenticationDialog : IDialog<Employee>
+    public class RegistrationDialog : IDialog<Employee>
     {
         private readonly ITimeSheetService _timeSheetService;
         private string _email;
         private string _userId;
 
-        public AuthenticationDialog()
+        public RegistrationDialog()
         {
             _timeSheetService = new TimeSheetService();
         }

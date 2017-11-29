@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.EnterpriseServices;
 using System.Linq;
 using System.Threading.Tasks;
 using IgorekBot.BLL.Interfaces;
@@ -39,7 +40,7 @@ namespace IgorekBot.Dialogs
                 var response = _timeSheetService.GetUserById(new GetUserByIdRequest
                 {
                     ChannelType = (int)ChannelTypes.Telegram,
-                    ChannelId = "1"//message?.From?.Id
+                    ChannelId = message?.From?.Id
                 });
 
                 if (response.Result == 1)
@@ -79,7 +80,12 @@ namespace IgorekBot.Dialogs
             }
             else if (message.Text.ToLower().Equals("/registration", StringComparison.InvariantCultureIgnoreCase))
             {
-                context.Call(new AuthenticationDialog(), AuthenticationDialogResumeAfter);
+                context.Call(new RegistrationDialog(), RegistrationDialogResumeAfter);
+            }
+            else if (message.Text.ToLower().Equals("/menu", StringComparison.InvariantCultureIgnoreCase))
+            {
+                await context.PostAsync("Menu");
+                context.Wait(MessageReceivedAsync);
             }
             else
             {
@@ -92,7 +98,7 @@ namespace IgorekBot.Dialogs
         {
         }
         
-        private async Task AuthenticationDialogResumeAfter(IDialogContext context, IAwaitable<Employee> result)
+        private async Task RegistrationDialogResumeAfter(IDialogContext context, IAwaitable<Employee> result)
         {
             var employee = await result;
             if(employee.FirstName != null)
