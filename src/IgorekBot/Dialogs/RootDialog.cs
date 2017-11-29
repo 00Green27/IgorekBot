@@ -39,7 +39,7 @@ namespace IgorekBot.Dialogs
                 var response = _timeSheetService.GetUserById(new GetUserByIdRequest
                 {
                     ChannelType = (int)ChannelTypes.Telegram,
-                    ChannelId = message?.From?.Id
+                    ChannelId = "1"//message?.From?.Id
                 });
 
                 if (response.Result == 1)
@@ -95,8 +95,38 @@ namespace IgorekBot.Dialogs
         private async Task AuthenticationDialogResumeAfter(IDialogContext context, IAwaitable<Employee> result)
         {
             var employee = await result;
+            if(employee.FirstName != null)
+            {
+                var reply = context.MakeMessage();
+                reply.Text = $"Приветствую, {employee.FirstName}";
+                reply.Type = ActivityTypes.Message;
+                reply.TextFormat = TextFormatTypes.Plain;
 
-            await context.PostAsync($"Приветствую, {employee.FirstName}");
+                reply.SuggestedActions = new SuggestedActions
+                {
+                    Actions = new List<CardAction>
+                    {
+                        new CardAction { Title = "Меню", Type=ActionTypes.ImBack, Value="/menu" },
+                    }
+                };
+            }
+            else
+            {
+                var reply = context.MakeMessage();
+                reply.Text = "Вам необходимо зарегистрироваться";
+                reply.Type = ActivityTypes.Message;
+                reply.TextFormat = TextFormatTypes.Plain;
+
+                reply.SuggestedActions = new SuggestedActions()
+                {
+                    Actions = new List<CardAction>
+                    {
+                        new CardAction { Title = "Регистрация", Type=ActionTypes.ImBack, Value="/registration" },
+                    }
+                };
+
+                await context.PostAsync(reply);
+            }
         }
     }
 }

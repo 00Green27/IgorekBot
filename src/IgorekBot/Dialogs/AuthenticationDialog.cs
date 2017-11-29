@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using IgorekBot.BLL.Interfaces;
 using IgorekBot.BLL.Models;
@@ -24,59 +24,48 @@ namespace IgorekBot.Dialogs
         {
             _timeSheetService = new TimeSheetService();
         }
-        public Task StartAsync(IDialogContext context)
-        {
-            context.Wait(this.MessageReceivedStart);
 
-            return Task.CompletedTask;
+        public async Task StartAsync(IDialogContext context)
+        {
+            await context.PostAsync(CreateMessage(context, "Укажите рабочий email"));
+
+            context.Wait(MessageReceivedEmailRegistration);
         }
 
         public async Task MessageReceivedStart(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
-
             var message = await argument;
 
             var response = _timeSheetService.GetUserById(new GetUserByIdRequest
             {
-                ChannelType = (int)ChannelTypes.Telegram,
+                ChannelType = (int) ChannelTypes.Telegram,
                 ChannelId = message?.From?.Id
             });
 
             if (response.Result == 1)
-            {
-                await context.PostAsync(CreateMessage(context, "Укажите рабочий email"));
                 context.Wait(MessageReceivedEmailRegistration);
-            }
             else
-            {
                 context.Done(response.XMLPort.Employee.First());
-            }
         }
 
-        public static IMessageActivity CreateMessage(IDialogContext context, string text)
-        {
 
-            var message = context.MakeMessage();
-            message.Text = text;
-            message.Type = ActivityTypes.Message;
-            message.TextFormat = TextFormatTypes.Plain;
-            message.SuggestedActions = new SuggestedActions
-            {
-                Actions = new List<CardAction>
-                {
-                    new CardAction { Title = "Отмена", Type=ActionTypes.ImBack, Value="/cancelRegistration" },
-                }
-            };
-            return message;
-        }
-
-        public async Task MessageReceivedEmailRegistration(IDialogContext context, IAwaitable<IMessageActivity> argument)
+        public async Task MessageReceivedEmailRegistration(IDialogContext context,
+            IAwaitable<IMessageActivity> argument)
         {
             var message = await argument;
 
-            if (IsValidEmail(message.Text))
+
+            if (message.Text.ToLower().Equals("/cancel", StringComparison.InvariantCultureIgnoreCase))
             {
-                var response = _timeSheetService.AddUserByEMail(new AddUserByEMailRequest {ChannelType = (int) ChannelTypes.Telegram, EMail = message.Text});
+                context.Done(new Employee());
+            }
+            else if (IsValidEmail(message.Text))
+            {
+                var response = _timeSheetService.AddUserByEMail(new AddUserByEMailRequest
+                {
+                    ChannelType = (int) ChannelTypes.Telegram,
+                    EMail = message.Text
+                });
                 if (response.Result == 1)
                 {
                     await context.PostAsync(CreateMessage(context, response.ErrorText));
@@ -88,19 +77,55 @@ namespace IgorekBot.Dialogs
                     await context.PostAsync(CreateMessage(context, $"{response.FirstName}, введите код активации"));
                     context.Wait(MessageReceivedActivationCode);
                 }
-
             }
             else
             {
-                context.Wait(MessageReceivedStart);
+                await context.PostAsync(CreateMessage(context, "Укажите рабочий email"));
+                context.Wait(MessageReceivedEmailRegistration);
             }
         }
 
-        bool IsValidEmail(string email)
+
+        public async Task MessageReceivedActivationCode(IDialogContext context, IAwaitable<IMessageActivity> argument)
+        {
+            var code = await argument;
+            var userId = code.From?.Id;
+            var response = _timeSheetService.ValidatePassword(new ValidatePasswordRequest
+            {
+                ChannelType = (int) ChannelTypes.Telegram,
+                ChannelId = userId,
+                EMail = _email,
+                Password = code.Text.Trim()
+            });
+
+            if (response.Result == 1)
+                await context.PostAsync(response.ErrorText);
+            else
+                context.Done(response.XMLPort.Employee.First());
+
+            context.Wait(MessageReceivedActivationCode);
+        }
+        public static IMessageActivity CreateMessage(IDialogContext context, string text)
+        {
+            var message = context.MakeMessage();
+            message.Text = text;
+            message.Type = ActivityTypes.Message;
+            message.TextFormat = TextFormatTypes.Plain;
+            message.SuggestedActions = new SuggestedActions
+            {
+                Actions = new List<CardAction>
+                {
+                    new CardAction {Title = "Отмена", Type = ActionTypes.ImBack, Value = "/cancel"}
+                }
+            };
+            return message;
+        }
+
+        private bool IsValidEmail(string email)
         {
             try
             {
-                var addr = new System.Net.Mail.MailAddress(email);
+                var addr = new MailAddress(email);
                 return addr.Address == email;
             }
             catch
@@ -108,23 +133,6 @@ namespace IgorekBot.Dialogs
                 return false;
             }
         }
-
-        public async Task MessageReceivedActivationCode(IDialogContext context, IAwaitable<IMessageActivity> argument)
-        {
-            var code = await argument;
-            var userId = code.From?.Id;
-            var response = _timeSheetService.ValidatePassword(new ValidatePasswordRequest {ChannelType = (int)ChannelTypes.Telegram, ChannelId = userId, EMail = _email, Password = code.Text.Trim()});
-
-            if (response.Result == 1)
-            {
-                await context.PostAsync(response.ErrorText);
-            }
-            else
-            {
-                context.Done(response.XMLPort.Employee.First());
-            }
-
-            context.Wait(MessageReceivedActivationCode);
-        }
     }
+
 }
