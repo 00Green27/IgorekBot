@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using IgorekBot.BLL.Interfaces;
+using IgorekBot.BLL.Models;
+using IgorekBot.BLL.Services;
+using IgorekBot.Common;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Resource;
 using Microsoft.Bot.Connector;
@@ -11,6 +16,13 @@ namespace IgorekBot.Dialogs
     [Serializable]
     public class RootDialog : IDialog<object>
     {
+        private readonly ITimeSheetService _timeSheetService;
+
+        public RootDialog()
+        {
+            _timeSheetService = new TimeSheetService();
+        }
+
         public Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
@@ -18,58 +30,66 @@ namespace IgorekBot.Dialogs
             return Task.CompletedTask;
         }
 
-        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
 
-            var message = await result;
+            var message = await argument;
+            if (message.Text.ToLower().Equals("/start", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var response = _timeSheetService.GetUserById(new GetUserByIdRequest
+                {
+                    ChannelType = (int)ChannelTypes.Telegram,
+                    ChannelId = message?.From?.Id
+                });
 
-            await SendWelcomeMessageAsync(context);
+                if (response.Result == 1)
+                {
+                    var reply = context.MakeMessage();
+                    reply.Text = "Вам необходимо зарегистрироваться";
+                    reply.Type = ActivityTypes.Message;
+                    reply.TextFormat = TextFormatTypes.Plain;
+                    
+                    reply.SuggestedActions = new SuggestedActions()
+                    {
+                        Actions = new List<CardAction>
+                        {
+                            new CardAction { Title = "Регистрация", Type=ActionTypes.ImBack, Value="/registration" },
+                        }
+                    };
 
-//            var message = await result;
-//
-//            if (message.Text == RegistrationCommand)
-//            {
-//                await this.SendRegistrationAsync(context);
-//            }
-//            else
-//            {
-//                var helloMessage = context.MakeMessage();
-//                helloMessage.InputHint = InputHints.AcceptingInput;
-//
-//                helloMessage.Attachments = new List<Attachment>
-//                {
-//                    new HeroCard("Привет, я бот!")
-//                    {
-//                        Buttons = new List<CardAction>
-//                        {
-//                            new CardAction(ActionTypes.ImBack, "Регистрация", value: RegistrationCommand)
-//                        }
-//                    }.ToAttachment()
-//                };
-//
-//                await context.PostAsync(helloMessage);
-//            }
+                    await context.PostAsync(reply);
+                }
+                else
+                {
+                    var reply = context.MakeMessage();
+                    reply.Text = $"Приветствую, {response.XMLPort.Employee.First().FirstName}";
+                    reply.Type = ActivityTypes.Message;
+                    reply.TextFormat = TextFormatTypes.Plain;
+
+                    reply.SuggestedActions = new SuggestedActions
+                    {
+                        Actions = new List<CardAction>
+                        {
+                            new CardAction { Title = "Меню", Type=ActionTypes.ImBack, Value="/menu" },
+                        }
+                    };
+
+                    await context.PostAsync(reply);
+                }
+            }
+            else if (message.Text.ToLower().Equals("/registration", StringComparison.InvariantCultureIgnoreCase))
+            {
+                context.Call(new AuthenticationDialog(), AuthenticationDialogResumeAfter);
+            }
+            else
+            {
+                await context.PostAsync("Ничего не понял");
+                context.Wait(MessageReceivedAsync);
+            }
         }
 
-        private async Task SendWelcomeMessageAsync(IDialogContext context)
+        private async Task SendWelcomeMessageAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
-            var helloMessage = context.MakeMessage();
-            helloMessage.Text = "Привет, я бот!";
-            //var reply = activity.CreateReply("I have colors in mind, but need your help to choose the best one.");
-            helloMessage.Type = ActivityTypes.Message;
-            helloMessage.TextFormat = TextFormatTypes.Plain;
-
-            helloMessage.SuggestedActions = new SuggestedActions()
-            {
-                Actions = new List<CardAction>()
-                {
-                    new CardAction(){ Title = "Регистрация", Type=ActionTypes.ImBack, Value="/registration" },
-                }
-            };
-
-            await context.PostAsync(helloMessage);
-
-            context.Call(new AuthenticationDialog(), AuthenticationDialogResumeAfter);
         }
         
         private async Task AuthenticationDialogResumeAfter(IDialogContext context, IAwaitable<Employee> result)

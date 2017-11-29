@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -43,14 +44,30 @@ namespace IgorekBot.Dialogs
 
             if (response.Result == 1)
             {
-                await context.PostAsync("Укажите рабочий email");
-
+                await context.PostAsync(CreateMessage(context, "Укажите рабочий email"));
                 context.Wait(MessageReceivedEmailRegistration);
             }
             else
             {
                 context.Done(response.XMLPort.Employee.First());
             }
+        }
+
+        public static IMessageActivity CreateMessage(IDialogContext context, string text)
+        {
+
+            var message = context.MakeMessage();
+            message.Text = text;
+            message.Type = ActivityTypes.Message;
+            message.TextFormat = TextFormatTypes.Plain;
+            message.SuggestedActions = new SuggestedActions
+            {
+                Actions = new List<CardAction>
+                {
+                    new CardAction { Title = "Отмена", Type=ActionTypes.ImBack, Value="/cancelRegistration" },
+                }
+            };
+            return message;
         }
 
         public async Task MessageReceivedEmailRegistration(IDialogContext context, IAwaitable<IMessageActivity> argument)
@@ -62,13 +79,13 @@ namespace IgorekBot.Dialogs
                 var response = _timeSheetService.AddUserByEMail(new AddUserByEMailRequest {ChannelType = (int) ChannelTypes.Telegram, EMail = message.Text});
                 if (response.Result == 1)
                 {
-                    await context.PostAsync(response.ErrorText);
+                    await context.PostAsync(CreateMessage(context, response.ErrorText));
                     context.Wait(MessageReceivedStart);
                 }
                 else
                 {
                     _email = message.Text;
-                    await context.PostAsync($"{response.FirstName}, введите код активации");
+                    await context.PostAsync(CreateMessage(context, $"{response.FirstName}, введите код активации"));
                     context.Wait(MessageReceivedActivationCode);
                 }
 
