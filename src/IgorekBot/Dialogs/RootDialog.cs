@@ -1,125 +1,84 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.EnterpriseServices;
 using System.Linq;
 using System.Threading.Tasks;
 using IgorekBot.BLL.Interfaces;
 using IgorekBot.BLL.Models;
-using IgorekBot.BLL.Services;
-using IgorekBot.Common;
 using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.Resource;
 using Microsoft.Bot.Connector;
 using NMSService.NMSServiceReference;
+using Microsoft.Bot.Builder.Internals.Fibers;
+using Resources = IgorekBot.Properties.Resources;
 
 namespace IgorekBot.Dialogs
 {
     [Serializable]
     public class RootDialog : IDialog<object>
     {
-        private readonly ITimeSheetService _timeSheetService;
+        private readonly ITimeSheetService _service;
 
-        public RootDialog()
+        public RootDialog(ITimeSheetService service)
         {
-            _timeSheetService = new TimeSheetService();
+            SetField.NotNull(out _service, nameof(service), service);
         }
 
-        public Task StartAsync(IDialogContext context)
+        public async Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
-
-            return Task.CompletedTask;
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
-
             var message = await argument;
-            if (message.Text.ToLower().Equals("/start", StringComparison.InvariantCultureIgnoreCase))
+
+            var response = _service.GetUserById(new GetUserByIdRequest { ChannelId = message?.From?.Id });
+            if (response.Result == 1 || message.Text.Equals(Resources.RegistrationCommand, StringComparison.InvariantCultureIgnoreCase))
             {
-                var response = _timeSheetService.GetUserById(new GetUserByIdRequest
-                {
-                    ChannelType = (int)ChannelTypes.Telegram,
-                    ChannelId = message?.From?.Id
-                });
-
-                if (response.Result == 1)
-                {
-                    var reply = context.MakeMessage();
-                    reply.Text = "Вам необходимо зарегистрироваться";
-                    reply.Type = ActivityTypes.Message;
-                    reply.TextFormat = TextFormatTypes.Plain;
-                    
-                    reply.SuggestedActions = new SuggestedActions()
-                    {
-                        Actions = new List<CardAction>
-                        {
-                            new CardAction { Title = "Регистрация", Type=ActionTypes.ImBack, Value="/registration" },
-                        }
-                    };
-
-                    await context.PostAsync(reply);
-                }
-                else
-                {
-                    var reply = context.MakeMessage();
-                    reply.Text = $"Приветствую, {response.XMLPort.Employee.First().FirstName}";
-                    reply.Type = ActivityTypes.Message;
-                    reply.TextFormat = TextFormatTypes.Plain;
-
-                    reply.SuggestedActions = new SuggestedActions
-                    {
-                        Actions = new List<CardAction>
-                        {
-                            new CardAction { Title = "Меню", Type=ActionTypes.ImBack, Value="/menu" },
-                        }
-                    };
-
-                    await context.PostAsync(reply);
-                }
+                context.Call(new AuthenticationDialog(_service), AuthenticationDialogResumeAfter);
             }
-            else if (message.Text.ToLower().Equals("/registration", StringComparison.InvariantCultureIgnoreCase))
+            else if (message.Text.Equals(Resources.TimeSheetCommand, StringComparison.InvariantCultureIgnoreCase))
             {
-                context.Call(new RegistrationDialog(), RegistrationDialogResumeAfter);
+                await context.Forward(new TimeSheetDialog(_service), TimeSheetDialogResumeAfterAsync, message);
             }
-            else if (message.Text.ToLower().Equals("/menu", StringComparison.InvariantCultureIgnoreCase))
+            else if (message.Text.Equals(Resources.EnterAbsenceCommand, StringComparison.InvariantCultureIgnoreCase))
             {
-                await context.PostAsync("Menu");
-                context.Wait(MessageReceivedAsync);
-            }
+                context.Call(new EnterAbsenceDialog(), EnterAbsenceDialogResumeAfterAsync);
+            } 
             else
             {
-                await context.PostAsync("Ничего не понял");
+                await context.PostAsync(CreateReply(context, Resources.RootDialog_Didnt_Understand_Message));
                 context.Wait(MessageReceivedAsync);
             }
+        }
+
+        private async Task TimeSheetDialogResumeAfterAsync(IDialogContext context, IAwaitable<object> result)
+        {
+            await context.PostAsync(CreateReply(context, Resources.RootDialog_Main_Message));
+            context.Wait(MessageReceivedAsync);
+        }
+
+        private async Task EnterAbsenceDialogResumeAfterAsync(IDialogContext context, IAwaitable<object> result)
+        {
+            var employee = await result;
+            context.Wait(MessageReceivedAsync);
         }
 
         private async Task SendWelcomeMessageAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
         }
         
-        private async Task RegistrationDialogResumeAfter(IDialogContext context, IAwaitable<Employee> result)
+        private async Task AuthenticationDialogResumeAfter(IDialogContext context, IAwaitable<Employee> result)
         {
             var employee = await result;
             if(employee.FirstName != null)
             {
-                var reply = context.MakeMessage();
-                reply.Text = $"Приветствую, {employee.FirstName}";
-                reply.Type = ActivityTypes.Message;
-                reply.TextFormat = TextFormatTypes.Plain;
-
-                reply.SuggestedActions = new SuggestedActions
-                {
-                    Actions = new List<CardAction>
-                    {
-                        new CardAction { Title = "Меню", Type=ActionTypes.ImBack, Value="/menu" },
-                    }
-                };
+                context.UserData.SetValue(@"profile", employee);
+                await context.PostAsync(CreateReply(context, string.Format(Resources.RootDialog_Welcome_Message, employee.FirstName)));
             }
             else
             {
                 var reply = context.MakeMessage();
-                reply.Text = "Вам необходимо зарегистрироваться";
+                reply.Text = Resources.RootDialog_Authentication_Message;
                 reply.Type = ActivityTypes.Message;
                 reply.TextFormat = TextFormatTypes.Plain;
 
@@ -127,12 +86,32 @@ namespace IgorekBot.Dialogs
                 {
                     Actions = new List<CardAction>
                     {
-                        new CardAction { Title = "Регистрация", Type=ActionTypes.ImBack, Value="/registration" },
+                        new CardAction { Title = Resources.RegistrationCommand, Type=ActionTypes.PostBack },
                     }
                 };
 
                 await context.PostAsync(reply);
             }
+
+        }
+        
+        public static IMessageActivity CreateReply(IDialogContext context, string text)
+        {
+            var reply = context.MakeMessage();
+            reply.Text = text;
+            reply.Type = ActivityTypes.Message;
+            reply.TextFormat = TextFormatTypes.Plain;
+
+            reply.SuggestedActions = new SuggestedActions
+            {
+                Actions = new List<CardAction>
+                    {
+                        new CardAction { Title = Resources.TimeSheetCommand, Type=ActionTypes.PostBack },
+                        new CardAction { Title = Resources.EnterAbsenceCommand, Type=ActionTypes.PostBack },
+                    }
+            };
+
+            return reply;
         }
     }
 }

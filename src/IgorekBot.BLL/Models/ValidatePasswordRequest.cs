@@ -8,7 +8,7 @@ namespace IgorekBot.BLL.Models
 {
     public class ValidatePasswordRequest
     {
-        public int ChannelType { get; set; }
+        public ChannelType ChannelType { get; set; } = ChannelType.Telegram;
 
         public string EMail { get; set; }
 

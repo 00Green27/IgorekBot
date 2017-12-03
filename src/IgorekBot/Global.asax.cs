@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Autofac;
+using Autofac.Integration.WebApi;
+using IgorekBot.Modules;
+using Microsoft.Bot.Builder.Dialogs;
+using System.Reflection;
 using System.Web.Http;
-using System.Web.Routing;
 
 namespace IgorekBot
 {
@@ -11,6 +11,10 @@ namespace IgorekBot
     {
         protected void Application_Start()
         {
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<MainModule>();
+            builder.Update(Conversation.Container);
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
         }
     }

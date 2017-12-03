@@ -3,15 +3,10 @@ using IgorekBot.BLL.Models;
 using NMSService;
 using NMSService.NMSServiceReference;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace IgorekBot.BLL.Services
 {
-    [Serializable]
     public class TimeSheetService : ITimeSheetService
     {
 
@@ -25,7 +20,7 @@ namespace IgorekBot.BLL.Services
 
             var client = NMSServiceClientFactory.GetNMSServiceClient();
 
-            var result = client.AddEmployeeByEMail(request.ChannelType, request.EMail, ref firstName, ref lastName, ref errText);
+            var result = client.AddEmployeeByEMail((int)request.ChannelType, request.EMail, ref firstName, ref lastName, ref errText);
 
             var response = new AddUserByEMailResponse
             {
@@ -66,7 +61,7 @@ namespace IgorekBot.BLL.Services
 
             var client = NMSServiceClientFactory.GetNMSServiceClient();
 
-            var result= client.GetEmployeeByID(request.ChannelType, request.ChannelId, ref xmlPort, ref errText);
+            var result= client.GetEmployeeByID((int)request.ChannelType, request.ChannelId, ref xmlPort, ref errText);
 
             var response = new GetUserByIdResponse
             {
@@ -106,7 +101,7 @@ namespace IgorekBot.BLL.Services
 
             var client = NMSServiceClientFactory.GetNMSServiceClient();
 
-            var result = client.ValidatePassCode(request.ChannelType, request.EMail, request.Password, request.ChannelId, ref xmlPort, ref errText);
+            var result = client.ValidatePassCode((int)request.ChannelType, request.EMail, request.Password, request.ChannelId, ref xmlPort, ref errText);
 
             var response = new ValidatePasswordResponse
             {

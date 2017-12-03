@@ -7,23 +7,17 @@ using System.Web.Http;
 using IgorekBot.BLL.Interfaces;
 using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
-using IgorekBot.Common;
 using IgorekBot.Dialogs;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
+using Microsoft.Bot.Builder.Dialogs.Internals;
+using Autofac;
 
 namespace IgorekBot
 {
     [BotAuthentication]
     public class MessagesController : ApiController
     {
-
-        private readonly ITimeSheetService _timeSheetService;
-        public MessagesController()
-        {
-            _timeSheetService = new TimeSheetService();
-        }
-
         /// <summary>
         /// POST: api/Messages
         /// Receive a message from a user and reply to it
@@ -32,37 +26,16 @@ namespace IgorekBot
         {
             if (activity.Type == ActivityTypes.Message)
             {
-                /* Creates a dialog stack for the new conversation, adds RootDialog to the stack, and forwards all 
-                 *  messages to the dialog stack. */
-                await Conversation.SendAsync(activity, () => new RootDialog());
+                using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, activity))
+                {
+                    await Conversation.SendAsync(activity, () => scope.Resolve<IDialog<object>>());
+                }
             }
             else
             {
                 HandleSystemMessage(activity);
             }
-            
-//            if (activity.Type == ActivityTypes.ConversationUpdate)
-//            {
-//                var userId = Common.CommonConversation.CurrentActivity?.From?.Id;
-//                var reslut = _timeSheetService.GetUserById(new GetUserByIdRequest
-//                {
-//                    ChannelType = (int)ChannelTypes.Telegram,
-//                    ChannelId = userId
-//                });
-//
-//                if (reslut.Result == 1)
-//                {
-//                    await Conversation.SendAsync(activity, () => new Dialogs.RegistrationDialog());
-//                }
-//            }
-//            else if (activity.Type == ActivityTypes.Message)
-//            {
-//                await Conversation.SendAsync(activity, () => new Dialogs.RootDialog());
-//            }
-//            else
-//            {
-//                HandleSystemMessage(activity);
-//            }
+
             var response = Request.CreateResponse(HttpStatusCode.OK);
             return response;
         }
