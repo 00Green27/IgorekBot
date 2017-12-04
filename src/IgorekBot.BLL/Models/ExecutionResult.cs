@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace IgorekBot.BLL.Models
 {
-    public class AddUserByEMailRequest
+    public enum ExecutionResult
     {
-        public ChannelType ChannelType { get; set; } = ChannelType.Telegram;
-
-        public string EMail { get; set; }
+        Fail,
+        Success
     }
 }

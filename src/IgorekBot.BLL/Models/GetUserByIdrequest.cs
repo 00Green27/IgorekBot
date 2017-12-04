@@ -9,7 +9,7 @@ namespace IgorekBot.BLL.Models
 {
     public class GetUserByIdRequest
     {
-        public int ChannelType { get; set; }
+        public ChannelType ChannelType { get; set; } = ChannelType.Telegram;
 
         public string ChannelId { get; set; }
     }

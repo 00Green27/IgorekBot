@@ -5,29 +5,29 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 using IgorekBot.BLL.Interfaces;
 using IgorekBot.BLL.Models;
-using IgorekBot.BLL.Services;
-using IgorekBot.Common;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using NMSService.NMSServiceReference;
+using Microsoft.Bot.Builder.Internals.Fibers;
+using IgorekBot.Properties;
 
 namespace IgorekBot.Dialogs
 {
     [Serializable]
-    public class RegistrationDialog : IDialog<Employee>
+    public class AuthenticationDialog : IDialog<Employee>
     {
-        private readonly ITimeSheetService _timeSheetService;
+        private readonly ITimeSheetService _service;
         private string _email;
-        private string _userId;
 
-        public RegistrationDialog()
+        public AuthenticationDialog(ITimeSheetService service)
         {
-            _timeSheetService = new TimeSheetService();
+            SetField.NotNull(out _service, nameof(service), service);
         }
 
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync(CreateMessage(context, "Укажите рабочий email"));
+
+            await context.PostAsync(CreateReply(context, Resources.AuthenticationDialog_EMail_Prompt));
 
             context.Wait(MessageReceivedEmailRegistration);
         }
@@ -36,9 +36,8 @@ namespace IgorekBot.Dialogs
         {
             var message = await argument;
 
-            var response = _timeSheetService.GetUserById(new GetUserByIdRequest
+            var response = _service.GetUserById(new GetUserByIdRequest
             {
-                ChannelType = (int) ChannelTypes.Telegram,
                 ChannelId = message?.From?.Id
             });
 
@@ -49,50 +48,39 @@ namespace IgorekBot.Dialogs
         }
 
 
-        public async Task MessageReceivedEmailRegistration(IDialogContext context,
-            IAwaitable<IMessageActivity> argument)
+        public async Task MessageReceivedEmailRegistration(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
             var message = await argument;
 
+            if (IsValidEmail(message.Text))
+            {
+                var response = _service.AddUserByEMail(new AddUserByEMailRequest { EMail = message.Text });
 
-            if (message.Text.ToLower().Equals("/cancel", StringComparison.InvariantCultureIgnoreCase))
-            {
-                context.Done(new Employee());
-            }
-            else if (IsValidEmail(message.Text))
-            {
-                var response = _timeSheetService.AddUserByEMail(new AddUserByEMailRequest
-                {
-                    ChannelType = (int) ChannelTypes.Telegram,
-                    EMail = message.Text
-                });
                 if (response.Result == 1)
                 {
-                    await context.PostAsync(CreateMessage(context, response.ErrorText));
-                    context.Wait(MessageReceivedStart);
+                    await context.PostAsync(CreateReply(context, response.ErrorText));
+                    context.Done(new Employee());
                 }
                 else
                 {
                     _email = message.Text;
-                    await context.PostAsync(CreateMessage(context, $"{response.FirstName}, введите код активации"));
+                    await context.PostAsync(CreateReply(context, string.Format(Resources.AuthenticationDialog_Code_Prompt, response.FirstName)));
                     context.Wait(MessageReceivedActivationCode);
                 }
             }
             else
             {
-                await context.PostAsync(CreateMessage(context, "Укажите рабочий email"));
+                await context.PostAsync(CreateReply(context, Resources.AuthenticationDialog_EMail_Prompt));
                 context.Wait(MessageReceivedEmailRegistration);
             }
         }
-
-
+        
         public async Task MessageReceivedActivationCode(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
             var code = await argument;
             var userId = code.From?.Id;
-            var response = _timeSheetService.ValidatePassword(new ValidatePasswordRequest
+            var response = _service.ValidatePassword(new ValidatePasswordRequest
             {
-                ChannelType = (int) ChannelTypes.Telegram,
                 ChannelId = userId,
                 EMail = _email,
                 Password = code.Text.Trim()
@@ -105,7 +93,8 @@ namespace IgorekBot.Dialogs
 
             context.Wait(MessageReceivedActivationCode);
         }
-        public static IMessageActivity CreateMessage(IDialogContext context, string text)
+        
+        public static IMessageActivity CreateReply(IDialogContext context, string text)
         {
             var message = context.MakeMessage();
             message.Text = text;
@@ -115,13 +104,13 @@ namespace IgorekBot.Dialogs
             {
                 Actions = new List<CardAction>
                 {
-                    new CardAction {Title = "Отмена", Type = ActionTypes.ImBack, Value = "/cancel"}
+                    new CardAction {Title = Resources.CancelCommand, Type = ActionTypes.PostBack}
                 }
             };
             return message;
         }
 
-        private bool IsValidEmail(string email)
+        private static bool IsValidEmail(string email)
         {
             try
             {
