@@ -126,6 +126,7 @@
     <Compile Include="Dialogs\CancelScorable.cs" />
     <Compile Include="Dialogs\EnsureRegistrationDialog.cs" />
     <Compile Include="Dialogs\EnterAbsenceDialog.cs" />
+    <Compile Include="Dialogs\ProjectDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Dialogs\TimeSheetDialog.cs" />
     <Compile Include="Global.asax.cs">

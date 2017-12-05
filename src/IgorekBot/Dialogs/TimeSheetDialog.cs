@@ -22,14 +22,17 @@ namespace IgorekBot.Dialogs
         {
             SetField.NotNull(out _service, nameof(service), service);
         }
-
-
+        
         public async Task StartAsync(IDialogContext context)
         {
-            context.Wait(MessageReceivedEmailRegistrationAsync);
+            var activity = context.Activity;
+            var reply = CreateMenu(context);
+            await context.PostAsync(reply.AsMessageActivity());
+
+            context.Wait(MessageReceivedAsync);
         }
 
-        private async Task MessageReceivedEmailRegistrationAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
 
@@ -37,14 +40,14 @@ namespace IgorekBot.Dialogs
             {
                 context.Done(new object());
             }
-            else if (message.Text.Equals(Resources.TasksCommand, StringComparison.InvariantCultureIgnoreCase))
+            else if (message.Text.Equals(Resources.ProjectsCommand, StringComparison.InvariantCultureIgnoreCase))
             {
 
                 ShowProjects(context, message);
             }
             else
             {
-                await context.PostAsync(CreateReply(context, Resources.TimeSheetDialog_Main_Message));
+                await context.PostAsync(Resources.TimeSheetDialog_Didnt_Understand_Message);
             }
         }
 
@@ -86,21 +89,19 @@ namespace IgorekBot.Dialogs
             PromptDialog.Choice(context, OnProjectSelected, res.XMLPort.Projects.Select(p => p.TaskNo), "Выберите задачу?");
         }
 
-        public static IMessageActivity CreateReply(IDialogContext context, string text)
+        public static IMessageActivity CreateMenu(IDialogContext context)
         {
             var reply = context.MakeMessage();
-            reply.Text = text;
-            reply.Type = ActivityTypes.Message;
-            reply.TextFormat = TextFormatTypes.Plain;
+            reply.Text = Resources.TimeSheetDialog_Main_Message;
 
             reply.SuggestedActions = new SuggestedActions
             {
                 Actions = new List<CardAction>
                     {
-                        new CardAction { Title = Resources.MenuCommand, Type=ActionTypes.PostBack },
-                        new CardAction { Title = Resources.HoursCommand, Type=ActionTypes.PostBack },
-                        new CardAction { Title = Resources.TasksCommand, Type=ActionTypes.PostBack },
-                        new CardAction { Title = Resources.NotificationsCommand, Type=ActionTypes.PostBack },
+                        new CardAction { Title = Resources.MenuCommand, Type=ActionTypes.PostBack, Value = Resources.MenuCommand },
+                        new CardAction { Title = Resources.HoursCommand, Type=ActionTypes.PostBack, Value = Resources.HoursCommand  },
+                        new CardAction { Title = Resources.ProjectsCommand, Type=ActionTypes.PostBack, Value = Resources.ProjectsCommand },
+                        new CardAction { Title = Resources.NotificationsCommand, Type=ActionTypes.PostBack, Value = Resources.NotificationsCommand },
                     }
             };
 

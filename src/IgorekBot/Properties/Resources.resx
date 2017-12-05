@@ -138,6 +138,9 @@
   <data name="NotificationsCommand" xml:space="preserve">
     <value>Уведомления</value>
   </data>
+  <data name="ProjectsCommand" xml:space="preserve">
+    <value>Проекты</value>
+  </data>
   <data name="RegistrationCommand" xml:space="preserve">
     <value>Регистрация</value>
   </data>
@@ -153,13 +156,13 @@
   <data name="RootDialog_Welcome_Message" xml:space="preserve">
     <value>Приветствую, {0}</value>
   </data>
-  <data name="TasksCommand" xml:space="preserve">
-    <value>Задачи</value>
-  </data>
   <data name="TimeSheetCommand" xml:space="preserve">
     <value>ТШ</value>
   </data>
+  <data name="TimeSheetDialog_Didnt_Understand_Message" xml:space="preserve">
+    <value>Простите, я не понимаю.😟</value>
+  </data>
   <data name="TimeSheetDialog_Main_Message" xml:space="preserve">
-    <value>Работаем с ТШ &amp;#128209;</value>
+    <value>Что бы вы хотели сделать?</value>
   </data>
 </root>

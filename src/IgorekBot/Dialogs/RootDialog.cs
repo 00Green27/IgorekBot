@@ -38,7 +38,8 @@ namespace IgorekBot.Dialogs
             }
             else if (message.Text.Equals(Resources.TimeSheetCommand, StringComparison.InvariantCultureIgnoreCase))
             {
-                await context.Forward(new TimeSheetDialog(_service), TimeSheetDialogResumeAfterAsync, message);
+                //await context.Forward(new TimeSheetDialog(_service), TimeSheetDialogResumeAfterAsync, message);
+                context.Call(new TimeSheetDialog(_service), TimeSheetDialogResumeAfterAsync);
             }
             else if (message.Text.Equals(Resources.EnterAbsenceCommand, StringComparison.InvariantCultureIgnoreCase))
             {

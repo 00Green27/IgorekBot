@@ -124,6 +124,15 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Проекты.
+        /// </summary>
+        internal static string ProjectsCommand {
+            get {
+                return ResourceManager.GetString("ProjectsCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Регистрация.
         /// </summary>
         internal static string RegistrationCommand {
@@ -169,15 +178,6 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Задачи.
-        /// </summary>
-        internal static string TasksCommand {
-            get {
-                return ResourceManager.GetString("TasksCommand", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to ТШ.
         /// </summary>
         internal static string TimeSheetCommand {
@@ -187,7 +187,16 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Работаем с ТШ &amp;#128209;.
+        ///   Looks up a localized string similar to Простите, я не понимаю.😟.
+        /// </summary>
+        internal static string TimeSheetDialog_Didnt_Understand_Message {
+            get {
+                return ResourceManager.GetString("TimeSheetDialog_Didnt_Understand_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Что бы вы хотели сделать?.
         /// </summary>
         internal static string TimeSheetDialog_Main_Message {
             get {
