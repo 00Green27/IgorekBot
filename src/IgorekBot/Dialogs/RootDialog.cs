@@ -22,9 +22,11 @@ namespace IgorekBot.Dialogs
             SetField.NotNull(out _service, nameof(service), service);
         }
 
-        public async Task StartAsync(IDialogContext context)
+        public Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
+
+            return Task.CompletedTask;
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
@@ -87,7 +89,7 @@ namespace IgorekBot.Dialogs
                 {
                     Actions = new List<CardAction>
                     {
-                        new CardAction { Title = Resources.RegistrationCommand, Type=ActionTypes.PostBack },
+                        new CardAction { Title = Resources.RegistrationCommand, Type=ActionTypes.PostBack, Value = Resources.RegistrationCommand  },
                     }
                 };
 
@@ -107,8 +109,8 @@ namespace IgorekBot.Dialogs
             {
                 Actions = new List<CardAction>
                     {
-                        new CardAction { Title = Resources.TimeSheetCommand, Type=ActionTypes.PostBack },
-                        new CardAction { Title = Resources.EnterAbsenceCommand, Type=ActionTypes.PostBack },
+                        new CardAction { Title = Resources.TimeSheetCommand, Type=ActionTypes.PostBack, Value = Resources.TimeSheetCommand },
+                        new CardAction { Title = Resources.EnterAbsenceCommand, Type=ActionTypes.PostBack, Value = Resources.TimeSheetCommand },
                     }
             };
 
