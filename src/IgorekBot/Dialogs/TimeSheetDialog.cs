@@ -2,13 +2,13 @@
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
-using IgorekBot.BLL.Interfaces;
 using IgorekBot.Properties;
 using Microsoft.Bot.Connector;
 using System.Collections.Generic;
 using IgorekBot.BLL.Models;
 using NMSService.NMSServiceReference;
 using System.Linq;
+using IgorekBot.BLL.Services;
 
 namespace IgorekBot.Dialogs
 {
@@ -56,11 +56,11 @@ namespace IgorekBot.Dialogs
             if (!context.UserData.TryGetValue(@"profile", out _employee))
             {
                 var response = _service.GetUserById(new GetUserByIdRequest { ChannelId = message?.From?.Id });
-                _employee = response.XMLPort.Employee.FirstOrDefault();
+                _employee = response.Employee;
             }
 
             var res = _service.GetUserProjects(new GetUserProjectsRequest { UserId = _employee.No });
-            PromptDialog.Choice(context, OnProjectSelected, res.XMLPort.Projects.Select(p => p.ProjectNo), "Выберите проект?");
+            PromptDialog.Choice(context, OnProjectSelected, res.Projects.Projects.Select(p => p.ProjectNo), "Выберите проект?");
 
         }
 
@@ -71,7 +71,7 @@ namespace IgorekBot.Dialogs
 
             var reply = context.MakeMessage();
 
-            foreach (var item in res.XMLPort.Projects)
+            foreach (var item in res.Tasks.Projects)
             {
 
             }
@@ -79,14 +79,14 @@ namespace IgorekBot.Dialogs
             var heroCard = new HeroCard
             {
                 Title = "dd",
-                Buttons = res.XMLPort.Projects.Select(p => new CardAction(ActionTypes.PostBack, p.TaskDescription, value: p.TaskNo)).ToList()
+                Buttons = res.Tasks.Projects.Select(p => new CardAction(ActionTypes.PostBack, p.TaskDescription, value: p.TaskNo)).ToList()
 
             };
 
             reply.Attachments.Add(heroCard.ToAttachment());
 
             await context.PostAsync(reply);
-            PromptDialog.Choice(context, OnProjectSelected, res.XMLPort.Projects.Select(p => p.TaskNo), "Выберите задачу?");
+            PromptDialog.Choice(context, OnProjectSelected, res.Tasks.Projects.Select(p => p.TaskNo), "Выберите задачу?");
         }
 
         public static IMessageActivity CreateMenu(IDialogContext context)

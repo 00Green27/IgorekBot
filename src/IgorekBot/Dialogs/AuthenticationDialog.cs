@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using IgorekBot.BLL.Interfaces;
 using IgorekBot.BLL.Models;
+using IgorekBot.BLL.Services;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using NMSService.NMSServiceReference;
@@ -44,7 +44,7 @@ namespace IgorekBot.Dialogs
             if (response.Result == 1)
                 context.Wait(MessageReceivedEmailRegistration);
             else
-                context.Done(response.XMLPort.Employee.First());
+                context.Done(response.Employee);
         }
 
 
@@ -54,7 +54,7 @@ namespace IgorekBot.Dialogs
 
             if (IsValidEmail(message.Text))
             {
-                var response = _service.AddUserByEMail(new AddUserByEMailRequest { EMail = message.Text });
+                var response = _service.AddUserByEmail(new AddUserByEmailRequest { Email = message.Text });
 
                 if (response.Result == 1)
                 {
@@ -82,14 +82,14 @@ namespace IgorekBot.Dialogs
             var response = _service.ValidatePassword(new ValidatePasswordRequest
             {
                 ChannelId = userId,
-                EMail = _email,
+                Email = _email,
                 Password = code.Text.Trim()
             });
 
             if (response.Result == 1)
                 await context.PostAsync(response.ErrorText);
             else
-                context.Done(response.XMLPort.Employee.First());
+                context.Done(response.Employee);
 
             context.Wait(MessageReceivedActivationCode);
         }

@@ -41,7 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\ITimeSheetService.cs" />
+    <Compile Include="Models\AddTimeSheetRequest.cs" />
+    <Compile Include="Models\AddTimeSheetResponse.cs" />
+    <Compile Include="Services\ITimeSheetService.cs" />
     <Compile Include="Models\AddUserByEMailRequest.cs" />
     <Compile Include="Models\AddUserByEMailResponse.cs" />
     <Compile Include="Models\ChannelType.cs" />
@@ -52,6 +54,7 @@
     <Compile Include="Models\GetUserByIdResponse.cs" />
     <Compile Include="Models\GetUserProjectsRequest.cs" />
     <Compile Include="Models\GetUserProjectsResponse.cs" />
+    <Compile Include="Models\Task.cs" />
     <Compile Include="Models\ValidatePasswordRequest.cs" />
     <Compile Include="Models\ValidatePasswordResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

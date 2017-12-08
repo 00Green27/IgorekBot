@@ -10,7 +10,7 @@ namespace IgorekBot.BLL.Models
     {
         public ChannelType ChannelType { get; set; } = ChannelType.Telegram;
 
-        public string EMail { get; set; }
+        public string Email { get; set; }
 
         public string Password { get; set; }
 

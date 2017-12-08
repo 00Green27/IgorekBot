@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Threading.Tasks;
-using IgorekBot.BLL.Interfaces;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using IgorekBot.BLL.Models;
+using IgorekBot.BLL.Services;
 
 namespace IgorekBot.Dialogs
 {

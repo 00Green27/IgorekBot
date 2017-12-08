@@ -1,22 +1,19 @@
 ﻿using IgorekBot.BLL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace IgorekBot.BLL.Interfaces
+namespace IgorekBot.BLL.Services
 {
     public interface ITimeSheetService
     {
         GetUserByIdResponse GetUserById(GetUserByIdRequest request);
 
-        AddUserByEMailResponse AddUserByEMail(AddUserByEMailRequest request);
+        AddUserByEMailResponse AddUserByEmail(AddUserByEmailRequest request);
 
         ValidatePasswordResponse ValidatePassword(ValidatePasswordRequest request);
 
         GetUserProjectsResponse GetUserProjects(GetUserProjectsRequest request);
 
         GetProjectTasksResponse GetProjectTasks(GetProjectTasksRequest request);
+
+        AddTimeSheetResponse AddTimeSheet(AddTimeSheetRequest request);
     }
 }

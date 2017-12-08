@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IgorekBot.BLL.Interfaces;
 using IgorekBot.BLL.Models;
+using IgorekBot.BLL.Services;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using NMSService.NMSServiceReference;
