@@ -6,7 +6,6 @@ using Microsoft.Bot.Builder.Scorables;
 using Microsoft.Bot.Connector;
 using IgorekBot.Dialogs;
 using IgorekBot.BLL.Services;
-using IgorekBot.BLL.Interfaces;
 
 namespace IgorekBot.Modules
 {

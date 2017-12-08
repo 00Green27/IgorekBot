@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
-using IgorekBot.BLL.Interfaces;
 using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
 using IgorekBot.Dialogs;

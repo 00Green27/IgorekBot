@@ -11,7 +11,7 @@ namespace IgorekBot.BLL.Models
     {
         public int Result { get; set; }
 
-        public root XMLPort { get; set; }
+        public Employee Employee { get; set; }
 
         public string ErrorText { get; set; }
     }
