@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using IgorekBot.BLL.Models;
 using NMSService.NMSServiceReference;
 using System.Linq;
+using IgorekBot.Helpers;
 
 namespace IgorekBot.Dialogs
 {
@@ -17,6 +18,8 @@ namespace IgorekBot.Dialogs
     {
         private readonly ITimeSheetService _service;
         private Employee _employee;
+        private List<Projects> _projects;
+        private List<Projects1> _tasks;
 
         public TimeSheetDialog(ITimeSheetService service)
         {
@@ -26,8 +29,8 @@ namespace IgorekBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
             var activity = context.Activity;
-            var reply = CreateMenu(context);
-            await context.PostAsync(reply.AsMessageActivity());
+            var reply = MenuHelper.CreateMenu(context, new List<string> { Resources.MenuCommand, Resources.HoursCommand, Resources.ProjectsCommand }, Resources.NotificationsCommand);
+            await context.PostAsync(reply);
 
             context.Wait(MessageReceivedAsync);
         }
@@ -57,36 +60,32 @@ namespace IgorekBot.Dialogs
             {
                 var response = _service.GetUserById(new GetUserByIdRequest { ChannelId = message?.From?.Id });
                 _employee = response.XMLPort.Employee.FirstOrDefault();
+                context.UserData.SetValue(@"profile", _employee);            
             }
 
             var res = _service.GetUserProjects(new GetUserProjectsRequest { UserId = _employee.No });
-            PromptDialog.Choice(context, OnProjectSelected, res.XMLPort.Projects.Select(p => p.ProjectNo), "Выберите проект?");
-
+            _projects = res.XMLPort.Projects.ToList();
+            PromptDialog.Choice(context, OnProjectSelected, _projects.Select(p => p.ProjectDescription), "Выберите проект?");
         }
 
         private async Task OnProjectSelected(IDialogContext context, IAwaitable<string> result)
         {
-            var projectId = await result;
-            var res = _service.GetProjectTasks(new GetProjectTasksRequest { UserId = _employee.No, ProjectId = projectId });
+            var project = await result;
 
-            var reply = context.MakeMessage();
+            var res = _service.GetProjectTasks(new GetProjectTasksRequest { UserId = _employee.No, ProjectId = _projects.First(p => p.ProjectDescription == project).ProjectNo });
 
-            foreach (var item in res.XMLPort.Projects)
-            {
+            //var reply = context.MakeMessage();
 
-            }
+            //await context.PostAsync(reply);
+            _tasks = res.XMLPort.Projects.ToList();
+            PromptDialog.Choice(context, OnTaskSelected, _tasks.Select(p => p.TaskDescription), "Выберите задачу?");
+        }
 
-            var heroCard = new HeroCard
-            {
-                Title = "dd",
-                Buttons = res.XMLPort.Projects.Select(p => new CardAction(ActionTypes.PostBack, p.TaskDescription, value: p.TaskNo)).ToList()
-
-            };
-
-            reply.Attachments.Add(heroCard.ToAttachment());
-
-            await context.PostAsync(reply);
-            PromptDialog.Choice(context, OnProjectSelected, res.XMLPort.Projects.Select(p => p.TaskNo), "Выберите задачу?");
+        private async Task OnTaskSelected(IDialogContext context, IAwaitable<string> result)
+        {
+            var task = await result;
+            await context.PostAsync(task);
+            context.Wait(MessageReceivedAsync);
         }
 
         public static IMessageActivity CreateMenu(IDialogContext context)

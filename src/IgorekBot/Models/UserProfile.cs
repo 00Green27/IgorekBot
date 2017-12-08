@@ -5,6 +5,7 @@ using System.Web;
 
 namespace IgorekBot.Models
 {
+    [Serializable]
     public class UserProfile
     {
         public string FirstName { get; set; }
