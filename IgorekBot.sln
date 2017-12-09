@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{34B69E08-D71
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgorekBot.BLL", "src\IgorekBot.BLL\IgorekBot.BLL.csproj", "{CFFD6179-F59A-48B3-B1EA-CE53FCB6EAF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgorekBot.Data", "IgorekBot.Data\IgorekBot.Data.csproj", "{091978CB-D4F8-4621-A09D-BB1AEE6349BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgorekBot.Data", "src\IgorekBot.Data\IgorekBot.Data.csproj", "{091978CB-D4F8-4621-A09D-BB1AEE6349BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

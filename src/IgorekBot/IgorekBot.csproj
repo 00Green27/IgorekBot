@@ -159,13 +159,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\IgorekBot.Data\IgorekBot.Data.csproj">
-      <Project>{091978CB-D4F8-4621-A09D-BB1AEE6349BD}</Project>
-      <Name>IgorekBot.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\IgorekBot.BLL\IgorekBot.BLL.csproj">
       <Project>{cffd6179-f59a-48b3-b1ea-ce53fcb6eaf4}</Project>
       <Name>IgorekBot.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IgorekBot.Data\IgorekBot.Data.csproj">
+      <Project>{091978cb-d4f8-4621-a09d-bb1aee6349bd}</Project>
+      <Name>IgorekBot.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\NMSService\NMSService.csproj">
       <Project>{8FA4C5A7-DFAA-4982-914F-1DF3522E4974}</Project>
