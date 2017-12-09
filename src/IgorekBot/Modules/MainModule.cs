@@ -16,12 +16,15 @@ namespace IgorekBot.Modules
             base.Load(builder);
 
             builder.RegisterType<RootDialog>().As<IDialog<object>>().InstancePerDependency();
-            
-            builder.RegisterType<CancelScorable>().As<IScorable<IActivity, double>>().InstancePerLifetimeScope();
+            builder.Register(c => new RegistrationDialog(c.Resolve<ITimeSheetService>())).AsSelf().InstancePerDependency();
+            builder.Register(c => new TimeSheetDialog(c.Resolve<IBotService>(), c.Resolve<ITimeSheetService>())).AsSelf().InstancePerDependency();
+
+            //builder.RegisterType<MenuScorable>().As<IScorable<IActivity, double>>().InstancePerLifetimeScope();
 
             builder.RegisterType<AuthenticationDialog>().InstancePerDependency();
 
             builder.RegisterType<TimeSheetService>().Keyed<ITimeSheetService>(FiberModule.Key_DoNotSerialize).AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<BotService>().Keyed<IBotService>(FiberModule.Key_DoNotSerialize).AsImplementedInterfaces().SingleInstance();
 
         }
     }

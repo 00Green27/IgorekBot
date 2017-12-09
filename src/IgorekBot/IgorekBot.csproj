@@ -72,7 +72,7 @@
       <HintPath>$(SolutionDir)\packages\Microsoft.WindowsAzure.ConfigurationManager.3.1.0\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=3.2.1.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\NLog.3.2.1\lib\net45\NLog.dll</HintPath>
@@ -123,10 +123,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\AuthenticationDialog.cs" />
-    <Compile Include="Dialogs\CancelScorable.cs" />
+    <Compile Include="Dialogs\MenuScorable.cs" />
     <Compile Include="Dialogs\EnsureRegistrationDialog.cs" />
     <Compile Include="Dialogs\EnterAbsenceDialog.cs" />
-    <Compile Include="Dialogs\ProjectDialog.cs" />
+    <Compile Include="Dialogs\ProjectsDialog.cs" />
     <Compile Include="Dialogs\PromptEmail.cs" />
     <Compile Include="Dialogs\PromptStringRegex.cs" />
     <Compile Include="Dialogs\RegistrationDialog.cs" />
@@ -136,7 +136,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MenuHelper.cs" />
-    <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -144,6 +143,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ReplyKeyboardMarkup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
@@ -159,6 +159,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\IgorekBot.Data\IgorekBot.Data.csproj">
+      <Project>{091978CB-D4F8-4621-A09D-BB1AEE6349BD}</Project>
+      <Name>IgorekBot.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IgorekBot.BLL\IgorekBot.BLL.csproj">
       <Project>{cffd6179-f59a-48b3-b1ea-ce53fcb6eaf4}</Project>
       <Name>IgorekBot.BLL</Name>
@@ -172,7 +176,11 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

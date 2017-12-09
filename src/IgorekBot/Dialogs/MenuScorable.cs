@@ -1,24 +1,21 @@
-﻿using Microsoft.Bot.Builder.Scorables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Bot.Connector;
+using IgorekBot.Properties;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.Internals.Fibers;
-using IgorekBot.Properties;
+using Microsoft.Bot.Builder.Scorables;
+using Microsoft.Bot.Connector;
 
 namespace IgorekBot.Dialogs
 {
-    public class CancelScorable : IScorable<IActivity, double>
+    public class MenuScorable : IScorable<IActivity, double>
     {
         private readonly IDialogTask _task;
-        
-        public CancelScorable(IDialogTask task)
+
+        public MenuScorable(IDialogTask task)
         {
-            SetField.NotNull(out this._task, nameof(task), task);
+            SetField.NotNull(out _task, nameof(task), task);
         }
 
         public Task DoneAsync(IActivity item, object state, CancellationToken token)
@@ -45,13 +42,9 @@ namespace IgorekBot.Dialogs
         {
             var message = item as IMessageActivity;
 
-            if(message != null && !string.IsNullOrWhiteSpace(message.Text))
-            {
-                if(message.Text.Equals(Resources.CancelCommand, StringComparison.InvariantCultureIgnoreCase))
-                {
+            if (message != null && !string.IsNullOrWhiteSpace(message.Text))
+                if (message.Text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
                     return message.Text;
-                }
-            }
 
             return null;
         }

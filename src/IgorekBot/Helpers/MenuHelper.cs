@@ -9,7 +9,7 @@ namespace IgorekBot.Helpers
 {
     public static class MenuHelper
     {
-        public static IMessageActivity CreateMenu(IDialogContext context, List<string> buttons, string text = null)
+        public static IMessageActivity CreateMenu(IDialogContext context, IEnumerable<string> buttons, string text = null)
         {
             var reply = context.MakeMessage();
             reply.Text = text;

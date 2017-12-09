@@ -7,11 +7,11 @@ namespace IgorekBot.BLL.Services
         AddUserByEMailResponse AddUserByEmail(AddUserByEmailRequest request);
         AddTimeSheetResponse AddTimeSheet(AddTimeSheetRequest request);
         GetUserByIdResponse GetUserById(GetUserByIdRequest request);
-        //GetEmployeeByPhoneNo
+        GetUserByPhoneResponse GetUserByPhone(GetUserByPhoneRequest request);
         GetUserProjectsResponse GetUserProjects(GetUserProjectsRequest request);
         GetProjectTasksResponse GetProjectTasks(GetProjectTasksRequest request);
-        //TimeSheetsPerDay
-        //TimeSheetsPerWeek
+        GetTimeSheetsPerDayResponse GetTimeSheetsPerDay(GetTimeSheetsPerDayRequest request);
+        GetTimeSheetsPerWeekResponse GetTimeSheetsPerWeek(GetTimeSheetsPerWeekRequest request);
         ValidatePasswordResponse ValidatePassword(ValidatePasswordRequest request);
 
 

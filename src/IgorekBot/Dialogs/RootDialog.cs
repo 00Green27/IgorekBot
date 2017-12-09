@@ -1,26 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using Autofac;
 using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
+using IgorekBot.Data.Models;
+using IgorekBot.Helpers;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Connector;
 using NMSService.NMSServiceReference;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Resources = IgorekBot.Properties.Resources;
-using IgorekBot.Models;
 
 namespace IgorekBot.Dialogs
 {
     [Serializable]
     public class RootDialog : IDialog<object>
     {
-        private readonly ITimeSheetService _service;
+        private readonly IBotService _botSvc;
+        private readonly ITimeSheetService _timeSheetSvc;
+        private readonly IEnumerable<string> _mainMenu = new List<string> { Resources.TimeSheetCommand, Resources.EnterAbsenceCommand };
+        private UserProfile _profile;
 
-        public RootDialog(ITimeSheetService service)
+        public RootDialog(IBotService botSvc, ITimeSheetService timeSheetSvc)
         {
-            SetField.NotNull(out _service, nameof(service), service);
+            SetField.NotNull(out _botSvc, nameof(botSvc), botSvc);
+            SetField.NotNull(out _timeSheetSvc, nameof(timeSheetSvc), timeSheetSvc);
         }
 
         public Task StartAsync(IDialogContext context)
@@ -30,12 +38,82 @@ namespace IgorekBot.Dialogs
             return Task.CompletedTask;
         }
 
-        private Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
+        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
-            context.Call(new EnsureRegistrationDialog(_service), RegistrationEnsured);
-            return Task.CompletedTask;
+            var message = await result;
+
+            using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
+            {
+                if (!context.UserData.TryGetValue("profile", out _profile))
+                {
+                    _profile = await _botSvc.GetUserProfileByUserId(message.From.Id);
+                    if (_profile == null)
+                    {
+                        context.Call(scope.Resolve<RegistrationDialog>(), ResumeAfterRegistration);
+                    }
+                    else
+                    {
+                        context.UserData.SetValue("profile", _profile);
+                    }
+                }
+                else if (message.Text.Equals(Resources.TimeSheetCommand, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    context.Call(scope.Resolve<TimeSheetDialog>(), ResumeAfterTimeSheetDialog);
+                }
+                else if (message.Text.Equals(Resources.EnterAbsenceCommand, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    context.Call(new EnterAbsenceDialog(), ResumeAfterEnterAbsenceDialog);
+                }
+                else if (message.Text.Equals("/start", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    await context.PostAsync(MenuHelper.CreateMenu(context, _mainMenu, Resources.RootDialog_Main_Message));
+                }
+                else
+                {
+                    await context.PostAsync(MenuHelper.CreateMenu(context, _mainMenu, Resources.RootDialog_Didnt_Understand_Message));
+                }
+            }
         }
-        
+
+        private async Task ResumeAfterEnterAbsenceDialog(IDialogContext context, IAwaitable<object> result)
+        {
+            await context.PostAsync(MenuHelper.CreateMenu(context, _mainMenu, Resources.RootDialog_Main_Message));
+            context.Wait(MessageReceivedAsync);
+        }
+
+        private async Task ResumeAfterTimeSheetDialog(IDialogContext context, IAwaitable<object> result)
+        {
+            await context.PostAsync(MenuHelper.CreateMenu(context, _mainMenu, Resources.RootDialog_Main_Message));
+            context.Wait(MessageReceivedAsync);
+        }
+
+        private async Task ResumeAfterRegistration(IDialogContext context, IAwaitable<UserProfile> result)
+        {
+            try
+            {
+                _profile = await result;
+                if(_profile != null)
+                {
+                    await _botSvc.SaveUserProfile(_profile);
+                    context.UserData.SetValue("profile", _profile);
+                    await context.PostAsync(MenuHelper.CreateMenu(context, _mainMenu, string.Format(Resources.RootDialog_Welcome_Message, _profile.FirstName)));
+                }
+                else
+                {
+                    await context.PostAsync(MenuHelper.CreateMenu(context,
+                        new List<string> { Resources.RegistrationCommand }, Resources.RootDialog_Authentication_Message));
+                }
+
+            }
+            catch (Exception e)
+            {
+                await context.PostAsync(MenuHelper.CreateMenu(context,
+                    new List<string> { Resources.RegistrationCommand },
+                    $"{e.Message}. {Resources.RootDialog_Authentication_Message}"));
+            }
+            context.Wait(MessageReceivedAsync);
+        }
+
         private async Task RegistrationEnsured(IDialogContext context, IAwaitable<UserProfile> result)
         {
             var profile = await result;
@@ -47,19 +125,29 @@ namespace IgorekBot.Dialogs
             context.Wait(MessageReceivedAsync);
         }
 
+
+
+
+
+
+
+
+
+
+
         //private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> argument)
         //{
         //    var message = await argument;
 
-        //    var response = _service.GetUserById(new GetUserByIdRequest { ChannelId = message?.From?.Id });
+        //    var response = _timeSheetSvc.GetUserById(new GetUserByIdRequest { ChannelId = message?.From?.Id });
         //    if (response.Result == 1 || message.Text.Equals(Resources.RegistrationCommand, StringComparison.InvariantCultureIgnoreCase))
         //    {
-        //        context.Call(new AuthenticationDialog(_service), AuthenticationDialogResumeAfter);
+        //        context.Call(new AuthenticationDialog(_timeSheetSvc), AuthenticationDialogResumeAfter);
         //    }
         //    else if (message.Text.Equals(Resources.TimeSheetCommand, StringComparison.InvariantCultureIgnoreCase))
         //    {
-        //        //await context.Forward(new TimeSheetDialog(_service), TimeSheetDialogResumeAfterAsync, message);
-        //        context.Call(new TimeSheetDialog(_service), TimeSheetDialogResumeAfterAsync);
+        //        //await context.Forward(new TimeSheetDialog(_timeSheetSvc), TimeSheetDialogResumeAfterAsync, message);
+        //        context.Call(new TimeSheetDialog(_timeSheetSvc), TimeSheetDialogResumeAfterAsync);
         //    }
         //    else if (message.Text.Equals(Resources.EnterAbsenceCommand, StringComparison.InvariantCultureIgnoreCase))
         //    {

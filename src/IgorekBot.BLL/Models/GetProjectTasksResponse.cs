@@ -1,9 +1,4 @@
-﻿using NMSService.NMSServiceReference;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace IgorekBot.BLL.Models
 {
@@ -11,7 +6,7 @@ namespace IgorekBot.BLL.Models
     {
         public int Result { get; set; }
 
-        public IEnumerable<Task> Tasks { get; set; }
+        public IEnumerable<ProjectTask> ProjectTasks { get; set; }
 
         public string ErrorText { get; set; }
     }

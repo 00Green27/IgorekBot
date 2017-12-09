@@ -117,64 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AuthenticationDialog_Code_Prompt" xml:space="preserve">
-    <value>{0}, введите код активации</value>
+  <data name="Target" xml:space="preserve">
+    <value>H4sIAAAAAAAEAM1Yy27bOBTdDzD/IHA1A6RmHptOILVInWQQTJwEVdo9LV0pRClSQ1KB/W1dzCfNL8yl3g87ttMiGHgjU/ee+z689r/f//E/rjLhPYM2XMmAnMyOiQcyUjGXaUAKm7x7Tz5++PUX/yrOVt7XRu7MyaGmNAF5sjY/p9RET5AxM8t4pJVRiZ1FKqMsVvT0+PgPenJCASEIYnme/7mQlmdQfsGvcyUjyG3BxELFIEx9jm/CEtW7YxmYnEUQkJtUafj2SdnZJbOMeBeCM/QiBJEQj0mpLLPo4/kXA6HVSqZhjgdMPK5zQLmECQO17+ed+L5hHJ+6MGin2EBFhbEqOxDw5KzOCx2rvyq7pM0bZu4KM2zXLuoyewHBhOgHrRIuMP6xvfO50E52nN9ZVZBZT/nIG4octW2B3eM+R968ELbQEEgorGbiyHsoloJHf8H6UX0DGchCiL6z6C6+GxzgEdrLQdv1Z0jqEG5i4tGhHh0rtmo9nToyac9OiXeHxtlSQNsLvSyEFiP7EyRoZiF+YNaClg4DymxOrI9sXXNtrHtsTGIH4iARb8FWtyBT+xQQfCTeNV9B3JzUbnyRHOcOlawuYJelW/ZGhq4yxsUbWMmFWgPMUeMnG/NpNwnT+UDmsYxjvWtHsKldT7tjWNkNc4KDUI+Kqa0NA6tgQ7DTqTPE61ypGGs2GMpNbrcOdpxIK1JsyJNuYU9/wfIcM9hj0/rECysqnb8LD+eZrMKgkdlAN623rSUcKJbC6C2aRk/LaXHZXjJXw3mcTcRG5diS6sbYhoyPOaUrQKPknmumGDJfvzQjmC6V1xhdhuRQBgqtR0O2nWiXFxsTTG/gqrkSRSa38d1L2j326YP0jvfH6vilD9Wd7o9UE0gfpj46BKNPD0Oo/pspok9HhRo3BJ10xOh+GXfZSzM6Fmmtt7M6mkm/no/da89kYCoR4mGqnnnshiVcGwtZ1bzh32IuOMbbCSyY5AkYW13BBOf5/Wh7+v9sMtSYWOy/zrz5KsFdYncuC5NN48DtQT4zHT0x/VvGVr/34V6zIfwQ2GAL+EGk6U1/AOBht/n0ltn7st51V1fjF5B4qTCMyt3hXf/K23zKCD7t/1zyL8HwtINwP54kRG7UOtBG5kYmqikAhtn3qBEZ1WcBlsWYrQttecIii68jMKbcxL4yUZQlXEJ8I+8Lmxf2whjIlmKwGvv0ZfvlyjL02b/P3TfzM0JANzmGAPfyU8FF3Pp9PR3CbRCucerJRq9wE0W4dN0i3Sm5J1CdvkvIQTpeeATsfwQz9zJkz/Aa37DLbiFl0boh9u0guwsxTLt/yVmqWWZqjE7f/QVA3X8AH/4D4FtThTUQAAA=</value>
   </data>
-  <data name="AuthenticationDialog_EMail_Prompt" xml:space="preserve">
-    <value>Укажите рабочий email</value>
-  </data>
-  <data name="CancelCommand" xml:space="preserve">
-    <value>Отмена</value>
-  </data>
-  <data name="EnterAbsenceCommand" xml:space="preserve">
-    <value>Ввод отсутствия</value>
-  </data>
-  <data name="HoursCommand" xml:space="preserve">
-    <value>Количество часов</value>
-  </data>
-  <data name="MenuCommand" xml:space="preserve">
-    <value>Меню</value>
-  </data>
-  <data name="NotificationsCommand" xml:space="preserve">
-    <value>Уведомления</value>
-  </data>
-  <data name="ProjectsCommand" xml:space="preserve">
-    <value>Проекты</value>
-  </data>
-  <data name="RegistrationCommand" xml:space="preserve">
-    <value>Регистрация</value>
-  </data>
-  <data name="RootDialog_Authentication_Message" xml:space="preserve">
-    <value>Вам необходимо зарегистрироваться</value>
-  </data>
-  <data name="RootDialog_Didnt_Understand_Message" xml:space="preserve">
-    <value>Простите, я не понимаю.😟</value>
-  </data>
-  <data name="RootDialog_Main_Message" xml:space="preserve">
-    <value>Игорек готов к работе!</value>
-  </data>
-  <data name="RootDialog_Welcome_Message" xml:space="preserve">
-    <value>Приветствую, {0}</value>
-  </data>
-  <data name="TimeSheetCommand" xml:space="preserve">
-    <value>ТШ</value>
-  </data>
-  <data name="TimeSheetDialog_Add_To_StopList_Action" xml:space="preserve">
-    <value>Добавить в стоп-лист</value>
-  </data>
-  <data name="TimeSheetDialog_Didnt_Understand_Message" xml:space="preserve">
-    <value>Простите, я не понимаю.😟</value>
-  </data>
-  <data name="TimeSheetDialog_Main_Message" xml:space="preserve">
-    <value>Что бы вы хотели сделать?</value>
-  </data>
-  <data name="TimeSheetDialog_Project_Choice_Message" xml:space="preserve">
-    <value>Выберите проект</value>
-  </data>
-  <data name="TimeSheetDialog_Task_Choice_Message" xml:space="preserve">
-    <value>Выберите задачу</value>
-  </data>
-  <data name="TimeSheetDialog_WriteOff_Action" xml:space="preserve">
-    <value>Списать</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

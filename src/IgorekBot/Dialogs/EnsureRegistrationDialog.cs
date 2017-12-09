@@ -7,7 +7,8 @@ using System.Web;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using IgorekBot.BLL.Models;
-using IgorekBot.Models;
+using IgorekBot.BLL.Services;
+using IgorekBot.Data.Models;
 using IgorekBot.Properties;
 
 namespace IgorekBot.Dialogs
@@ -44,7 +45,8 @@ namespace IgorekBot.Dialogs
                 }
                 else
                 {
-                    context.Done(response.XMLPort.Employee.Select(e => new UserProfile { FirstName = e.FirstName, LastName = e.LastName, EmployeeCode = e.No}));
+                    //context.Done(response.Employee.Select(e => new UserProfile { FirstName = e.FirstName, LastName = e.LastName, UserId = e.No}));
+                    context.Done(new object());
                 }
             }
             else
@@ -55,7 +57,7 @@ namespace IgorekBot.Dialogs
 
         private async Task ResumeAfterEmailEntered(IDialogContext context, IAwaitable<string> result)
         {
-            _profile.EMail = await result;
+            _profile.Email = await result;
 
         }
     }

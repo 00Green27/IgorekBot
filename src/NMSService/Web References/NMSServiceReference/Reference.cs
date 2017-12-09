@@ -23,19 +23,19 @@ namespace NMSService.NMSServiceReference {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="TimeSheetBotService_Binding", Namespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService")]
     public partial class TimeSheetBotService : System.Web.Services.Protocols.SoapHttpClientProtocol {
-        
-        private System.Threading.SendOrPostCallback GetEmployeeByIDOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetEmployeeByPhoneNoOperationCompleted;
         
         private System.Threading.SendOrPostCallback TimeSheetsPerDayOperationCompleted;
         
         private System.Threading.SendOrPostCallback TimeSheetsPerWeekOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback GetEmployeeByIDOperationCompleted;
         
         private System.Threading.SendOrPostCallback AddEmployeeByEMailOperationCompleted;
         
@@ -46,6 +46,8 @@ namespace NMSService.NMSServiceReference {
         private System.Threading.SendOrPostCallback GetEmployeeTasksOperationCompleted;
         
         private System.Threading.SendOrPostCallback AddTimeSheetOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback PostTimeSheetOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
@@ -86,9 +88,6 @@ namespace NMSService.NMSServiceReference {
         }
         
         /// <remarks/>
-        public event GetEmployeeByIDCompletedEventHandler GetEmployeeByIDCompleted;
-        
-        /// <remarks/>
         public event GetEmployeeByPhoneNoCompletedEventHandler GetEmployeeByPhoneNoCompleted;
         
         /// <remarks/>
@@ -97,6 +96,14 @@ namespace NMSService.NMSServiceReference {
         /// <remarks/>
         public event TimeSheetsPerWeekCompletedEventHandler TimeSheetsPerWeekCompleted;
         
+        /// <remarks/>
+        public event GetEmployeeByIDCompletedEventHandler GetEmployeeByIDCompleted;
+
+        public void GetEmployeeByPhoneNo(string phone, ref root1 xmlPort)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <remarks/>
         public event AddEmployeeByEMailCompletedEventHandler AddEmployeeByEMailCompleted;
         
@@ -113,59 +120,24 @@ namespace NMSService.NMSServiceReference {
         public event AddTimeSheetCompletedEventHandler AddTimeSheetCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByID", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", ResponseElementName="GetEmployeeByID_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public int GetEmployeeByID(int channelType, string channelID, ref root employeeByIDXMLPort, ref string errorText) {
-            object[] results = this.Invoke("GetEmployeeByID", new object[] {
-                        channelType,
-                        channelID,
-                        employeeByIDXMLPort,
-                        errorText});
-            employeeByIDXMLPort = ((root)(results[1]));
-            errorText = ((string)(results[2]));
-            return ((int)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void GetEmployeeByIDAsync(int channelType, string channelID, root employeeByIDXMLPort, string errorText) {
-            this.GetEmployeeByIDAsync(channelType, channelID, employeeByIDXMLPort, errorText, null);
-        }
-        
-        /// <remarks/>
-        public void GetEmployeeByIDAsync(int channelType, string channelID, root employeeByIDXMLPort, string errorText, object userState) {
-            if ((this.GetEmployeeByIDOperationCompleted == null)) {
-                this.GetEmployeeByIDOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetEmployeeByIDOperationCompleted);
-            }
-            this.InvokeAsync("GetEmployeeByID", new object[] {
-                        channelType,
-                        channelID,
-                        employeeByIDXMLPort,
-                        errorText}, this.GetEmployeeByIDOperationCompleted, userState);
-        }
-        
-        private void OnGetEmployeeByIDOperationCompleted(object arg) {
-            if ((this.GetEmployeeByIDCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.GetEmployeeByIDCompleted(this, new GetEmployeeByIDCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
+        public event PostTimeSheetCompletedEventHandler PostTimeSheetCompleted;
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByPhoneNo", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", ResponseElementName="GetEmployeeByPhoneNo_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetEmployeeByPhoneNo(string phoneNo, ref root1 employeeXMLPort) {
+        public void GetEmployeeByPhoneNo(string phoneNo, ref root employeeXMLPort) {
             object[] results = this.Invoke("GetEmployeeByPhoneNo", new object[] {
                         phoneNo,
                         employeeXMLPort});
-            employeeXMLPort = ((root1)(results[0]));
+            employeeXMLPort = ((root)(results[0]));
         }
         
         /// <remarks/>
-        public void GetEmployeeByPhoneNoAsync(string phoneNo, root1 employeeXMLPort) {
+        public void GetEmployeeByPhoneNoAsync(string phoneNo, root employeeXMLPort) {
             this.GetEmployeeByPhoneNoAsync(phoneNo, employeeXMLPort, null);
         }
         
         /// <remarks/>
-        public void GetEmployeeByPhoneNoAsync(string phoneNo, root1 employeeXMLPort, object userState) {
+        public void GetEmployeeByPhoneNoAsync(string phoneNo, root employeeXMLPort, object userState) {
             if ((this.GetEmployeeByPhoneNoOperationCompleted == null)) {
                 this.GetEmployeeByPhoneNoOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetEmployeeByPhoneNoOperationCompleted);
             }
@@ -184,24 +156,24 @@ namespace NMSService.NMSServiceReference {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:TimeSheetsPerDay", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", ResponseElementName="TimeSheetsPerDay_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public int TimeSheetsPerDay([System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime dateP, string employeeNoP, ref root2 timeSheetPerDayXMLPort, ref string errorText) {
+        public int TimeSheetsPerDay([System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime dateP, string employeeNoP, ref root1 timeSheetPerDayXMLPort, ref string errorText) {
             object[] results = this.Invoke("TimeSheetsPerDay", new object[] {
                         dateP,
                         employeeNoP,
                         timeSheetPerDayXMLPort,
                         errorText});
-            timeSheetPerDayXMLPort = ((root2)(results[1]));
+            timeSheetPerDayXMLPort = ((root1)(results[1]));
             errorText = ((string)(results[2]));
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void TimeSheetsPerDayAsync(System.DateTime dateP, string employeeNoP, root2 timeSheetPerDayXMLPort, string errorText) {
+        public void TimeSheetsPerDayAsync(System.DateTime dateP, string employeeNoP, root1 timeSheetPerDayXMLPort, string errorText) {
             this.TimeSheetsPerDayAsync(dateP, employeeNoP, timeSheetPerDayXMLPort, errorText, null);
         }
         
         /// <remarks/>
-        public void TimeSheetsPerDayAsync(System.DateTime dateP, string employeeNoP, root2 timeSheetPerDayXMLPort, string errorText, object userState) {
+        public void TimeSheetsPerDayAsync(System.DateTime dateP, string employeeNoP, root1 timeSheetPerDayXMLPort, string errorText, object userState) {
             if ((this.TimeSheetsPerDayOperationCompleted == null)) {
                 this.TimeSheetsPerDayOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTimeSheetsPerDayOperationCompleted);
             }
@@ -222,25 +194,25 @@ namespace NMSService.NMSServiceReference {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:TimeSheetsPerWeek", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", ResponseElementName="TimeSheetsPerWeek_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public int TimeSheetsPerWeek([System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime startDateP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime endDateP, string employeeNoP, ref root3 timeSheetPerWeekXMLPort, ref string errorText) {
+        public int TimeSheetsPerWeek([System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime startDateP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime endDateP, string employeeNoP, ref root2 timeSheetPerWeekXMLPort, ref string errorText) {
             object[] results = this.Invoke("TimeSheetsPerWeek", new object[] {
                         startDateP,
                         endDateP,
                         employeeNoP,
                         timeSheetPerWeekXMLPort,
                         errorText});
-            timeSheetPerWeekXMLPort = ((root3)(results[1]));
+            timeSheetPerWeekXMLPort = ((root2)(results[1]));
             errorText = ((string)(results[2]));
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void TimeSheetsPerWeekAsync(System.DateTime startDateP, System.DateTime endDateP, string employeeNoP, root3 timeSheetPerWeekXMLPort, string errorText) {
+        public void TimeSheetsPerWeekAsync(System.DateTime startDateP, System.DateTime endDateP, string employeeNoP, root2 timeSheetPerWeekXMLPort, string errorText) {
             this.TimeSheetsPerWeekAsync(startDateP, endDateP, employeeNoP, timeSheetPerWeekXMLPort, errorText, null);
         }
         
         /// <remarks/>
-        public void TimeSheetsPerWeekAsync(System.DateTime startDateP, System.DateTime endDateP, string employeeNoP, root3 timeSheetPerWeekXMLPort, string errorText, object userState) {
+        public void TimeSheetsPerWeekAsync(System.DateTime startDateP, System.DateTime endDateP, string employeeNoP, root2 timeSheetPerWeekXMLPort, string errorText, object userState) {
             if ((this.TimeSheetsPerWeekOperationCompleted == null)) {
                 this.TimeSheetsPerWeekOperationCompleted = new System.Threading.SendOrPostCallback(this.OnTimeSheetsPerWeekOperationCompleted);
             }
@@ -256,6 +228,44 @@ namespace NMSService.NMSServiceReference {
             if ((this.TimeSheetsPerWeekCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.TimeSheetsPerWeekCompleted(this, new TimeSheetsPerWeekCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByID", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", ResponseElementName="GetEmployeeByID_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public int GetEmployeeByID(int channelType, string channelID, ref root3 employeeByIDXMLPort, ref string errorText) {
+            object[] results = this.Invoke("GetEmployeeByID", new object[] {
+                        channelType,
+                        channelID,
+                        employeeByIDXMLPort,
+                        errorText});
+            employeeByIDXMLPort = ((root3)(results[1]));
+            errorText = ((string)(results[2]));
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetEmployeeByIDAsync(int channelType, string channelID, root3 employeeByIDXMLPort, string errorText) {
+            this.GetEmployeeByIDAsync(channelType, channelID, employeeByIDXMLPort, errorText, null);
+        }
+        
+        /// <remarks/>
+        public void GetEmployeeByIDAsync(int channelType, string channelID, root3 employeeByIDXMLPort, string errorText, object userState) {
+            if ((this.GetEmployeeByIDOperationCompleted == null)) {
+                this.GetEmployeeByIDOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetEmployeeByIDOperationCompleted);
+            }
+            this.InvokeAsync("GetEmployeeByID", new object[] {
+                        channelType,
+                        channelID,
+                        employeeByIDXMLPort,
+                        errorText}, this.GetEmployeeByIDOperationCompleted, userState);
+        }
+        
+        private void OnGetEmployeeByIDOperationCompleted(object arg) {
+            if ((this.GetEmployeeByIDCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetEmployeeByIDCompleted(this, new GetEmployeeByIDCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -303,7 +313,7 @@ namespace NMSService.NMSServiceReference {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:ValidatePassCode", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", ResponseElementName="ValidatePassCode_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
-        public int ValidatePassCode(int channelType, string eMail, string passCode, string channelID, ref root employeeByIDXMLPort, ref string errorText) {
+        public int ValidatePassCode(int channelType, string eMail, string passCode, string channelID, ref root3 employeeByIDXMLPort, ref string errorText) {
             object[] results = this.Invoke("ValidatePassCode", new object[] {
                         channelType,
                         eMail,
@@ -311,18 +321,18 @@ namespace NMSService.NMSServiceReference {
                         channelID,
                         employeeByIDXMLPort,
                         errorText});
-            employeeByIDXMLPort = ((root)(results[1]));
+            employeeByIDXMLPort = ((root3)(results[1]));
             errorText = ((string)(results[2]));
             return ((int)(results[0]));
         }
         
         /// <remarks/>
-        public void ValidatePassCodeAsync(int channelType, string eMail, string passCode, string channelID, root employeeByIDXMLPort, string errorText) {
+        public void ValidatePassCodeAsync(int channelType, string eMail, string passCode, string channelID, root3 employeeByIDXMLPort, string errorText) {
             this.ValidatePassCodeAsync(channelType, eMail, passCode, channelID, employeeByIDXMLPort, errorText, null);
         }
         
         /// <remarks/>
-        public void ValidatePassCodeAsync(int channelType, string eMail, string passCode, string channelID, root employeeByIDXMLPort, string errorText, object userState) {
+        public void ValidatePassCodeAsync(int channelType, string eMail, string passCode, string channelID, root3 employeeByIDXMLPort, string errorText, object userState) {
             if ((this.ValidatePassCodeOperationCompleted == null)) {
                 this.ValidatePassCodeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnValidatePassCodeOperationCompleted);
             }
@@ -460,6 +470,43 @@ namespace NMSService.NMSServiceReference {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:PostTimeSheet", RequestNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", ResponseElementName="PostTimeSheet_Result", ResponseNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlElementAttribute("return_value")]
+        public int PostTimeSheet(string employeeNoP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime startDateP, [System.Xml.Serialization.XmlElementAttribute(DataType="date")] System.DateTime endDateP, ref string errorText) {
+            object[] results = this.Invoke("PostTimeSheet", new object[] {
+                        employeeNoP,
+                        startDateP,
+                        endDateP,
+                        errorText});
+            errorText = ((string)(results[1]));
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void PostTimeSheetAsync(string employeeNoP, System.DateTime startDateP, System.DateTime endDateP, string errorText) {
+            this.PostTimeSheetAsync(employeeNoP, startDateP, endDateP, errorText, null);
+        }
+        
+        /// <remarks/>
+        public void PostTimeSheetAsync(string employeeNoP, System.DateTime startDateP, System.DateTime endDateP, string errorText, object userState) {
+            if ((this.PostTimeSheetOperationCompleted == null)) {
+                this.PostTimeSheetOperationCompleted = new System.Threading.SendOrPostCallback(this.OnPostTimeSheetOperationCompleted);
+            }
+            this.InvokeAsync("PostTimeSheet", new object[] {
+                        employeeNoP,
+                        startDateP,
+                        endDateP,
+                        errorText}, this.PostTimeSheetOperationCompleted, userState);
+        }
+        
+        private void OnPostTimeSheetOperationCompleted(object arg) {
+            if ((this.PostTimeSheetCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.PostTimeSheetCompleted(this, new PostTimeSheetCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         public new void CancelAsync(object userState) {
             base.CancelAsync(userState);
         }
@@ -479,11 +526,11 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50073")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50070")]
     public partial class root {
         
         private Employee[] employeeField;
@@ -514,11 +561,11 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50073")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:microsoft-dynamics-nav/xmlports/x50070")]
     public partial class Employee {
         
         private string noField;
@@ -526,6 +573,8 @@ namespace NMSService.NMSServiceReference {
         private string firstNameField;
         
         private string lastNameField;
+        
+        private string phoneNoField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute("No.")]
@@ -557,10 +606,21 @@ namespace NMSService.NMSServiceReference {
                 this.lastNameField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("PhoneNo.")]
+        public string PhoneNo {
+            get {
+                return this.phoneNoField;
+            }
+            set {
+                this.phoneNoField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -617,7 +677,7 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -652,7 +712,7 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -685,7 +745,7 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -720,7 +780,88 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="Employee", Namespace="urn:microsoft-dynamics-nav/xmlports/x50073")]
+    public partial class Employee1 {
+        
+        private string noField;
+        
+        private string firstNameField;
+        
+        private string lastNameField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("No.")]
+        public string No {
+            get {
+                return this.noField;
+            }
+            set {
+                this.noField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FirstName {
+            get {
+                return this.firstNameField;
+            }
+            set {
+                this.firstNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string LastName {
+            get {
+                return this.lastNameField;
+            }
+            set {
+                this.lastNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(TypeName="root", Namespace="urn:microsoft-dynamics-nav/xmlports/x50073")]
+    public partial class root3 {
+        
+        private Employee1[] employeeField;
+        
+        private string[] textField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Employee")]
+        public Employee1[] Employee {
+            get {
+                return this.employeeField;
+            }
+            set {
+                this.employeeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTextAttribute()]
+        public string[] Text {
+            get {
+                return this.textField;
+            }
+            set {
+                this.textField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -768,12 +909,12 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="root", Namespace="urn:microsoft-dynamics-nav/xmlports/x50072")]
-    public partial class root3 {
+    public partial class root2 {
         
         private TimeSheet1[] timeSheetField;
         
@@ -803,7 +944,7 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -827,6 +968,12 @@ namespace NMSService.NMSServiceReference {
         private string taskDescriptionField;
         
         private string externalNoField;
+        
+        private int jobLedgerEntryNoField;
+        
+        public TimeSheet() {
+            this.jobLedgerEntryNoField = 0;
+        }
         
         /// <remarks/>
         public string PostingDate {
@@ -920,15 +1067,26 @@ namespace NMSService.NMSServiceReference {
                 this.externalNoField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("JobLedgerEntryNo.")]
+        public int JobLedgerEntryNo {
+            get {
+                return this.jobLedgerEntryNoField;
+            }
+            set {
+                this.jobLedgerEntryNoField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(TypeName="root", Namespace="urn:microsoft-dynamics-nav/xmlports/x50071")]
-    public partial class root2 {
+    public partial class root1 {
         
         private TimeSheet[] timeSheetField;
         
@@ -958,147 +1116,11 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="Employee", Namespace="urn:microsoft-dynamics-nav/xmlports/x50070")]
-    public partial class Employee1 {
-        
-        private string noField;
-        
-        private string firstNameField;
-        
-        private string lastNameField;
-        
-        private string phoneNoField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("No.")]
-        public string No {
-            get {
-                return this.noField;
-            }
-            set {
-                this.noField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FirstName {
-            get {
-                return this.firstNameField;
-            }
-            set {
-                this.firstNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string LastName {
-            get {
-                return this.lastNameField;
-            }
-            set {
-                this.lastNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("PhoneNo.")]
-        public string PhoneNo {
-            get {
-                return this.phoneNoField;
-            }
-            set {
-                this.phoneNoField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(TypeName="root", Namespace="urn:microsoft-dynamics-nav/xmlports/x50070")]
-    public partial class root1 {
-        
-        private Employee1[] employeeField;
-        
-        private string[] textField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Employee")]
-        public Employee1[] Employee {
-            get {
-                return this.employeeField;
-            }
-            set {
-                this.employeeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTextAttribute()]
-        public string[] Text {
-            get {
-                return this.textField;
-            }
-            set {
-                this.textField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
-    public delegate void GetEmployeeByIDCompletedEventHandler(object sender, GetEmployeeByIDCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class GetEmployeeByIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal GetEmployeeByIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public int Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((int)(this.results[0]));
-            }
-        }
-        
-        /// <remarks/>
-        public root employeeByIDXMLPort {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((root)(this.results[1]));
-            }
-        }
-        
-        /// <remarks/>
-        public string errorText {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((string)(this.results[2]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void GetEmployeeByPhoneNoCompletedEventHandler(object sender, GetEmployeeByPhoneNoCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetEmployeeByPhoneNoCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1111,20 +1133,20 @@ namespace NMSService.NMSServiceReference {
         }
         
         /// <remarks/>
-        public root1 employeeXMLPort {
+        public root employeeXMLPort {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((root1)(this.results[0]));
+                return ((root)(this.results[0]));
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void TimeSheetsPerDayCompletedEventHandler(object sender, TimeSheetsPerDayCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TimeSheetsPerDayCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1145,10 +1167,10 @@ namespace NMSService.NMSServiceReference {
         }
         
         /// <remarks/>
-        public root2 timeSheetPerDayXMLPort {
+        public root1 timeSheetPerDayXMLPort {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((root2)(this.results[1]));
+                return ((root1)(this.results[1]));
             }
         }
         
@@ -1162,11 +1184,11 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void TimeSheetsPerWeekCompletedEventHandler(object sender, TimeSheetsPerWeekCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class TimeSheetsPerWeekCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1187,7 +1209,49 @@ namespace NMSService.NMSServiceReference {
         }
         
         /// <remarks/>
-        public root3 timeSheetPerWeekXMLPort {
+        public root2 timeSheetPerWeekXMLPort {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((root2)(this.results[1]));
+            }
+        }
+        
+        /// <remarks/>
+        public string errorText {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[2]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    public delegate void GetEmployeeByIDCompletedEventHandler(object sender, GetEmployeeByIDCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetEmployeeByIDCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetEmployeeByIDCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public root3 employeeByIDXMLPort {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((root3)(this.results[1]));
@@ -1204,11 +1268,11 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void AddEmployeeByEMailCompletedEventHandler(object sender, AddEmployeeByEMailCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AddEmployeeByEMailCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1254,11 +1318,11 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void ValidatePassCodeCompletedEventHandler(object sender, ValidatePassCodeCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ValidatePassCodeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1279,10 +1343,10 @@ namespace NMSService.NMSServiceReference {
         }
         
         /// <remarks/>
-        public root employeeByIDXMLPort {
+        public root3 employeeByIDXMLPort {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((root)(this.results[1]));
+                return ((root3)(this.results[1]));
             }
         }
         
@@ -1296,11 +1360,11 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void GetEmployeeProjectsCompletedEventHandler(object sender, GetEmployeeProjectsCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetEmployeeProjectsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1338,11 +1402,11 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void GetEmployeeTasksCompletedEventHandler(object sender, GetEmployeeTasksCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class GetEmployeeTasksCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1380,11 +1444,11 @@ namespace NMSService.NMSServiceReference {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void AddTimeSheetCompletedEventHandler(object sender, AddTimeSheetCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class AddTimeSheetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -1392,6 +1456,40 @@ namespace NMSService.NMSServiceReference {
         private object[] results;
         
         internal AddTimeSheetCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+        
+        /// <remarks/>
+        public string errorText {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((string)(this.results[1]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    public delegate void PostTimeSheetCompletedEventHandler(object sender, PostTimeSheetCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class PostTimeSheetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal PostTimeSheetCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

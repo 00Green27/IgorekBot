@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2009
+VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgorekBot", "src\IgorekBot\IgorekBot.csproj", "{A90292FF-FF0D-43C6-8656-E3AD442D3E87}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DAL", "DAL", "{34B69E08-D714-4D11-8C32-61FB0587FA3E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgorekBot.BLL", "src\IgorekBot.BLL\IgorekBot.BLL.csproj", "{CFFD6179-F59A-48B3-B1EA-CE53FCB6EAF4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IgorekBot.Data", "IgorekBot.Data\IgorekBot.Data.csproj", "{091978CB-D4F8-4621-A09D-BB1AEE6349BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +33,10 @@ Global
 		{CFFD6179-F59A-48B3-B1EA-CE53FCB6EAF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFFD6179-F59A-48B3-B1EA-CE53FCB6EAF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFFD6179-F59A-48B3-B1EA-CE53FCB6EAF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{091978CB-D4F8-4621-A09D-BB1AEE6349BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{091978CB-D4F8-4621-A09D-BB1AEE6349BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{091978CB-D4F8-4621-A09D-BB1AEE6349BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{091978CB-D4F8-4621-A09D-BB1AEE6349BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

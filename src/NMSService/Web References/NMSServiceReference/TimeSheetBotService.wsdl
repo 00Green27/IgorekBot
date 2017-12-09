@@ -1,21 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <definitions xmlns:tns="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
-    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50073" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50073" xmlns="http://www.w3.org/2001/XMLSchema">
-      <complexType name="Employee">
-        <sequence>
-          <element minOccurs="1" maxOccurs="1" name="No." type="string" />
-          <element minOccurs="1" maxOccurs="1" name="FirstName" type="string" />
-          <element minOccurs="1" maxOccurs="1" name="LastName" type="string" />
-        </sequence>
-      </complexType>
-      <complexType name="root" mixed="true">
-        <sequence>
-          <element minOccurs="1" maxOccurs="unbounded" name="Employee" type="tns:Employee" />
-        </sequence>
-      </complexType>
-      <element name="root" type="tns:root" />
-    </schema>
     <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50070" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50070" xmlns="http://www.w3.org/2001/XMLSchema">
       <complexType name="Employee">
         <sequence>
@@ -44,6 +29,7 @@
           <element minOccurs="1" maxOccurs="1" name="JobTaskFullNo." type="string" />
           <element minOccurs="1" maxOccurs="1" name="TaskDescription" type="string" />
           <element minOccurs="1" maxOccurs="1" name="ExternalNo." type="string" />
+          <element minOccurs="1" maxOccurs="1" default="0" name="JobLedgerEntryNo." type="int" />
         </sequence>
       </complexType>
       <complexType name="root" mixed="true">
@@ -64,6 +50,21 @@
       <complexType name="root" mixed="true">
         <sequence>
           <element minOccurs="1" maxOccurs="unbounded" name="TimeSheet" type="tns:TimeSheet" />
+        </sequence>
+      </complexType>
+      <element name="root" type="tns:root" />
+    </schema>
+    <schema xmlns:tns="urn:microsoft-dynamics-nav/xmlports/x50073" elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-nav/xmlports/x50073" xmlns="http://www.w3.org/2001/XMLSchema">
+      <complexType name="Employee">
+        <sequence>
+          <element minOccurs="1" maxOccurs="1" name="No." type="string" />
+          <element minOccurs="1" maxOccurs="1" name="FirstName" type="string" />
+          <element minOccurs="1" maxOccurs="1" name="LastName" type="string" />
+        </sequence>
+      </complexType>
+      <complexType name="root" mixed="true">
+        <sequence>
+          <element minOccurs="1" maxOccurs="unbounded" name="Employee" type="tns:Employee" />
         </sequence>
       </complexType>
       <element name="root" type="tns:root" />
@@ -99,37 +100,18 @@
       <element name="root" type="tns:root" />
     </schema>
     <schema elementFormDefault="qualified" targetNamespace="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService" xmlns="http://www.w3.org/2001/XMLSchema">
-      <element name="GetEmployeeByID">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="channelType" type="int" />
-            <element minOccurs="1" maxOccurs="1" name="channelID" type="string" />
-            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x50073" minOccurs="1" maxOccurs="1" name="employeeByIDXMLPort" type="q1:root" />
-            <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
-          </sequence>
-        </complexType>
-      </element>
-      <element name="GetEmployeeByID_Result">
-        <complexType>
-          <sequence>
-            <element minOccurs="1" maxOccurs="1" name="return_value" type="int" />
-            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x50073" minOccurs="1" maxOccurs="1" name="employeeByIDXMLPort" type="q2:root" />
-            <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
-          </sequence>
-        </complexType>
-      </element>
       <element name="GetEmployeeByPhoneNo">
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="phoneNo" type="string" />
-            <element xmlns:q3="urn:microsoft-dynamics-nav/xmlports/x50070" minOccurs="1" maxOccurs="1" name="employeeXMLPort" type="q3:root" />
+            <element xmlns:q1="urn:microsoft-dynamics-nav/xmlports/x50070" minOccurs="1" maxOccurs="1" name="employeeXMLPort" type="q1:root" />
           </sequence>
         </complexType>
       </element>
       <element name="GetEmployeeByPhoneNo_Result">
         <complexType>
           <sequence>
-            <element xmlns:q4="urn:microsoft-dynamics-nav/xmlports/x50070" minOccurs="1" maxOccurs="1" name="employeeXMLPort" type="q4:root" />
+            <element xmlns:q2="urn:microsoft-dynamics-nav/xmlports/x50070" minOccurs="1" maxOccurs="1" name="employeeXMLPort" type="q2:root" />
           </sequence>
         </complexType>
       </element>
@@ -138,7 +120,7 @@
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="dateP" type="date" />
             <element minOccurs="1" maxOccurs="1" name="employeeNoP" type="string" />
-            <element xmlns:q5="urn:microsoft-dynamics-nav/xmlports/x50071" minOccurs="1" maxOccurs="1" name="timeSheetPerDayXMLPort" type="q5:root" />
+            <element xmlns:q3="urn:microsoft-dynamics-nav/xmlports/x50071" minOccurs="1" maxOccurs="1" name="timeSheetPerDayXMLPort" type="q3:root" />
             <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
           </sequence>
         </complexType>
@@ -147,7 +129,7 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="int" />
-            <element xmlns:q6="urn:microsoft-dynamics-nav/xmlports/x50071" minOccurs="1" maxOccurs="1" name="timeSheetPerDayXMLPort" type="q6:root" />
+            <element xmlns:q4="urn:microsoft-dynamics-nav/xmlports/x50071" minOccurs="1" maxOccurs="1" name="timeSheetPerDayXMLPort" type="q4:root" />
             <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
           </sequence>
         </complexType>
@@ -158,7 +140,7 @@
             <element minOccurs="1" maxOccurs="1" name="startDateP" type="date" />
             <element minOccurs="1" maxOccurs="1" name="endDateP" type="date" />
             <element minOccurs="1" maxOccurs="1" name="employeeNoP" type="string" />
-            <element xmlns:q7="urn:microsoft-dynamics-nav/xmlports/x50072" minOccurs="1" maxOccurs="1" name="timeSheetPerWeekXMLPort" type="q7:root" />
+            <element xmlns:q5="urn:microsoft-dynamics-nav/xmlports/x50072" minOccurs="1" maxOccurs="1" name="timeSheetPerWeekXMLPort" type="q5:root" />
             <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
           </sequence>
         </complexType>
@@ -167,7 +149,26 @@
         <complexType>
           <sequence>
             <element minOccurs="1" maxOccurs="1" name="return_value" type="int" />
-            <element xmlns:q8="urn:microsoft-dynamics-nav/xmlports/x50072" minOccurs="1" maxOccurs="1" name="timeSheetPerWeekXMLPort" type="q8:root" />
+            <element xmlns:q6="urn:microsoft-dynamics-nav/xmlports/x50072" minOccurs="1" maxOccurs="1" name="timeSheetPerWeekXMLPort" type="q6:root" />
+            <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetEmployeeByID">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="channelType" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="channelID" type="string" />
+            <element xmlns:q7="urn:microsoft-dynamics-nav/xmlports/x50073" minOccurs="1" maxOccurs="1" name="employeeByIDXMLPort" type="q7:root" />
+            <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="GetEmployeeByID_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="int" />
+            <element xmlns:q8="urn:microsoft-dynamics-nav/xmlports/x50073" minOccurs="1" maxOccurs="1" name="employeeByIDXMLPort" type="q8:root" />
             <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
           </sequence>
         </complexType>
@@ -272,14 +273,26 @@
           </sequence>
         </complexType>
       </element>
+      <element name="PostTimeSheet">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="employeeNoP" type="string" />
+            <element minOccurs="1" maxOccurs="1" name="startDateP" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="endDateP" type="date" />
+            <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
+          </sequence>
+        </complexType>
+      </element>
+      <element name="PostTimeSheet_Result">
+        <complexType>
+          <sequence>
+            <element minOccurs="1" maxOccurs="1" name="return_value" type="int" />
+            <element minOccurs="1" maxOccurs="1" name="errorText" type="string" />
+          </sequence>
+        </complexType>
+      </element>
     </schema>
   </types>
-  <message name="GetEmployeeByID">
-    <part name="parameters" element="tns:GetEmployeeByID" />
-  </message>
-  <message name="GetEmployeeByID_Result">
-    <part name="parameters" element="tns:GetEmployeeByID_Result" />
-  </message>
   <message name="GetEmployeeByPhoneNo">
     <part name="parameters" element="tns:GetEmployeeByPhoneNo" />
   </message>
@@ -297,6 +310,12 @@
   </message>
   <message name="TimeSheetsPerWeek_Result">
     <part name="parameters" element="tns:TimeSheetsPerWeek_Result" />
+  </message>
+  <message name="GetEmployeeByID">
+    <part name="parameters" element="tns:GetEmployeeByID" />
+  </message>
+  <message name="GetEmployeeByID_Result">
+    <part name="parameters" element="tns:GetEmployeeByID_Result" />
   </message>
   <message name="AddEmployeeByEMail">
     <part name="parameters" element="tns:AddEmployeeByEMail" />
@@ -328,11 +347,13 @@
   <message name="AddTimeSheet_Result">
     <part name="parameters" element="tns:AddTimeSheet_Result" />
   </message>
+  <message name="PostTimeSheet">
+    <part name="parameters" element="tns:PostTimeSheet" />
+  </message>
+  <message name="PostTimeSheet_Result">
+    <part name="parameters" element="tns:PostTimeSheet_Result" />
+  </message>
   <portType name="TimeSheetBotService_Port">
-    <operation name="GetEmployeeByID">
-      <input name="GetEmployeeByID" message="tns:GetEmployeeByID" />
-      <output name="GetEmployeeByID_Result" message="tns:GetEmployeeByID_Result" />
-    </operation>
     <operation name="GetEmployeeByPhoneNo">
       <input name="GetEmployeeByPhoneNo" message="tns:GetEmployeeByPhoneNo" />
       <output name="GetEmployeeByPhoneNo_Result" message="tns:GetEmployeeByPhoneNo_Result" />
@@ -344,6 +365,10 @@
     <operation name="TimeSheetsPerWeek">
       <input name="TimeSheetsPerWeek" message="tns:TimeSheetsPerWeek" />
       <output name="TimeSheetsPerWeek_Result" message="tns:TimeSheetsPerWeek_Result" />
+    </operation>
+    <operation name="GetEmployeeByID">
+      <input name="GetEmployeeByID" message="tns:GetEmployeeByID" />
+      <output name="GetEmployeeByID_Result" message="tns:GetEmployeeByID_Result" />
     </operation>
     <operation name="AddEmployeeByEMail">
       <input name="AddEmployeeByEMail" message="tns:AddEmployeeByEMail" />
@@ -365,18 +390,13 @@
       <input name="AddTimeSheet" message="tns:AddTimeSheet" />
       <output name="AddTimeSheet_Result" message="tns:AddTimeSheet_Result" />
     </operation>
+    <operation name="PostTimeSheet">
+      <input name="PostTimeSheet" message="tns:PostTimeSheet" />
+      <output name="PostTimeSheet_Result" message="tns:PostTimeSheet_Result" />
+    </operation>
   </portType>
   <binding name="TimeSheetBotService_Binding" type="tns:TimeSheetBotService_Port">
     <binding transport="http://schemas.xmlsoap.org/soap/http" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-    <operation name="GetEmployeeByID">
-      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByID" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      <input name="GetEmployeeByID">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </input>
-      <output name="GetEmployeeByID_Result">
-        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
-      </output>
-    </operation>
     <operation name="GetEmployeeByPhoneNo">
       <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByPhoneNo" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       <input name="GetEmployeeByPhoneNo">
@@ -401,6 +421,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="TimeSheetsPerWeek_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="GetEmployeeByID">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:GetEmployeeByID" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="GetEmployeeByID">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="GetEmployeeByID_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>
@@ -446,6 +475,15 @@
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </input>
       <output name="AddTimeSheet_Result">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+    </operation>
+    <operation name="PostTimeSheet">
+      <operation soapAction="urn:microsoft-dynamics-schemas/codeunit/TimeSheetBotService:PostTimeSheet" style="document" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input name="PostTimeSheet">
+        <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output name="PostTimeSheet_Result">
         <body use="literal" xmlns="http://schemas.xmlsoap.org/wsdl/soap/" />
       </output>
     </operation>

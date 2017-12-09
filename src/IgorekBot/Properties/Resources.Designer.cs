@@ -151,7 +151,7 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ничего не понял.
+        ///   Looks up a localized string similar to Простите, я не понимаю.😟.
         /// </summary>
         internal static string RootDialog_Didnt_Understand_Message {
             get {
@@ -187,6 +187,15 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Добавить в стоп-лист.
+        /// </summary>
+        internal static string TimeSheetDialog_Add_To_StopList_Action {
+            get {
+                return ResourceManager.GetString("TimeSheetDialog_Add_To_StopList_Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Простите, я не понимаю.😟.
         /// </summary>
         internal static string TimeSheetDialog_Didnt_Understand_Message {
@@ -201,6 +210,33 @@ namespace IgorekBot.Properties {
         internal static string TimeSheetDialog_Main_Message {
             get {
                 return ResourceManager.GetString("TimeSheetDialog_Main_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите проект.
+        /// </summary>
+        internal static string TimeSheetDialog_Project_Choice_Message {
+            get {
+                return ResourceManager.GetString("TimeSheetDialog_Project_Choice_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Выберите задачу.
+        /// </summary>
+        internal static string TimeSheetDialog_Task_Choice_Message {
+            get {
+                return ResourceManager.GetString("TimeSheetDialog_Task_Choice_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Списать.
+        /// </summary>
+        internal static string TimeSheetDialog_WriteOff_Action {
+            get {
+                return ResourceManager.GetString("TimeSheetDialog_WriteOff_Action", resourceCulture);
             }
         }
     }
