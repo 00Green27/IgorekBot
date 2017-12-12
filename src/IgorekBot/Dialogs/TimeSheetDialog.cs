@@ -147,6 +147,9 @@ namespace IgorekBot.Dialogs
                 StringComparison.InvariantCultureIgnoreCase))
             {
                 
+            } else if (message.Text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+            {
+                context.Done<object>(null);
             }
         }
 
