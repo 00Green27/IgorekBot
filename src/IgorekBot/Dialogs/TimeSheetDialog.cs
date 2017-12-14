@@ -156,7 +156,11 @@ namespace IgorekBot.Dialogs
         {
             var message = await result;
 
-            if (message.Text.Equals(Resources.TimeSheetDialog_WriteOff_Action,
+            if (message.Text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+            {
+                context.Done<object>(null);
+            }
+            else if (message.Text.Equals(Resources.TimeSheetDialog_WriteOff_Action,
                 StringComparison.InvariantCultureIgnoreCase))
             {
                 context.Call(new AddTimeSheetDialog(_botSvc, _timeSheetSvc), ResumeAfterTimeSheetAdded);
