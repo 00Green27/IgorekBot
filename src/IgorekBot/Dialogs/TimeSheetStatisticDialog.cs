@@ -8,6 +8,7 @@ using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
 using IgorekBot.Data.Models;
 using IgorekBot.Helpers;
+using IgorekBot.Properties;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Connector;
@@ -30,6 +31,9 @@ namespace IgorekBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
             context.UserData.TryGetValue(@"profile", out _profile);
+
+            await context.PostAsync(MenuHelper.CreateMenu(context, new List<string> { Resources.MenuCommand },
+                "Готовлю отчет..."));
 
             var message = context.MakeMessage();
             message.Attachments.Add(GenerateStatistics());
