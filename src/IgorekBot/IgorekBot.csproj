@@ -128,6 +128,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\AddTimeSheetDialog.cs" />
     <Compile Include="Dialogs\AuthenticationDialog.cs" />
     <Compile Include="Dialogs\MenuScorable.cs" />
     <Compile Include="Dialogs\EnsureRegistrationDialog.cs" />
@@ -138,9 +139,11 @@
     <Compile Include="Dialogs\RegistrationDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Dialogs\TimeSheetDialog.cs" />
+    <Compile Include="Dialogs\TimeSheetStatisticDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DateTimeExtensions.cs" />
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Modules\MainModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -157,6 +160,7 @@
     </Content>
     <None Include="Properties\PublishProfiles\IgorekBot - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\IgorekBot20171128121313 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\IgorekBot20171212014949 - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

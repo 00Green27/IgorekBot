@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Microsoft.Bot.Builder.Dialogs;
-using Microsoft.Bot.Builder.Internals.Fibers;
-using IgorekBot.Properties;
-using Microsoft.Bot.Connector;
 using System.Collections.Generic;
-using IgorekBot.BLL.Models;
-using NMSService.NMSServiceReference;
 using System.Linq;
+using System.Threading.Tasks;
+using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
 using IgorekBot.Data.Models;
 using IgorekBot.Helpers;
+using IgorekBot.Properties;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Internals.Fibers;
+using Microsoft.Bot.Connector;
+using NMSService.NMSServiceReference;
 
 namespace IgorekBot.Dialogs
 {
@@ -18,7 +18,6 @@ namespace IgorekBot.Dialogs
     public class TimeSheetDialog : IDialog<object>
     {
         private readonly IBotService _botSvc;
-        private readonly ITimeSheetService _timeSheetSvc;
 
         private readonly IEnumerable<string> _mainMenu = new List<string>
         {
@@ -27,6 +26,8 @@ namespace IgorekBot.Dialogs
             Resources.ProjectsCommand,
             Resources.NotificationsCommand
         };
+
+        private readonly ITimeSheetService _timeSheetSvc;
 
         private UserProfile _profile;
         private IEnumerable<Projects> _projects;
@@ -62,27 +63,38 @@ namespace IgorekBot.Dialogs
             {
                 context.Done<object>(null);
             }
+            else if (message.Text.Equals(Resources.HoursCommand, StringComparison.InvariantCultureIgnoreCase))
+            {
+                context.Call(new TimeSheetStatisticDialog(_botSvc, _timeSheetSvc), ResumeAfterTimeSheetStatistics);
+            }
             else if (message.Text.Equals(Resources.ProjectsCommand, StringComparison.InvariantCultureIgnoreCase))
             {
                 await context.PostAsync(MenuHelper.CreateMenu(context, new List<string> {Resources.MenuCommand},
                     "Получаю список проектов..."));
 
-                //context.Call(new ProjectsDialog(_timeSheetSvc), OnProjectSelected);
-                //PromptDialog.Choice(context, OnProjectSelected, _projects.Select(p => p.ProjectNo), Resources.TimeSheetDialog_Project_Choice_Message, descriptions: _projects.Select(p => p.ProjectDescription));
-
                 var response =
                     _timeSheetSvc.GetUserProjects(new GetUserProjectsRequest {UserId = _profile.EmployeeCode});
                 _projects = response.Projects.ToList();
-                var reply = CreateMessageWithHeroCard(context,
-                    _projects.Select(p => new CardAction {Title = p.ProjectDescription, Value = p.ProjectNo}),
-                    Resources.TimeSheetDialog_Project_Choice_Message);
-                await context.PostAsync(reply);
-                context.Wait<IMessageActivity>(OnProjectSelected);
+//                var reply = CreateMessageWithHeroCard(context,
+//                    _projects.Select(p => new CardAction {Title = p.ProjectDescription, Value = p.ProjectNo}),
+//                    Resources.TimeSheetDialog_Project_Choice_Message);
+//                await context.PostAsync(reply);
+//                context.Wait<IMessageActivity>(OnProjectSelected);
+
+                PromptDialog.Choice(context, OnProjectSelected, _projects.Select(p => p.ProjectNo),
+                    Resources.TimeSheetDialog_Project_Choice_Message,
+                    descriptions: _projects.Select(p => p.ProjectDescription));
             }
             else
             {
                 await context.PostAsync(Resources.TimeSheetDialog_Didnt_Understand_Message);
             }
+        }
+
+        private Task ResumeAfterTimeSheetStatistics(IDialogContext context, IAwaitable<object> result)
+        {
+            context.Wait(MessageReceivedAsync);
+            return Task.CompletedTask;
         }
 
         private async Task OnProjectSelected(IDialogContext context, IAwaitable<IMessageActivity> result)
@@ -114,20 +126,25 @@ namespace IgorekBot.Dialogs
             var message = await result;
 
             if (message.Text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
-            {
                 context.Done<object>(null);
-            }
 
             ShowOptions(context);
         }
 
         private void ShowOptions(IDialogContext context)
         {
-
             var actions = new List<CardAction>
             {
-                new CardAction {Title = Resources.TimeSheetDialog_WriteOff_Action, Value = Resources.TimeSheetDialog_WriteOff_Action},
-                new CardAction {Title = Resources.TimeSheetDialog_Add_To_StopList_Action, Value = Resources.TimeSheetDialog_Add_To_StopList_Action}
+                new CardAction
+                {
+                    Title = Resources.TimeSheetDialog_WriteOff_Action,
+                    Value = Resources.TimeSheetDialog_WriteOff_Action
+                },
+                new CardAction
+                {
+                    Title = Resources.TimeSheetDialog_Add_To_StopList_Action,
+                    Value = Resources.TimeSheetDialog_Add_To_StopList_Action
+                }
             };
 
             var reply = CreateMessageWithHeroCard(context, actions, Resources.TimeSheetDialog_Main_Message);
@@ -139,23 +156,57 @@ namespace IgorekBot.Dialogs
         {
             var message = await result;
 
-            if (message.Text.Equals(Resources.TimeSheetDialog_WriteOff_Action,
+            if (message.Text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+            {
+                context.Done<object>(null);
+            }
+            else if (message.Text.Equals(Resources.TimeSheetDialog_WriteOff_Action,
                 StringComparison.InvariantCultureIgnoreCase))
             {
-                
-            } else if (message.Text.Equals(Resources.TimeSheetDialog_Add_To_StopList_Action,
+                context.Call(new AddTimeSheetDialog(_botSvc, _timeSheetSvc), ResumeAfterTimeSheetAdded);
+            }
+            else if (message.Text.Equals(Resources.TimeSheetDialog_Add_To_StopList_Action,
                 StringComparison.InvariantCultureIgnoreCase))
             {
-                
             }
         }
 
-        //        private async Task OnProjectSelected(IDialogContext context, IAwaitable<string> result)
-        //        {
-        //            var projectNo = await result;
-        //
-        //            PromptDialog.Choice(context, OnTaskSelected, _tasks.Select(p => p.TaskNo), Resources.TimeSheetDialog_Task_Choice_Message, descriptions: _tasks.Select(p => p.TaskDescription));
-        //        }
+        private Task ResumeAfterTimeSheetAdded(IDialogContext context, IAwaitable<object> result)
+        {
+            throw new NotImplementedException();
+        }
+
+        private async Task OnProjectSelected(IDialogContext context, IAwaitable<string> result)
+        {
+            var text = await result;
+
+
+            if (text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+            {
+                context.Done<object>(null);
+            }
+            else
+            {
+                var response = _timeSheetSvc.GetProjectTasks(new GetProjectTasksRequest
+                {
+                    UserId = _profile.EmployeeCode,
+                    ProjectId = _projects.First(p => p.ProjectNo == text).ProjectNo
+                });
+                _tasks = response.ProjectTasks.ToList();
+                PromptDialog.Choice(context, OnTaskSelected, _tasks.Select(p => p.TaskNo),
+                    Resources.TimeSheetDialog_Task_Choice_Message, descriptions: _tasks.Select(p => p.TaskDescription));
+            }
+        }
+
+        private async Task OnTaskSelected(IDialogContext context, IAwaitable<string> result)
+        {
+            var text = await result;
+
+            if (text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+                context.Done<object>(null);
+            else
+                ShowOptions(context);
+        }
 
 
         //        private async Task OnProjectSelected(IDialogContext context, IAwaitable<IMessageActivity> result)
@@ -184,7 +235,7 @@ namespace IgorekBot.Dialogs
                 .MakeMessage(); //MenuHelper.CreateMenu(context, new List<string> { Resources.MenuCommand });
 
 
-            HeroCard projectsCard = new HeroCard
+            var projectsCard = new HeroCard
             {
                 Text = text,
                 Buttons = actions.ToList()
