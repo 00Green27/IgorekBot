@@ -117,82 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AuthenticationDialog_Code_Prompt" xml:space="preserve">
-    <value>{0}, введите код активации</value>
+  <data name="Target" xml:space="preserve">
+    <value>H4sIAAAAAAAEAO1ZW2/bNhR+H7D/IOhpG1LLSV+2wG6RuslmrLkgTou9FYx07BClKI2kAnvDftke9pP2F3aoO0nZlu3WGIahLw5FfufC71x4+veff41eL2PmPYOQNOFj/3Qw9D3gYRJRvhj7mZq/+N5//errr0aXUbz0PlT7Xup9eJLLsf+kVHoeBDJ8gpjIQUxDkchkrgZhEgckSoKz4fCH4PQ0AITwEcvzRvcZVzSG/A/8c5LwEFKVEXadRMBkuY5fZjmqd0NikCkJYexPF4mAT28SNXhLFPG9C0YJajEDNvc9wnmiiEIdz99LmCmR8MUsxQXCHlYp4L45YRJK3c+b7X3NGJ5pM4LmYAUVZlIl8Y6Apy9LvwT28b2869d+Q89doofVSlude2/so0PEnUjmlKH9trzzCRN6r+3fQXEhg9bhE8/cclLTAtmj/514k4ypTMCYQ6YEYSfeXfbIaPgzrB6ST8DHPGOsrSyqi9+MBVxCeSkItbqHeWnCNPK9wDwX2AfrY60zpWVcvTzzvRsUTh4Z1FxoeWGm0LIfgYMgCqI7ohQIrjEg96Yj3ZKlvdTIQ/phFPneNVm+A75QT2Mff/reFV1CVK2UOrznFIMODymRQR8x+tcXF3RFhVRHkfSOHEnQZUwoO4KUlCUrgJvk84u6Ic90kdPVEvoTjZCnD0R+kr53DyzfI59oWmTHQfP9o5ELrkQS3yfMQGjv+PhAxAIUWpJs3DZLMhFa+o6CJg9tzE4N5u7JqTn7f25aK0u756h0NDj2OelY8WwLHSvW9qHjhZRJSHMNHT4a2pm2X/LI66dq4XTTbPQ+cpGmyD5Uaex/5/h2K34dmQ2+4UtTwHAwOLX90bLcjU/syxShyLjSKRhWOqr0MixVR6Ci8DJWZUkX2yANOwPlcgRzVnM3XbY4vjGhjOznILW9bgG1PNCFZpKztXkzje2E0ZsqtV2WScHOiBU5Woimv+10ZXqiI2xqPjQNelB06FUnH6xp5UfXJE0x47Ra+3LFmxV9/eTFbPemNy4wglB29L61trUkzKBkAdZXFI2a5q2OJvcj0TlvEsXONov9a+hYCesguHuDFUurQ/p3WRrMSreBWo0rr9C6GKtBbih0X7t7On9lEUZER3GaJCyL+boCt+l01Qq3Eaq13VCKttDGKVb7I7Va2TZUa7k/VtOstqGa1f5IZTfahimXdsFoek0TqFl30UaBRRqbnIHDTitb2IzvFQ/tlHZAOLTS+e7RsOnwlwmGqvdqI1Rrx78aM82vux+z7vW4CfNAf6frQrb2JdNV0FyH9bqyNlLX9Wm31YrsrWNZxvfUcWe9sBhFNG9bp1I/Huqmvb/ldt13OeOUf3tLzdi6DbDK/agsvdvHe04tLrb4HhrwTCNdh2crqSAu6Df7lU0YxRhpNlwTTucgVfGc88+Gp2eDi9/wyWfNCv89c7tAyoj1H94d/XFKtXu3Pj+dt+suszL+TET4RMQ3MVl+28baZx52EJgz8zoIzZ5rHQRmzK4ORLLnUzvA7TPT+W9w1pyhHMzZdk5uae28qqc8guXY/z0/eu5Nf/lonj7xbgUmvnNv6P2x39UdPP9wmoV9phFrHrV7j0+QSyD0VROGpUsqgcXLaabuBOUhTQnrsMSt4n1oqt1co9pf3kIKXPPPNbOPtO1NTC3ACp1tzthxFOS+mXtPerYNeoqKP/ajRx1qBZU3Di7Wj4K2TIK6JG0Yuhx9VNThNOc9328wtGau9GVmQG6zh/Rr/Y8vBoGkiwZCd7EcQoN49Z4pnydVHFgaVVus1HoNikTIyguh6JyECj+HIGU+7/5AWJbXv0eIpvw2U2mm0GSIH5kxQddxtEl+PugydR7dpvmE+3OYgGpSNAFu+ZuMsqjW+8qtUusgdICWpU/fpdIlcLGqkW4S3hOodF+dVx4AmwcEk7d8Rp5hH92Qv+9gQcJV1bOvB9l+EabbR28pWQgSyxKjOY9/IoejePnqH/8xvWb4IAAA</value>
   </data>
-  <data name="AuthenticationDialog_EMail_Prompt" xml:space="preserve">
-    <value>Укажите рабочий email</value>
-  </data>
-  <data name="BackCommand" xml:space="preserve">
-    <value>⬅ Назад</value>
-  </data>
-  <data name="CancelablePromptChoice_CancelText" xml:space="preserve">
-    <value>Для отмены диалога напишите (О)тмена или (Н)азад.</value>
-  </data>
-  <data name="CancelCommand" xml:space="preserve">
-    <value>Отмена</value>
-  </data>
-  <data name="EnterAbsenceCommand" xml:space="preserve">
-    <value>🤒 Ввод отсутствия</value>
-  </data>
-  <data name="HoursCommand" xml:space="preserve">
-    <value>⏳ Количество часов</value>
-  </data>
-  <data name="NotificationsCommand" xml:space="preserve">
-    <value>🔔 Уведомления</value>
-  </data>
-  <data name="ProjectsCommand" xml:space="preserve">
-    <value>🗂Проекты</value>
-  </data>
-  <data name="RegistrationCommand" xml:space="preserve">
-    <value>Регистрация</value>
-  </data>
-  <data name="RootDialog_Authentication_Message" xml:space="preserve">
-    <value>Вам необходимо зарегистрироваться</value>
-  </data>
-  <data name="RootDialog_Didnt_Understand_Message" xml:space="preserve">
-    <value>Простите, я не понимаю.😟</value>
-  </data>
-  <data name="RootDialog_Main_Message" xml:space="preserve">
-    <value>Игорек готов к работе!</value>
-  </data>
-  <data name="RootDialog_Welcome_Message" xml:space="preserve">
-    <value>Приветствую, {0}</value>
-  </data>
-  <data name="StoplistCommand" xml:space="preserve">
-    <value>⛔ Стоп-листы</value>
-  </data>
-  <data name="TimeSheetCommand" xml:space="preserve">
-    <value>🗒 ТШ</value>
-  </data>
-  <data name="TimeSheetDialog_Add_To_StopList_Action" xml:space="preserve">
-    <value>Добавить в стоп-лист</value>
-  </data>
-  <data name="TimeSheetDialog_Didnt_Understand_Message" xml:space="preserve">
-    <value>Простите, я не понимаю.😟</value>
-  </data>
-  <data name="TimeSheetDialog_Main_Message" xml:space="preserve">
-    <value>Что бы вы хотели сделать?</value>
-  </data>
-  <data name="TimeSheetDialog_Project_Choice_Message" xml:space="preserve">
-    <value>Выберите проект</value>
-  </data>
-  <data name="TimeSheetDialog_Task_Choice_Message" xml:space="preserve">
-    <value>Выберите задачу</value>
-  </data>
-  <data name="TimeSheetDialog_WriteOff_Action" xml:space="preserve">
-    <value>Списать</value>
-  </data>
-  <data name="CurrentWeekCommand" xml:space="preserve">
-    <value>⤵ Текущая неделя</value>
-  </data>
-  <data name="NextWeekCommand" xml:space="preserve">
-    <value>➡ Следующая неделя</value>
-  </data>
-  <data name="PrevWeekCommand" xml:space="preserve">
-    <value>⬅ Предыдущая неделя</value>
-  </data>
-  <data name="TimeSheetDialog_Remove_To_StopList_Action" xml:space="preserve">
-    <value>Удалить из стоп-листа</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

@@ -7,6 +7,6 @@ namespace IgorekBot.BLL.Models
     {
         public int Result { get; set; }
         public string ErrorText { get; set; }
-        public IEnumerable<TimeSheet1> TimeSeets { get; set; }
+        public IEnumerable<Workday> Workdays { get; set; }
     }
 }

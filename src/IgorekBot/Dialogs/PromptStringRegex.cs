@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using IgorekBot.Properties;
 
 namespace IgorekBot.Dialogs
 {
@@ -24,12 +25,12 @@ namespace IgorekBot.Dialogs
 
         protected override bool TryParse(IMessageActivity message, out string result)
         {
-            var quitCondition = message.Text.Equals("Cancel", StringComparison.InvariantCultureIgnoreCase);
-            var validEmail = regex.Match(message.Text).Success;
+            var quitCondition = message.Text.Equals(Resources.BackCommand, StringComparison.InvariantCultureIgnoreCase);
+            var valid = regex.Match(message.Text).Success;
 
-            result = validEmail ? message.Text : null;
+            result = valid ? message.Text : null;
 
-            return validEmail || quitCondition;
+            return valid || quitCondition;
         }
     }
 }

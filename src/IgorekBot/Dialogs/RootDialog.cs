@@ -38,11 +38,13 @@ namespace IgorekBot.Dialogs
         }
 
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
-        {
-            var message = await result;
-
-            using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
+       {
+           var message = await result;
+           
+           using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
             {
+                if(_profile != null && string.IsNullOrEmpty(_profile.EmployeeNo))
+                    context.UserData.RemoveValue("profile");
                 if (!context.UserData.TryGetValue("profile", out _profile))
                 {
                     _profile = await _botSvc.GetUserProfileByUserId(message.From.Id);

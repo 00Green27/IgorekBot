@@ -16,7 +16,7 @@ namespace IgorekBot.BLL.Services
         {
             using (var ctx = new BotDataContext())
             {
-                ctx.UserProfiles.AddOrUpdate(profile);
+                ctx.UserProfiles.Add(profile);
                 await ctx.SaveChangesAsync();
             }
         }
@@ -26,6 +26,35 @@ namespace IgorekBot.BLL.Services
             using (var ctx = new BotDataContext())
             {
                 return await ctx.UserProfiles.FirstOrDefaultAsync(u => u.UserId == userId);
+            }
+        }
+
+        public async Task HideTask(HiddenTask task)
+        {
+            using (var ctx = new BotDataContext())
+            {
+                ctx.UserProfiles.Attach(task.UserProfile);
+                ctx.HiddenTasks.Add(task);
+                await ctx.SaveChangesAsync();
+            }
+        }
+
+        public List<HiddenTask> GetUserHiddenTask(UserProfile profile)
+        {
+            using (var ctx = new BotDataContext())
+            {
+                return ctx.HiddenTasks.Where(t => t.UserProfile.Id == profile.Id).ToList();
+            }
+        }
+
+        public async Task ShowTask(HiddenTask task)
+        {
+            using (var ctx = new BotDataContext())
+            {
+                var taskForRemove = ctx.HiddenTasks.FirstOrDefault(t => t.TaskNo == task.TaskNo && t.UserProfile.Id == task.UserProfile.Id);
+                if(taskForRemove != null)
+                    ctx.HiddenTasks.Remove(taskForRemove);
+                await ctx.SaveChangesAsync();
             }
         }
     }

@@ -56,6 +56,7 @@
     <Compile Include="Models\GetTimeSheetsPerWeekResponse.cs" />
     <Compile Include="Models\GetUserByPhoneRequest.cs" />
     <Compile Include="Models\GetUserByPhoneResponse.cs" />
+    <Compile Include="Models\Workday.cs" />
     <Compile Include="Services\BotService.cs" />
     <Compile Include="Services\IBotService.cs" />
     <Compile Include="Services\ITimeSheetService.cs" />

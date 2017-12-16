@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace IgorekBot.Data.Models
 {
@@ -11,6 +12,7 @@ namespace IgorekBot.Data.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string EmployeeCode { get; set; }
+        public string EmployeeNo { get; set; }
+        public List<HiddenTask> HiddenTasks { get; set; }
     }
 }
