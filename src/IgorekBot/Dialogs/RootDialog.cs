@@ -34,7 +34,6 @@ namespace IgorekBot.Dialogs
         public Task StartAsync(IDialogContext context)
         {
             context.Wait(MessageReceivedAsync);
-
             return Task.CompletedTask;
         }
 
@@ -222,5 +221,12 @@ namespace IgorekBot.Dialogs
 
         //    return reply;
         //}
+
+        private string x = @"
+  First Header  | Second Header
+  ------------- | -------------
+  Content Cell  | Content Cell
+  Content Cell  | Content Cell
+";
     }
 }

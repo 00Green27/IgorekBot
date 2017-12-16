@@ -32,7 +32,7 @@ namespace IgorekBot.Dialogs
         {
             context.UserData.TryGetValue(@"profile", out _profile);
 
-            await context.PostAsync(MenuHelper.CreateMenu(context, new List<string> { Resources.MenuCommand },
+            await context.PostAsync(MenuHelper.CreateMenu(context, new List<string> { Resources.BackCommand },
                 "Готовлю отчет..."));
 
             var message = context.MakeMessage();

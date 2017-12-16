@@ -43,7 +43,7 @@ namespace IgorekBot.Dialogs
             var message = item as IMessageActivity;
 
             if (message != null && !string.IsNullOrWhiteSpace(message.Text))
-                if (message.Text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+                if (message.Text.Equals(Resources.BackCommand, StringComparison.InvariantCultureIgnoreCase))
                     return message.Text;
 
             return null;

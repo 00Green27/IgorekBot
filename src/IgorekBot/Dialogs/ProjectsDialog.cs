@@ -45,7 +45,7 @@ namespace IgorekBot.Dialogs
 
         private static IMessageActivity CreateMessageWithHeroCard(IDialogContext context, IEnumerable<CardAction> actions)
         {
-            var reply = MenuHelper.CreateMenu(context, new List<string> { Resources.MenuCommand });
+            var reply = MenuHelper.CreateMenu(context, new List<string> { Resources.BackCommand });
 
             var projectsCard = new HeroCard
             {

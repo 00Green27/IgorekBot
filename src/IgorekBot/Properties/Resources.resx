@@ -123,23 +123,23 @@
   <data name="AuthenticationDialog_EMail_Prompt" xml:space="preserve">
     <value>Укажите рабочий email</value>
   </data>
+  <data name="BackCommand" xml:space="preserve">
+    <value>⬅ Назад</value>
+  </data>
   <data name="CancelCommand" xml:space="preserve">
     <value>Отмена</value>
   </data>
   <data name="EnterAbsenceCommand" xml:space="preserve">
-    <value>Ввод отсутствия</value>
+    <value>🤒 Ввод отсутствия</value>
   </data>
   <data name="HoursCommand" xml:space="preserve">
-    <value>Количество часов</value>
-  </data>
-  <data name="MenuCommand" xml:space="preserve">
-    <value>Меню</value>
+    <value>⏳ Количество часов</value>
   </data>
   <data name="NotificationsCommand" xml:space="preserve">
-    <value>Уведомления</value>
+    <value>🔔 Уведомления</value>
   </data>
   <data name="ProjectsCommand" xml:space="preserve">
-    <value>Проекты</value>
+    <value>🗂Проекты</value>
   </data>
   <data name="RegistrationCommand" xml:space="preserve">
     <value>Регистрация</value>
@@ -156,8 +156,11 @@
   <data name="RootDialog_Welcome_Message" xml:space="preserve">
     <value>Приветствую, {0}</value>
   </data>
+  <data name="StoplistCommand" xml:space="preserve">
+    <value>⛔ Стоп-листы</value>
+  </data>
   <data name="TimeSheetCommand" xml:space="preserve">
-    <value>ТШ</value>
+    <value>🗒 ТШ</value>
   </data>
   <data name="TimeSheetDialog_Add_To_StopList_Action" xml:space="preserve">
     <value>Добавить в стоп-лист</value>

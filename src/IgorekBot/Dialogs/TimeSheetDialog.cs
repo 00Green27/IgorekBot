@@ -21,7 +21,7 @@ namespace IgorekBot.Dialogs
 
         private readonly IEnumerable<string> _mainMenu = new List<string>
         {
-            Resources.MenuCommand,
+            Resources.BackCommand,
             Resources.HoursCommand,
             Resources.ProjectsCommand,
             Resources.NotificationsCommand
@@ -59,7 +59,7 @@ namespace IgorekBot.Dialogs
                 context.UserData.SetValue(@"profile", _profile);
             }
 
-            if (message.Text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+            if (message.Text.Equals(Resources.BackCommand, StringComparison.InvariantCultureIgnoreCase))
             {
                 context.Done<object>(null);
             }
@@ -69,7 +69,7 @@ namespace IgorekBot.Dialogs
             }
             else if (message.Text.Equals(Resources.ProjectsCommand, StringComparison.InvariantCultureIgnoreCase))
             {
-                await context.PostAsync(MenuHelper.CreateMenu(context, new List<string> {Resources.MenuCommand},
+                await context.PostAsync(MenuHelper.CreateMenu(context, new List<string> {Resources.BackCommand},
                     "Получаю список проектов..."));
 
                 var response =
@@ -91,17 +91,18 @@ namespace IgorekBot.Dialogs
             }
         }
 
-        private Task ResumeAfterTimeSheetStatistics(IDialogContext context, IAwaitable<object> result)
+        private async Task ResumeAfterTimeSheetStatistics(IDialogContext context, IAwaitable<object> result)
         {
+            var reply = MenuHelper.CreateMenu(context, _mainMenu, Resources.TimeSheetDialog_Main_Message);
+            await context.PostAsync(reply);
             context.Wait(MessageReceivedAsync);
-            return Task.CompletedTask;
         }
 
         private async Task OnProjectSelected(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
 
-            if (message.Text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+            if (message.Text.Equals(Resources.BackCommand, StringComparison.InvariantCultureIgnoreCase))
             {
                 context.Done<object>(null);
             }
@@ -125,7 +126,7 @@ namespace IgorekBot.Dialogs
         {
             var message = await result;
 
-            if (message.Text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+            if (message.Text.Equals(Resources.BackCommand, StringComparison.InvariantCultureIgnoreCase))
                 context.Done<object>(null);
 
             ShowOptions(context);
@@ -156,7 +157,7 @@ namespace IgorekBot.Dialogs
         {
             var message = await result;
 
-            if (message.Text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+            if (message.Text.Equals(Resources.BackCommand, StringComparison.InvariantCultureIgnoreCase))
             {
                 context.Done<object>(null);
             }
@@ -181,7 +182,7 @@ namespace IgorekBot.Dialogs
             var text = await result;
 
 
-            if (text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+            if (text.Equals(Resources.BackCommand, StringComparison.InvariantCultureIgnoreCase))
             {
                 context.Done<object>(null);
             }
@@ -202,7 +203,7 @@ namespace IgorekBot.Dialogs
         {
             var text = await result;
 
-            if (text.Equals(Resources.MenuCommand, StringComparison.InvariantCultureIgnoreCase))
+            if (text.Equals(Resources.BackCommand, StringComparison.InvariantCultureIgnoreCase))
                 context.Done<object>(null);
             else
                 ShowOptions(context);
