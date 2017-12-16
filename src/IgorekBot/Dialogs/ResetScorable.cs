@@ -9,11 +9,11 @@ using Microsoft.Bot.Connector;
 
 namespace IgorekBot.Dialogs
 {
-    public class MenuScorable : IScorable<IActivity, double>
+    public class ResetScorable : IScorable<IActivity, double>
     {
         private readonly IDialogTask _task;
 
-        public MenuScorable(IDialogTask task)
+        public ResetScorable(IDialogTask task)
         {
             SetField.NotNull(out _task, nameof(task), task);
         }
@@ -43,7 +43,7 @@ namespace IgorekBot.Dialogs
             var message = item as IMessageActivity;
 
             if (message != null && !string.IsNullOrWhiteSpace(message.Text))
-                if (message.Text.Equals(Resources.BackCommand, StringComparison.InvariantCultureIgnoreCase))
+                if (message.Text.Equals("/reset", StringComparison.InvariantCultureIgnoreCase))
                     return message.Text;
 
             return null;

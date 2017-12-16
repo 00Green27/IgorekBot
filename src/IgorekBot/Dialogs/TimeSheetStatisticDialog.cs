@@ -51,13 +51,14 @@ namespace IgorekBot.Dialogs
         private Attachment GenerateStatistics()
         {
             var startOfWeek = DateTime.Now.StartOfWeek(1);
+            var ru = new CultureInfo("ru-RU");
             var response = _timeSheetSvc.GetTimeSheetsPerWeek(new GetTimeSheetsPerWeekRequest { EmployeeNo = _profile.EmployeeCode, StartDate = startOfWeek, EndDate = startOfWeek.AddDays(6) });
             
-            var facts = response.TimeSeets.AsEnumerable().Select(t => new Fact(DateTime.ParseExact(t.PostingDate[0], "MM/dd/yy", CultureInfo.InvariantCulture).ToString("dddd"), t.Quantity[0])).ToList();
+            var facts = response.TimeSeets.AsEnumerable().Select(t => new Fact(DateTime.ParseExact(t.PostingDate[0], "MM/dd/yy", ru).ToString("dddd"), t.Quantity[0])).ToList();
             var writeOffHours = facts.Select(f => int.Parse(f.Value)).Sum().ToString();
             ReceiptCard receiptCard = new ReceiptCard
             {
-                Title = $"С {startOfWeek.ToShortDateString()} по {startOfWeek.AddDays(6).ToShortDateString()} списано",
+                Title = $"С {startOfWeek:dd.MM.yyyy} по {startOfWeek.AddDays(6):dd.MM.yyyy} списано",
                 Facts = facts,
                 Total = $"{writeOffHours} из 40"
             };

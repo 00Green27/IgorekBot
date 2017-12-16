@@ -24,7 +24,8 @@ namespace IgorekBot.Dialogs
             Resources.BackCommand,
             Resources.HoursCommand,
             Resources.ProjectsCommand,
-            Resources.NotificationsCommand
+            Resources.NotificationsCommand,
+            Resources.StoplistCommand
         };
 
         private readonly ITimeSheetService _timeSheetSvc;
