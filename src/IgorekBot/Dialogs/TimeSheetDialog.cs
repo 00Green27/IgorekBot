@@ -23,16 +23,33 @@ namespace IgorekBot.Dialogs
         private IEnumerable<Projects> _projects;
         private IEnumerable<ProjectTask> _tasks;
         private string _taskNo;
-        private readonly IEnumerable<string>
+        //        private readonly IEnumerable<string> _mainMenu = new List<string>
+        //            {
+        //                Resources.BackCommand,
+        //                Resources.HoursCommand,
+        //                Resources.ProjectsCommand,
+        //                Resources.NotificationsCommand,
+        //                Resources.StoplistCommand
+        //            };
 
-            _mainMenu = new List<string>
-            {
-                Resources.BackCommand,
-                Resources.HoursCommand,
-                Resources.ProjectsCommand,
-                Resources.NotificationsCommand,
-                Resources.StoplistCommand
-            };
+        private readonly CardAction[][] _mainMenu = new CardAction[3][]
+        {
+            new[] {
+                new CardAction {Title =  Resources.BackCommand, Value = Resources.BackCommand
+                }
+            },
+            new[] {
+                new CardAction {Title =  Resources.HoursCommand, Value = Resources.HoursCommand},
+                new CardAction {Title =  Resources.ProjectsCommand, Value = Resources.ProjectsCommand}
+            },
+            new[] {
+                new CardAction {Title =  Resources.NotificationsCommand, Value = Resources.NotificationsCommand},
+                new CardAction {Title =  Resources.StoplistCommand, Value = Resources.StoplistCommand}
+            }
+        };
+
+
+        private string _projectNo;
 
 
         public TimeSheetDialog(IBotService botSvc, ITimeSheetService timeSheetSvc)
@@ -43,7 +60,7 @@ namespace IgorekBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            var reply = MenuHelper.CreateMenu(context, _mainMenu, Resources.TimeSheetDialog_Main_Message);
+            var reply = MenuHelper.CreateMainMenuMessage(context, _mainMenu, Resources.TimeSheetDialog_Main_Message);
             await context.PostAsync(reply);
 
             context.Wait(MessageReceivedAsync);
@@ -93,9 +110,9 @@ namespace IgorekBot.Dialogs
         private async Task AfterProjectSelected(IDialogContext context, IAwaitable<string> result)
 
         {
-            var projectNo = await result;
+            _projectNo = await result;
 
-            if (projectNo == null)
+            if (_projectNo == null)
             {
                 await StartAsync(context);
             }
@@ -104,12 +121,12 @@ namespace IgorekBot.Dialogs
                 var response = _timeSheetSvc.GetProjectTasks(new GetProjectTasksRequest
                 {
                     UserId = _profile.EmployeeNo,
-                    ProjectId = _projects.First(p => p.ProjectNo == projectNo).ProjectNo
+                    ProjectId = _projects.First(p => p.ProjectNo == _projectNo).ProjectNo
                 });
 
-                var hiddenTask = _botSvc.GetUserHiddenTask(_profile);
+                var hiddenTask = _botSvc.GetUserHiddenTasks(_profile);
 
-                _tasks = response.ProjectTasks.Where(i => hiddenTask.All(e => i.TaskNo != e.TaskNo)).ToList();
+                _tasks = response.ProjectTasks.Where(i => hiddenTask.All(e => e.ProjectNo != _projectNo && i.TaskNo != e.TaskNo)).ToList();
                 CancelablePromptChoice<string>.Choice(context, AfterTaskSelected, _tasks.Select(t => t.TaskNo.Replace(".", "💩")),
                     Resources.TimeSheetDialog_Task_Choice_Message,
                     descriptions: _tasks.Select(p => p.TaskDescription));
@@ -289,7 +306,7 @@ namespace IgorekBot.Dialogs
             else if (action.Equals(Resources.TimeSheetDialog_Add_To_StopList_Action,
                 StringComparison.InvariantCultureIgnoreCase))
             {
-                await _botSvc.HideTask(new HiddenTask(_profile, _taskNo));
+                await _botSvc.HideTask(new HiddenTask(_profile, _projectNo, _taskNo));
                 await context.PostAsync($"Задача **{_tasks.First(t => t.TaskNo == _taskNo).TaskDescription}** добавлена в стоп-лист.");
                 await StartAsync(context);
             }

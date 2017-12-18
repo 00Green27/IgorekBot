@@ -59,16 +59,14 @@ namespace IgorekBot.Dialogs
         private Attachment GenerateStatistics()
         {
             var startOfWeek = DateTime.Now.StartOfWeek(1);
-            var response = _timeSheetSvc.GetTimeSheetsPerWeek(new GetTimeSheetsPerWeekRequest { EmployeeNo = _profile.EmployeeCode, StartDate = startOfWeek, EndDate = startOfWeek.AddDays(6) });
+            var response = _timeSheetSvc.GetWorkdays(new GetTimeSheetsPerWeekRequest { EmployeeNo = _profile.EmployeeNo, StartDate = startOfWeek, EndDate = startOfWeek.AddDays(6) });
 
             CultureInfo ru = new CultureInfo("ru-RU");
-            var facts = response.TimeSeets.AsEnumerable().Select(t =>
+            var facts = response.Workdays.Select(t =>
             {
                 try
                 {
-                    return new Fact(
-                        DateTime.ParseExact(t.PostingDate[0], "MM/dd/yy", ru)
-                            .ToString("dddd", ru), t.Quantity[0]);
+                    return new Fact(t.Date.ToString("dddd", ru), t.WorkHours.ToString());
                 }
                 catch (Exception e)
                 {

@@ -10,7 +10,7 @@ namespace IgorekBot.BLL.Services
         Task SaveUserProfile(UserProfile profile);
         Task<UserProfile> GetUserProfileByUserId(string userId);
         Task HideTask(HiddenTask hiddenTask);
-        List<HiddenTask> GetUserHiddenTask(UserProfile profile);
+        List<HiddenTask> GetUserHiddenTasks(UserProfile profile);
         Task ShowTask(HiddenTask hiddenTask);
     }
 }

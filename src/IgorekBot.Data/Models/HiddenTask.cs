@@ -10,14 +10,16 @@ namespace IgorekBot.Data.Models
                 
         }
 
-        public HiddenTask(UserProfile profile, string taskNo)
+        public HiddenTask(UserProfile profile, string projectNo, string taskNo)
         {
             UserProfile = profile;
+            ProjectNo = projectNo;
             TaskNo = taskNo;
         }
 
         public int Id { get; set; }
         public string TaskNo { get; set; }
         public UserProfile UserProfile { get; set; }
+        public string ProjectNo { get; }
     }
 }

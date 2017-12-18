@@ -39,7 +39,7 @@ namespace IgorekBot.BLL.Services
             }
         }
 
-        public List<HiddenTask> GetUserHiddenTask(UserProfile profile)
+        public List<HiddenTask> GetUserHiddenTasks(UserProfile profile)
         {
             using (var ctx = new BotDataContext())
             {
@@ -51,7 +51,7 @@ namespace IgorekBot.BLL.Services
         {
             using (var ctx = new BotDataContext())
             {
-                var taskForRemove = ctx.HiddenTasks.FirstOrDefault(t => t.TaskNo == task.TaskNo && t.UserProfile.Id == task.UserProfile.Id);
+                var taskForRemove = ctx.HiddenTasks.FirstOrDefault(t => t.ProjectNo == task.ProjectNo && t.TaskNo == task.TaskNo && t.UserProfile.Id == task.UserProfile.Id);
                 if(taskForRemove != null)
                     ctx.HiddenTasks.Remove(taskForRemove);
                 await ctx.SaveChangesAsync();

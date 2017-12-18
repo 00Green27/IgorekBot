@@ -23,6 +23,8 @@ namespace IgorekBot.Dialogs
         private List<Projects> _projects;
         private List<ProjectTask> _tasks;
         private string _taskNo;
+        private string _projectNo;
+        private List<HiddenTask> _hiddenTasks;
 
         public StoplistDialog(IBotService botSvc, ITimeSheetService timeSheetSvc)
         {
@@ -37,20 +39,36 @@ namespace IgorekBot.Dialogs
             await context.PostAsync(MenuHelper.CreateMenu(context, new List<string> {Resources.BackCommand},
                 "Получаю список проектов..."));
 
+            _hiddenTasks = _botSvc.GetUserHiddenTasks(_profile);
+
             var response =
                 _timeSheetSvc.GetUserProjects(new GetUserProjectsRequest {UserId = _profile.EmployeeNo});
-            _projects = response.Projects.ToList();
+            if (response.Result == 1)
+            {
+                context.Fail(new Exception(response.ErrorText));    
+            }
 
-            CancelablePromptChoice<string>.Choice(context, AfterProjectSelected, _projects.Select(p => p.ProjectNo),
-                Resources.TimeSheetDialog_Project_Choice_Message,
-                descriptions: _projects.Select(p => p.ProjectDescription));
+            _projects = response.Projects.Join(_hiddenTasks, p => p.ProjectNo, ht => ht.ProjectNo, (p, ht) => p).ToList();
+
+
+            if (_projects.Count != 0)
+            {
+                CancelablePromptChoice<string>.Choice(context, AfterProjectSelected, _projects.Select(p => p.ProjectNo),
+                    Resources.TimeSheetDialog_Project_Choice_Message,
+                    descriptions: _projects.Select(p => p.ProjectDescription));
+            }
+            else
+            {
+                await context.PostAsync("У вас нет задач в стоп-листах.");
+                context.Done(true);
+            }
         }
 
         private async Task AfterProjectSelected(IDialogContext context, IAwaitable<string> result)
         {
-            var projectNo = await result;
+            _projectNo = await result;
 
-            if (projectNo == null)
+            if (_projectNo == null)
             {
                 context.Done(false);
             }
@@ -59,24 +77,28 @@ namespace IgorekBot.Dialogs
                 var response = _timeSheetSvc.GetProjectTasks(new GetProjectTasksRequest
                 {
                     UserId = _profile.EmployeeNo,
-                    ProjectId = _projects.First(p => p.ProjectNo == projectNo).ProjectNo
+                    ProjectId = _projects.First(p => p.ProjectNo == _projectNo).ProjectNo
                 });
+                
+                _tasks = response.ProjectTasks.Join(_hiddenTasks, t => t.TaskNo, ht => ht.TaskNo, (t, ht) => t).ToList();
 
-                var hiddenTask = _botSvc.GetUserHiddenTask(_profile);
+                CancelablePromptChoice<string>.Choice(context, AfterTaskSelected,
+                    _tasks.Select(t => t.TaskNo.Replace(".", "💩")),
+                    Resources.TimeSheetDialog_Task_Choice_Message,
+                    descriptions: _tasks.Select(p => p.TaskDescription));
 
-                _tasks = response.ProjectTasks.Join(hiddenTask, t => t.TaskNo, ht => ht.TaskNo, (t, ht) => t).ToList();
-                if (_tasks.Count != 0)
-                {
-                    CancelablePromptChoice<string>.Choice(context, AfterTaskSelected,
-                        _tasks.Select(t => t.TaskNo.Replace(".", "💩")),
-                        Resources.TimeSheetDialog_Task_Choice_Message,
-                        descriptions: _tasks.Select(p => p.TaskDescription));
-                }
-                else
-                {
-                    await context.PostAsync("По данному проекту нет задач в стоп-листе");
-                    context.Done(true);
-                }
+//                if (_tasks.Count != 0)
+//                {
+//                    CancelablePromptChoice<string>.Choice(context, AfterTaskSelected,
+//                        _tasks.Select(t => t.TaskNo.Replace(".", "💩")),
+//                        Resources.TimeSheetDialog_Task_Choice_Message,
+//                        descriptions: _tasks.Select(p => p.TaskDescription));
+//                }
+//                else
+//                {
+//                    await context.PostAsync("По данному проекту нет задач в стоп-листе");
+//                    context.Done(true);
+//                }
             }
         }
 
@@ -111,7 +133,7 @@ namespace IgorekBot.Dialogs
             else if (action.Equals(Resources.TimeSheetDialog_Remove_To_StopList_Action,
                 StringComparison.InvariantCultureIgnoreCase))
             {
-                await _botSvc.ShowTask(new HiddenTask(_profile, _taskNo));
+                await _botSvc.ShowTask(new HiddenTask(_profile, _projectNo, _taskNo));
                 await context.PostAsync(
                     $"Задача **{_tasks.First(t => t.TaskNo == _taskNo).TaskDescription}** удалена из стоп-листа.");
                 context.Done(true);
