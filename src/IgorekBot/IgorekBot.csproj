@@ -130,6 +130,7 @@
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\AddTimeSheetDialog.cs" />
     <Compile Include="Dialogs\AuthenticationDialog.cs" />
+    <Compile Include="Dialogs\CancelablePromptChoice.cs" />
     <Compile Include="Dialogs\StartScorable.cs" />
     <Compile Include="Dialogs\EnsureRegistrationDialog.cs" />
     <Compile Include="Dialogs\EnterAbsenceDialog.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Dialogs\PromptStringRegex.cs" />
     <Compile Include="Dialogs\RegistrationDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
+    <Compile Include="Dialogs\StoplistDialog.cs" />
     <Compile Include="Dialogs\TimeSheetDialog.cs" />
     <Compile Include="Dialogs\TimeSheetStatisticDialog.cs" />
     <Compile Include="Global.asax.cs">

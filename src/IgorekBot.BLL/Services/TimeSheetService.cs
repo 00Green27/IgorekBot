@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using IgorekBot.BLL.Models;
 using NMSService;
@@ -75,16 +77,38 @@ namespace IgorekBot.BLL.Services
             };
         }
 
-        public GetTimeSheetsPerWeekResponse GetTimeSheetsPerWeek(GetTimeSheetsPerWeekRequest request)
+        public GetTimeSheetsPerWeekResponse GetWorkdays(GetTimeSheetsPerWeekRequest request)
         {
             var xmlPort = new root2();
             var errText = string.Empty;
             var result = _client.TimeSheetsPerWeek(request.StartDate, request.EndDate, request.EmployeeNo, ref xmlPort, ref errText);
+            
+            var workdays = new List<Workday>();
+            if (result != 1)
+            {
+                var days = xmlPort.TimeSheet.Select(t => new Workday
+                {
+                    DayOfWeek = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), t.DayName[0]),
+                    Date = DateTime.ParseExact(t.PostingDate[0], "MM/dd/yy", CultureInfo.InvariantCulture),
+                    WorkHours = int.Parse(t.Quantity[0])
+
+                }).ToList();
+
+
+                request.StartDate = request.StartDate.AddDays(-1);
+                while (request.StartDate.AddDays(1) <= request.EndDate)
+                {
+                    request.StartDate = request.StartDate.AddDays(1);
+                    workdays.Add(days.FirstOrDefault(d => d.Date.Date == request.StartDate.Date) ?? new Workday(request.StartDate));
+                }
+            }
+
+
             return new GetTimeSheetsPerWeekResponse
             {
                 Result = result,
                 ErrorText = errText,
-                TimeSeets = xmlPort.TimeSheet.ToList()
+                Workdays = workdays
             };
         }
 

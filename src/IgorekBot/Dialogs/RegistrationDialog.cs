@@ -85,7 +85,7 @@ namespace IgorekBot.Dialogs
             {
                 _profile.FirstName = response.Employee.FirstName;
                 _profile.LastName = response.Employee.LastName;
-                _profile.EmployeeCode = response.Employee.No;
+                _profile.EmployeeNo = response.Employee.No;
                 context.Done(_profile);
             }
         }

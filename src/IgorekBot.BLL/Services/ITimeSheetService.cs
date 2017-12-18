@@ -11,7 +11,7 @@ namespace IgorekBot.BLL.Services
         GetUserProjectsResponse GetUserProjects(GetUserProjectsRequest request);
         GetProjectTasksResponse GetProjectTasks(GetProjectTasksRequest request);
         GetTimeSheetsPerDayResponse GetTimeSheetsPerDay(GetTimeSheetsPerDayRequest request);
-        GetTimeSheetsPerWeekResponse GetTimeSheetsPerWeek(GetTimeSheetsPerWeekRequest request);
+        GetTimeSheetsPerWeekResponse GetWorkdays(GetTimeSheetsPerWeekRequest request);
         ValidatePasswordResponse ValidatePassword(ValidatePasswordRequest request);
 
 

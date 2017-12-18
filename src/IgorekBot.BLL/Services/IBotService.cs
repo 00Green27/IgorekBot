@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using IgorekBot.Data.Models;
 
 namespace IgorekBot.BLL.Services
@@ -7,5 +9,8 @@ namespace IgorekBot.BLL.Services
     {
         Task SaveUserProfile(UserProfile profile);
         Task<UserProfile> GetUserProfileByUserId(string userId);
+        Task HideTask(HiddenTask hiddenTask);
+        List<HiddenTask> GetUserHiddenTask(UserProfile profile);
+        Task ShowTask(HiddenTask hiddenTask);
     }
 }

@@ -79,6 +79,24 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ⬅ Назад.
+        /// </summary>
+        internal static string BackCommand {
+            get {
+                return ResourceManager.GetString("BackCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Для отмены диалога напишите (О)тмена или (Н)азад..
+        /// </summary>
+        internal static string CancelablePromptChoice_CancelText {
+            get {
+                return ResourceManager.GetString("CancelablePromptChoice_CancelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Отмена.
         /// </summary>
         internal static string CancelCommand {
@@ -88,7 +106,16 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ввод отсутствия.
+        ///   Looks up a localized string similar to ⤵ Текущая неделя.
+        /// </summary>
+        internal static string CurrentWeekCommand {
+            get {
+                return ResourceManager.GetString("CurrentWeekCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🤒 Ввод отсутствия.
         /// </summary>
         internal static string EnterAbsenceCommand {
             get {
@@ -97,7 +124,7 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Количество часов.
+        ///   Looks up a localized string similar to ⏳ Количество часов.
         /// </summary>
         internal static string HoursCommand {
             get {
@@ -106,16 +133,16 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Меню.
+        ///   Looks up a localized string similar to ➡ Следующая неделя.
         /// </summary>
-        internal static string MenuCommand {
+        internal static string NextWeekCommand {
             get {
-                return ResourceManager.GetString("MenuCommand", resourceCulture);
+                return ResourceManager.GetString("NextWeekCommand", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Уведомления.
+        ///   Looks up a localized string similar to 🔔 Уведомления.
         /// </summary>
         internal static string NotificationsCommand {
             get {
@@ -124,7 +151,16 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Проекты.
+        ///   Looks up a localized string similar to ⬅ Предыдущая неделя.
+        /// </summary>
+        internal static string PrevWeekCommand {
+            get {
+                return ResourceManager.GetString("PrevWeekCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🗂Проекты.
         /// </summary>
         internal static string ProjectsCommand {
             get {
@@ -178,7 +214,16 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ТШ.
+        ///   Looks up a localized string similar to ⛔ Стоп-листы.
+        /// </summary>
+        internal static string StoplistCommand {
+            get {
+                return ResourceManager.GetString("StoplistCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🗒 ТШ.
         /// </summary>
         internal static string TimeSheetCommand {
             get {
@@ -219,6 +264,15 @@ namespace IgorekBot.Properties {
         internal static string TimeSheetDialog_Project_Choice_Message {
             get {
                 return ResourceManager.GetString("TimeSheetDialog_Project_Choice_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Удалить из стоп-листа.
+        /// </summary>
+        internal static string TimeSheetDialog_Remove_To_StopList_Action {
+            get {
+                return ResourceManager.GetString("TimeSheetDialog_Remove_To_StopList_Action", resourceCulture);
             }
         }
         

@@ -28,7 +28,7 @@ namespace IgorekBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
             var profile = context.UserData.GetValue<UserProfile>("profile");
-            var response = _service.GetUserProjects(new GetUserProjectsRequest { UserId = profile.EmployeeCode });
+            var response = _service.GetUserProjects(new GetUserProjectsRequest { UserId = profile.EmployeeNo });
             var projects = response.Projects.ToList();
             var reply = CreateMessageWithHeroCard(context, projects.Select(p => new CardAction { Title = p.ProjectDescription, Value = p.ProjectNo }));
             await context.PostAsync(reply);
@@ -45,7 +45,7 @@ namespace IgorekBot.Dialogs
 
         private static IMessageActivity CreateMessageWithHeroCard(IDialogContext context, IEnumerable<CardAction> actions)
         {
-            var reply = MenuHelper.CreateMenu(context, new List<string> { Resources.MenuCommand });
+            var reply = MenuHelper.CreateMenu(context, new List<string> { Resources.BackCommand });
 
             var projectsCard = new HeroCard
             {
