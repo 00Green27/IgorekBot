@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web;
+using IgorekBot.Models;
 
 namespace IgorekBot.Helpers
 {
@@ -23,7 +24,7 @@ namespace IgorekBot.Helpers
             return reply;
         }
 
-        public static IMessageActivity CreateMainMenuMessage(IDialogContext context, CardAction[][] buttons, string text = null, bool isInlineKeyboard = false)
+        public static IMessageActivity CreateMainMenuMessage(IDialogContext context, KeyboardButton[][] buttons, string text = null, bool isInlineKeyboard = false)
         {
             var message = context.MakeMessage();
             var keyboard = new StringBuilder();
@@ -38,7 +39,7 @@ namespace IgorekBot.Helpers
                         rowKeyboard += ",";
                     }
                     first = false;
-                    rowKeyboard += string.Format("{{text: \"" + cardAction.Title + "\", callback_data: \"" +
+                    rowKeyboard += string.Format("{{text: \"" + cardAction.Text + "\", callback_data: \"" +
                                                 cardAction.Value + "\"}}");
                 }
                 keyboard.Append("[").Append(rowKeyboard).Append("],");
