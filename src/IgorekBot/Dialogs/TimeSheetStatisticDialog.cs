@@ -36,7 +36,15 @@ namespace IgorekBot.Dialogs
                 "Готовлю отчет..."));
 
             var message = context.MakeMessage();
-            message.Attachments.Add(GenerateStatistics());
+            var attachment = GenerateStatistics();
+            if(attachment != null)
+            {
+                message.Attachments.Add(attachment);
+            }
+            else
+            {
+                message.Text = "За прошедшую неделю списано 0 часов.";
+            }
             await context.PostAsync(message);
 
             context.Wait(MessageReceivedAsync);
@@ -52,9 +60,26 @@ namespace IgorekBot.Dialogs
         {
             var startOfWeek = DateTime.Now.StartOfWeek(1);
             var response = _timeSheetSvc.GetTimeSheetsPerWeek(new GetTimeSheetsPerWeekRequest { EmployeeNo = _profile.EmployeeCode, StartDate = startOfWeek, EndDate = startOfWeek.AddDays(6) });
-            
-            var facts = response.TimeSeets.AsEnumerable().Select(t => new Fact(DateTime.ParseExact(t.PostingDate[0], "MM/dd/yy", CultureInfo.InvariantCulture).ToString("dddd"), t.Quantity[0])).ToList();
-            var writeOffHours = facts.Select(f => int.Parse(f.Value)).Sum().ToString();
+
+            CultureInfo ru = new CultureInfo("ru-RU");
+            var facts = response.TimeSeets.AsEnumerable().Select(t =>
+            {
+                try
+                {
+                    return new Fact(
+                        DateTime.ParseExact(t.PostingDate[0], "MM/dd/yy", ru)
+                            .ToString("dddd", ru), t.Quantity[0]);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+                return null;
+            }).Where(f => f != null).ToList();
+            var writeOffHours = facts.Select(f => int.Parse(f.Value)).Sum();
+            if (writeOffHours == 0)
+                return null;
+
             ReceiptCard receiptCard = new ReceiptCard
             {
                 Title = $"С {startOfWeek.ToShortDateString()} по {startOfWeek.AddDays(6).ToShortDateString()} списано",

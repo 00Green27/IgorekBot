@@ -19,7 +19,7 @@ namespace IgorekBot.Modules
             builder.Register(c => new RegistrationDialog(c.Resolve<ITimeSheetService>())).AsSelf().InstancePerDependency();
             builder.Register(c => new TimeSheetDialog(c.Resolve<IBotService>(), c.Resolve<ITimeSheetService>())).AsSelf().InstancePerDependency();
 
-            //builder.RegisterType<MenuScorable>().As<IScorable<IActivity, double>>().InstancePerLifetimeScope();
+            builder.RegisterType<StartScorable>().As<IScorable<IActivity, double>>().InstancePerLifetimeScope();
 
             builder.RegisterType<AuthenticationDialog>().InstancePerDependency();
 
