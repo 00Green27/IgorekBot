@@ -20,6 +20,6 @@ namespace IgorekBot.Data.Models
         public int Id { get; set; }
         public string TaskNo { get; set; }
         public UserProfile UserProfile { get; set; }
-        public string ProjectNo { get; }
+        public string ProjectNo { get; set; }
     }
 }

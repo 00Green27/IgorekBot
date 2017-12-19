@@ -55,12 +55,17 @@ namespace IgorekBot.Dialogs
             }
             else
             {
-                _date = _workdays.First(d => d.ToString() == text).Date;
-//                var promptOption = new PromptOptions<long>("Количество часов");
-//                var prompt = new PromptDialog.PromptInt64(promptOption, min: 1, max: 8);
-                var prompt = new PromptStringRegex("Количество часов", "[1-8]");
+                var workday = _workdays.First(d => d.ToString() == text);
+                _date = workday.Date;
+                
+                CancelablePromptChoice<int>.Choice(context, AfterHoursEntered, Enumerable.Range(1, 8 - workday.WorkHours), "Количество часов");
 
-                context.Call(prompt, AfterHoursEntered);
+
+                //                var promptOption = new PromptOptions<long>("Количество часов");
+                //                var prompt = new PromptDialog.PromptInt64(promptOption, min: 1, max: 8);
+                //var prompt = new PromptStringRegex("Количество часов", "[1-8]");
+
+                //context.Call(prompt, AfterHoursEntered);
                 //                var getTimeSheetsPerDayResponse = _timeSheetSvc.GetTimeSheetsPerDay(new GetTimeSheetsPerDayRequest
                 //                {
                 //                    EmployeeNo = _profile.EmployeeNo,
@@ -70,10 +75,9 @@ namespace IgorekBot.Dialogs
 
         }
 
-        private async Task AfterHoursEntered(IDialogContext context, IAwaitable<string> result)
+        private async Task AfterHoursEntered(IDialogContext context, IAwaitable<int> result)
         {
-            var text = await result;
-            _hours = int.Parse(text);
+            _hours = await result;
             var prompt = new PromptDialog.PromptString("Коментарий", null, 3);
             context.Call(prompt, AfterCommenEntered);
         }
@@ -81,6 +85,28 @@ namespace IgorekBot.Dialogs
         private async Task AfterCommenEntered(IDialogContext context, IAwaitable<string> result)
         {
             _comment = await result;
+            var response = _timeSheetSvc.AddTimeSheet(new AddTimeSheetRequest
+            {
+                AssignmentCode = _task.AssignmentCode,
+                Comment = _comment,
+                Date = _date,
+                EmployeeNo = _profile.EmployeeNo,
+                Hours = _hours,
+                TaskNo = _task.TaskNo
+            });
+
+            if (response.Result == 1)
+            {
+                context.Fail(new Exception(response.ErrorText));
+            }
+            else
+            {
+                var message = context.MakeMessage();
+                message.TextFormat = TextFormatTypes.Markdown;
+                message.Text = "ТШ создан";
+                await context.PostAsync(message);
+                context.Done(true);
+            }
         }
 
         private async Task DaysButtons(IDialogContext context, string lastButton, int weekAgo = 0)

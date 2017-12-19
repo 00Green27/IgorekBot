@@ -24,30 +24,30 @@ namespace IgorekBot.Dialogs
         private IEnumerable<Projects> _projects;
         private IEnumerable<ProjectTask> _tasks;
         private string _taskNo;
-        //private readonly IEnumerable<string> _mainMenu = new List<string>
-        //            {
-        //                Resources.BackCommand,
-        //                Resources.HoursCommand,
-        //                Resources.ProjectsCommand,
-        //                Resources.NotificationsCommand,
-        //                Resources.StoplistCommand
-        //            };
+        private readonly IEnumerable<string> _mainMenu = new List<string>
+                    {
+                        Resources.BackCommand,
+                        Resources.HoursCommand,
+                        Resources.ProjectsCommand,
+                        Resources.NotificationsCommand,
+                        Resources.StoplistCommand
+                    };
 
-        private readonly KeyboardButton[][] _mainMenu = new KeyboardButton[3][]
-        {
-            new[] {
-                new KeyboardButton {Text =  Resources.BackCommand, Value = Resources.BackCommand
-                }
-            },
-            new[] {
-                new KeyboardButton {Text =  Resources.HoursCommand, Value = Resources.HoursCommand},
-                new KeyboardButton {Text =  Resources.ProjectsCommand, Value = Resources.ProjectsCommand}
-            },
-            new[] {
-                new KeyboardButton {Text =  Resources.NotificationsCommand, Value = Resources.NotificationsCommand},
-                new KeyboardButton {Text =  Resources.StoplistCommand, Value = Resources.StoplistCommand}
-            }
-        };
+        //private readonly KeyboardButton[][] _mainMenu = new KeyboardButton[3][]
+        //{
+        //    new[] {
+        //        new KeyboardButton {Text =  Resources.BackCommand, Value = Resources.BackCommand
+        //        }
+        //    },
+        //    new[] {
+        //        new KeyboardButton {Text =  Resources.HoursCommand, Value = Resources.HoursCommand},
+        //        new KeyboardButton {Text =  Resources.ProjectsCommand, Value = Resources.ProjectsCommand}
+        //    },
+        //    new[] {
+        //        new KeyboardButton {Text =  Resources.NotificationsCommand, Value = Resources.NotificationsCommand},
+        //        new KeyboardButton {Text =  Resources.StoplistCommand, Value = Resources.StoplistCommand}
+        //    }
+        //};
 
 
         private string _projectNo;
@@ -61,7 +61,7 @@ namespace IgorekBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            var reply = MenuHelper.CreateMainMenuMessage(context, _mainMenu, Resources.TimeSheetDialog_Main_Message);
+            var reply = MenuHelper.CreateMenu(context, _mainMenu, Resources.TimeSheetDialog_Main_Message);
             await context.PostAsync(reply);
 
             context.Wait(MessageReceivedAsync);
@@ -127,7 +127,7 @@ namespace IgorekBot.Dialogs
 
                 var hiddenTask = _botSvc.GetUserHiddenTasks(_profile);
 
-                _tasks = response.ProjectTasks.Where(i => hiddenTask.All(e => e.ProjectNo != _projectNo && i.TaskNo != e.TaskNo)).ToList();
+                _tasks = response.ProjectTasks.Where(i => hiddenTask.All(e => i.TaskNo != e.TaskNo)).ToList();
                 CancelablePromptChoice<string>.Choice(context, AfterTaskSelected, _tasks.Select(t => t.TaskNo.Replace(".", "💩")),
                     Resources.TimeSheetDialog_Task_Choice_Message,
                     descriptions: _tasks.Select(p => p.TaskDescription));

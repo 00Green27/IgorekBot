@@ -7,13 +7,13 @@ namespace IgorekBot.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class ProjectNoToHiddenTasks : IMigrationMetadata
+    public sealed partial class Test : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ProjectNoToHiddenTasks));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Test));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712180701097_ProjectNoToHiddenTasks"; }
+            get { return "201712191630075_Test"; }
         }
         
         string IMigrationMetadata.Source

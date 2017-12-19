@@ -60,9 +60,13 @@
     <Compile Include="Migrations\201712161649411_HiddenTasks.Designer.cs">
       <DependentUpon>201712161649411_HiddenTasks.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201712180701097_ProjectNoToHiddenTasks.cs" />
-    <Compile Include="Migrations\201712180701097_ProjectNoToHiddenTasks.Designer.cs">
-      <DependentUpon>201712180701097_ProjectNoToHiddenTasks.cs</DependentUpon>
+    <Compile Include="Migrations\201712191630075_Test.cs" />
+    <Compile Include="Migrations\201712191630075_Test.Designer.cs">
+      <DependentUpon>201712191630075_Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712191630372_AddedProjectNo.cs" />
+    <Compile Include="Migrations\201712191630372_AddedProjectNo.Designer.cs">
+      <DependentUpon>201712191630372_AddedProjectNo.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\HiddenTask.cs" />
@@ -83,8 +87,11 @@
     <EmbeddedResource Include="Migrations\201712161649411_HiddenTasks.resx">
       <DependentUpon>201712161649411_HiddenTasks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712180701097_ProjectNoToHiddenTasks.resx">
-      <DependentUpon>201712180701097_ProjectNoToHiddenTasks.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712191630075_Test.resx">
+      <DependentUpon>201712191630075_Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712191630372_AddedProjectNo.resx">
+      <DependentUpon>201712191630372_AddedProjectNo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
