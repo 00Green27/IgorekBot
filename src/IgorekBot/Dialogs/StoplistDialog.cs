@@ -25,6 +25,7 @@ namespace IgorekBot.Dialogs
         private string _taskNo;
         private string _projectNo;
         private List<HiddenTask> _hiddenTasks;
+        private string _taskDescription;
 
         public StoplistDialog(IBotService botSvc, ITimeSheetService timeSheetSvc)
         {
@@ -113,14 +114,38 @@ namespace IgorekBot.Dialogs
             else
             {
                 _taskNo = _taskNo.Replace("💩", ".");
-                var list = new List<string>
-                {
-                    Resources.TimeSheetDialog_Remove_To_StopList_Action
-                };
+                _taskDescription = _tasks.First(t => t.TaskNo == _taskNo).TaskDescription;
+                //var list = new List<string>
+            //{
+            //    Resources.TimeSheetDialog_Remove_To_StopList_Action
+            //};
 
-                CancelablePromptChoice<string>.Choice(context, AfterTaskActionSelected, list,
-                    Resources.TimeSheetDialog_Main_Message);
+            //CancelablePromptChoice<string>.Choice(context, AfterTaskActionSelected, list,
+            //    Resources.TimeSheetDialog_Main_Message);
+
+            PromptDialog.Confirm(
+                        context,
+                        AfterTaskActionSelected, 
+                    $"Удалить задачу **{_taskDescription}** из стоп-листа?",
+                    promptStyle: PromptStyle.None);
             }
+        }
+
+        private async Task AfterTaskActionSelected(IDialogContext context, IAwaitable<bool> result)
+        {
+            var confirm = await result;
+            if (confirm)
+            {
+                await _botSvc.ShowTask(new HiddenTask(_profile, _projectNo, _taskNo));
+                await context.PostAsync(
+                    $"Задача **{_taskDescription}** удалена из стоп-листа.");
+            }
+            else
+            {
+                await context.PostAsync(
+                    $"Удаление задачи **{_taskDescription}** из стоп-листа отменено.");
+            }
+            context.Done(true);
         }
 
         private async Task AfterTaskActionSelected(IDialogContext context, IAwaitable<string> result)
@@ -135,7 +160,7 @@ namespace IgorekBot.Dialogs
             {
                 await _botSvc.ShowTask(new HiddenTask(_profile, _projectNo, _taskNo));
                 await context.PostAsync(
-                    $"Задача **{_tasks.First(t => t.TaskNo == _taskNo).TaskDescription}** удалена из стоп-листа.");
+                    $"Задача **{_taskDescription}** удалена из стоп-листа.");
                 context.Done(true);
             }
         }

@@ -95,18 +95,18 @@ namespace IgorekBot.Dialogs
                 TaskNo = _task.TaskNo
             });
 
+            var message = context.MakeMessage();
             if (response.Result == 1)
             {
-                context.Fail(new Exception(response.ErrorText));
+                //context.Fail(new Exception(response.ErrorText));
+                message.Text = response.ErrorText;
             }
             else
             {
-                var message = context.MakeMessage();
-                message.TextFormat = TextFormatTypes.Markdown;
                 message.Text = "ТШ создан";
-                await context.PostAsync(message);
-                context.Done(true);
             }
+            await context.PostAsync(message);
+            context.Done<object>(null);
         }
 
         private async Task DaysButtons(IDialogContext context, string lastButton, int weekAgo = 0)
