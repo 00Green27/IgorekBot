@@ -75,6 +75,9 @@ namespace IgorekBot.Dialogs
         private async Task AfterDeptSelected(IDialogContext context, IAwaitable<string> result)
         {
             _dept = await result;
+            if(_dept == null)
+                context.Done<object>(null);
+
             var list = new List<string>
             {
                 "Очередной оплачиваемый отпуск",
@@ -84,16 +87,17 @@ namespace IgorekBot.Dialogs
                 "Декрет",
                 "Отгул до 4х часов",
             };
-            await context.PostAsync(MenuHelper.CreateMenu(context,new List<string> {Resources.BackCommand}));
 
-CancelablePromptChoice<string>.Choice(context, AfterTypeSelected, list,
-                "Тип заявки");
+            CancelablePromptChoice<string>.Choice(context, AfterTypeSelected, list,
+                            "Тип заявки");
         }
 
 
         private async Task AfterTypeSelected(IDialogContext context, IAwaitable<string> result)
         {
             _type = await result;
+            if (_type == null)
+                context.Done<object>(null);
 
             var dialog = new PromptDateTime("Дата начала отсутствия (первый день)");
             context.Call(dialog, AfterStartDateEntered);
@@ -102,6 +106,8 @@ CancelablePromptChoice<string>.Choice(context, AfterTypeSelected, list,
         private async Task AfterStartDateEntered(IDialogContext context, IAwaitable<DateTime> result)
         {
             _startDate = await result;
+            if (_startDate == null)
+                context.Done<object>(null);
 
             var dialog = new PromptDateTime("Дата окончания отсутствия (последний день)");
             context.Call(dialog, AfterEndDateEntered);
@@ -110,6 +116,9 @@ CancelablePromptChoice<string>.Choice(context, AfterTypeSelected, list,
         private async Task AfterEndDateEntered(IDialogContext context, IAwaitable<DateTime> result)
         {
             _endDate = await result;
+            if (_endDate == null)
+                context.Done<object>(null);
+
             await context.PostAsync("Заявка на отсутсвие создана");
             context.Done<object>(null);
         }
