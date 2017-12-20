@@ -184,7 +184,7 @@
     <value>Списать</value>
   </data>
   <data name="CurrentWeekCommand" xml:space="preserve">
-    <value>⤵ Текущая неделя</value>
+    <value>⬇️ Текущая неделя</value>
   </data>
   <data name="NextWeekCommand" xml:space="preserve">
     <value>➡ Следующая неделя</value>
@@ -194,5 +194,8 @@
   </data>
   <data name="TimeSheetDialog_Remove_To_StopList_Action" xml:space="preserve">
     <value>Удалить из стоп-листа</value>
+  </data>
+  <data name="CreateAbsenceCommand" xml:space="preserve">
+    <value>✍️ Создать новую заявку</value>
   </data>
 </root>

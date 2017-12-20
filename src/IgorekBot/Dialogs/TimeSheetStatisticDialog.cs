@@ -58,7 +58,7 @@ namespace IgorekBot.Dialogs
             {
                 EmployeeNo = _profile.EmployeeNo,
                 StartDate = startOfWeek,
-                EndDate = startOfWeek.AddDays(6)
+                EndDate = startOfWeek.AddDays(4)
             });
 
             var ru = new CultureInfo("ru-RU");

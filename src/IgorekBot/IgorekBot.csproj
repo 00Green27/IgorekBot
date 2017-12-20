@@ -158,6 +158,7 @@
     <Compile Include="Dialogs\AddTimeSheetDialog.cs" />
     <Compile Include="Dialogs\AuthenticationDialog.cs" />
     <Compile Include="Dialogs\CancelablePromptChoice.cs" />
+    <Compile Include="Dialogs\PromptDateTime.cs" />
     <Compile Include="Dialogs\StartScorable.cs" />
     <Compile Include="Dialogs\EnsureRegistrationDialog.cs" />
     <Compile Include="Dialogs\EnterAbsenceDialog.cs" />

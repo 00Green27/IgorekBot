@@ -106,7 +106,16 @@ namespace IgorekBot.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ⤵ Текущая неделя.
+        ///   Looks up a localized string similar to ✍️ Создать новую заявку.
+        /// </summary>
+        internal static string CreateAbsenceCommand {
+            get {
+                return ResourceManager.GetString("CreateAbsenceCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⬇️ Текущая неделя.
         /// </summary>
         internal static string CurrentWeekCommand {
             get {
