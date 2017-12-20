@@ -59,7 +59,7 @@ namespace IgorekBot.Dialogs
                 var workday = _workdays.First(d => d.ToString() == text);
                 _date = workday.Date;
                 
-                CancelablePromptChoice<int>.Choice(context, AfterHoursEntered, Enumerable.Range(1, 8 - workday.WorkHours), "Количество часов");
+                CancelablePromptChoice<int>.Choice(context, AfterHoursEntered, Enumerable.Range(1, 8 - (int) workday.WorkHours), "Количество часов");
 
 
                 //                var promptOption = new PromptOptions<long>("Количество часов");
@@ -95,7 +95,7 @@ namespace IgorekBot.Dialogs
                 Hours = _hours,
                 ProjectNo = _task.ProjectNo
             });
-
+            
             var message = context.MakeMessage();
             if (response.Result == 1)
             {
@@ -114,7 +114,6 @@ namespace IgorekBot.Dialogs
         {
             var startOfWeek = DateTime.Now.StartOfWeek(weekAgo);
             var endOfWeek = startOfWeek.AddDays(4);
-
 
             await context.PostAsync($"Неделя [{startOfWeek:dd.MM.yyyy} - {endOfWeek:dd.MM.yyyy}]");
 

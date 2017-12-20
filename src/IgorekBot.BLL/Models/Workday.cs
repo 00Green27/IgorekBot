@@ -18,7 +18,7 @@ namespace IgorekBot.BLL.Models
 
         public DateTime Date { get; set; }
         public DayOfWeek DayOfWeek { get; set; }
-        public int WorkHours { get; set; }
+        public double WorkHours { get; set; }
 
         public override string ToString()
         {

@@ -48,8 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="Models\AddTimeSheetRequest.cs" />
-    <Compile Include="Models\AddTimeSheetResponse.cs" />
+    <Compile Include="Models\ServiceResponse.cs" />
     <Compile Include="Models\GetTimeSheetsPerDayRequest.cs" />
     <Compile Include="Models\GetTimeSheetsPerDayResponse.cs" />
     <Compile Include="Models\GetTimeSheetsPerWeekRequest.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Models\ValidatePasswordRequest.cs" />
     <Compile Include="Models\ValidatePasswordResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\PostTimeSheetRequest.cs" />
     <Compile Include="Services\TimeSheetService.cs" />
   </ItemGroup>
   <ItemGroup>

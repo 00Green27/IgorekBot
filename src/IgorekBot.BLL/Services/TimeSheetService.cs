@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using IgorekBot.BLL.Models;
+using IgorekBot.Helpers;
 using NMSService;
 using NMSService.NMSServiceReference;
 
@@ -90,7 +91,7 @@ namespace IgorekBot.BLL.Services
                 {
                     DayOfWeek = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), t.DayName[0]),
                     Date = DateTime.ParseExact(t.PostingDate[0], "MM/dd/yy", CultureInfo.InvariantCulture),
-                    WorkHours = int.Parse(t.Quantity[0])
+                    WorkHours = double.Parse(t.Quantity[0], CultureInfo.InvariantCulture)
 
                 }).ToList();
 
@@ -112,18 +113,39 @@ namespace IgorekBot.BLL.Services
             };
         }
 
-        public AddTimeSheetResponse AddTimeSheet(AddTimeSheetRequest request)
+        public ServiceResponse AddTimeSheet(AddTimeSheetRequest request, bool doPost = true)
         {
             var errText = string.Empty;
 
             var result = _client.AddTimeSheet(request.EmployeeNo, request.Date, request.ProjectNo, request.AssignmentCode,
                 request.Hours, request.Comment, ref errText);
 
-            return new AddTimeSheetResponse
+            if (string.IsNullOrEmpty(errText) && doPost)
+            {
+                var startOfWeek = request.Date.StartOfWeek();
+                var endOfWeek = startOfWeek.AddDays(6);
+
+                result = _client.PostTimeSheet(request.EmployeeNo, startOfWeek, endOfWeek, ref errText);
+            }
+
+            return new ServiceResponse
             {
                 Result = result,
                 ErrorText = errText
             };
+        }
+
+        public ServiceResponse PostTimeSheet(PostTimeSheetRequest request)
+        {
+            var errText = string.Empty;
+            var result = _client.PostTimeSheet(request.EmployeeNo, request.StartDate, request.EndDate, ref errText);
+
+            return new ServiceResponse
+            {
+                Result = result,
+                ErrorText = errText
+            };
+
         }
 
         public GetUserByIdResponse GetUserById(GetUserByIdRequest request)
