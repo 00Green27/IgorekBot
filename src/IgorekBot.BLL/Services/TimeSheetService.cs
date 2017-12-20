@@ -116,7 +116,7 @@ namespace IgorekBot.BLL.Services
         {
             var errText = string.Empty;
 
-            var result = _client.AddTimeSheet(request.EmployeeNo, request.Date, request.TaskNo, request.AssignmentCode,
+            var result = _client.AddTimeSheet(request.EmployeeNo, request.Date, request.ProjectNo, request.AssignmentCode,
                 request.Hours, request.Comment, ref errText);
 
             return new AddTimeSheetResponse

@@ -6,7 +6,7 @@ namespace IgorekBot.BLL.Models
     {
         public string EmployeeNo { get; set; }
         public DateTime Date { get; set; }
-        public string TaskNo { get; set; }
+        public string ProjectNo { get; set; }
         public string AssignmentCode { get; set; }
         public decimal Hours { get; set; }
         public string Comment { get; set; }

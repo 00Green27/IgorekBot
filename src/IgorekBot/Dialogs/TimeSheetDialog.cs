@@ -6,7 +6,6 @@ using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
 using IgorekBot.Data.Models;
 using IgorekBot.Helpers;
-using IgorekBot.Models;
 using IgorekBot.Properties;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
@@ -24,30 +23,30 @@ namespace IgorekBot.Dialogs
         private IEnumerable<Projects> _projects;
         private IEnumerable<ProjectTask> _tasks;
         private string _taskNo;
-        //private readonly IEnumerable<string> _mainMenu = new List<string>
-        //            {
-        //                Resources.BackCommand,
-        //                Resources.HoursCommand,
-        //                Resources.ProjectsCommand,
-        //                Resources.NotificationsCommand,
-        //                Resources.StoplistCommand
-        //            };
+        private readonly IEnumerable<string> _mainMenu = new List<string>
+                    {
+                        Resources.BackCommand,
+                        Resources.HoursCommand,
+                        Resources.ProjectsCommand,
+                        Resources.NotificationsCommand,
+                        Resources.StoplistCommand
+                    };
 
-        private readonly KeyboardButton[][] _mainMenu = new KeyboardButton[3][]
-        {
-            new[] {
-                new KeyboardButton {Text =  Resources.BackCommand, Value = Resources.BackCommand
-                }
-            },
-            new[] {
-                new KeyboardButton {Text =  Resources.HoursCommand, Value = Resources.HoursCommand},
-                new KeyboardButton {Text =  Resources.ProjectsCommand, Value = Resources.ProjectsCommand}
-            },
-            new[] {
-                new KeyboardButton {Text =  Resources.NotificationsCommand, Value = Resources.NotificationsCommand},
-                new KeyboardButton {Text =  Resources.StoplistCommand, Value = Resources.StoplistCommand}
-            }
-        };
+//        private readonly KeyboardButton[][] _mainMenu = new KeyboardButton[3][]
+//        {
+//            new[] {
+//                new KeyboardButton {Text =  Resources.BackCommand, Value = Resources.BackCommand
+//                }
+//            },
+//            new[] {
+//                new KeyboardButton {Text =  Resources.HoursCommand, Value = Resources.HoursCommand},
+//                new KeyboardButton {Text =  Resources.ProjectsCommand, Value = Resources.ProjectsCommand}
+//            },
+//            new[] {
+//                new KeyboardButton {Text =  Resources.NotificationsCommand, Value = Resources.NotificationsCommand},
+//                new KeyboardButton {Text =  Resources.StoplistCommand, Value = Resources.StoplistCommand}
+//            }
+//        };
 
 
         private string _projectNo;
@@ -61,7 +60,7 @@ namespace IgorekBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            var reply = MenuHelper.CreateMainMenuMessage(context, _mainMenu, Resources.TimeSheetDialog_Main_Message);
+            var reply = MenuHelper.CreateMenu(context, _mainMenu, Resources.TimeSheetDialog_Main_Message);
             await context.PostAsync(reply);
 
             context.Wait(MessageReceivedAsync);
@@ -186,7 +185,7 @@ namespace IgorekBot.Dialogs
 //                });
 //                _tasks = response.ProjectTasks.ToList();
 //                var reply = CreateMessageWithHeroCard(context,
-//                    _tasks.Select(p => new CardAction {Title = p.TaskDescription, Value = p.TaskNo}),
+//                    _tasks.Select(p => new CardAction {Title = p.TaskDescription, Value = p.ProjectNo}),
 //                    Resources.TimeSheetDialog_Task_Choice_Message);
 //                await context.PostAsync(reply);
 //                context.Wait<IMessageActivity>(OnTaskSelected);
@@ -265,7 +264,7 @@ namespace IgorekBot.Dialogs
 //                    ProjectId = _projects.First(p => p.ProjectNo == text).ProjectNo
 //                });
 //                _tasks = response.ProjectTasks.ToList();
-//                PromptDialog.Choice(context, OnTaskSelected, _tasks.Select(p => p.TaskNo),
+//                PromptDialog.Choice(context, OnTaskSelected, _tasks.Select(p => p.ProjectNo),
 //                    Resources.TimeSheetDialog_Task_Choice_Message, descriptions: _tasks.Select(p => p.TaskDescription));
 //            }
 //        }
@@ -299,17 +298,22 @@ namespace IgorekBot.Dialogs
             {
                 await StartAsync(context);
             }
-            else if (action.Equals(Resources.TimeSheetDialog_WriteOff_Action,
-                StringComparison.InvariantCultureIgnoreCase))
+            else
             {
-                context.Call(new AddTimeSheetDialog(_botSvc, _timeSheetSvc, _tasks.First(t => t.TaskNo == _taskNo)), AfterTimeSheetAdded);
-            }
-            else if (action.Equals(Resources.TimeSheetDialog_Add_To_StopList_Action,
-                StringComparison.InvariantCultureIgnoreCase))
-            {
-                await _botSvc.HideTask(new HiddenTask(_profile, _projectNo, _taskNo));
-                await context.PostAsync($"Задача **{_tasks.First(t => t.TaskNo == _taskNo).TaskDescription}** добавлена в стоп-лист.");
-                await StartAsync(context);
+                var task = _tasks.First(t => t.TaskNo == _taskNo);
+                task.ProjectNo = _projectNo;
+                if (action.Equals(Resources.TimeSheetDialog_WriteOff_Action,
+                    StringComparison.InvariantCultureIgnoreCase))
+                {
+                    context.Call(new AddTimeSheetDialog(_botSvc, _timeSheetSvc, task), AfterTimeSheetAdded);
+                }
+                else if (action.Equals(Resources.TimeSheetDialog_Add_To_StopList_Action,
+                    StringComparison.InvariantCultureIgnoreCase))
+                {
+                    await _botSvc.HideTask(new HiddenTask(_profile, _projectNo, _taskNo));
+                    await context.PostAsync($"Задача **{task.TaskDescription}** добавлена в стоп-лист.");
+                    await StartAsync(context);
+                }
             }
         }
 
@@ -325,11 +329,11 @@ namespace IgorekBot.Dialogs
         //            var response = _timeSheetSvc.GetProjectTasks(new GetProjectTasksRequest { UserId = _profile.EmployeeNo, ProjectId = _projects.First(p => p.ProjectNo == message.Text).ProjectNo });
         //            _tasks = response.ProjectTasks.ToList();
         //
-        //            var reply = CreateMessageWithHeroCard(context, _tasks.Select(p => new CardAction { Title = p.TaskDescription, Value = p.TaskNo }));
+        //            var reply = CreateMessageWithHeroCard(context, _tasks.Select(p => new CardAction { Title = p.TaskDescription, Value = p.ProjectNo }));
         //            await context.PostAsync(reply);
         //            context.Wait<IMessageActivity>(OnTaskSelected);
         //
-        //            //PromptDialog.Choice(context, OnTaskSelected, _tasks.Select(p => p.TaskNo), Resources.TimeSheetDialog_Task_Choice_Message, descriptions: _tasks.Select(p => p.TaskDescription));
+        //            //PromptDialog.Choice(context, OnTaskSelected, _tasks.Select(p => p.ProjectNo), Resources.TimeSheetDialog_Task_Choice_Message, descriptions: _tasks.Select(p => p.TaskDescription));
         //        }
         //
         //        private async Task OnTaskSelected(IDialogContext context, IAwaitable<string> result)

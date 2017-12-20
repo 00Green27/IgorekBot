@@ -33,6 +33,7 @@ namespace IgorekBot.Dialogs
             SetField.NotNull(out _botSvc, nameof(botSvc), botSvc);
             SetField.NotNull(out _timeSheetSvc, nameof(timeSheetSvc), timeSheetSvc);
             SetField.NotNull(out _task, nameof(task), task);
+            SetField.NotNull(out _task, nameof(task), task);
 
         }
 
@@ -92,7 +93,7 @@ namespace IgorekBot.Dialogs
                 Date = _date,
                 EmployeeNo = _profile.EmployeeNo,
                 Hours = _hours,
-                TaskNo = _task.TaskNo
+                ProjectNo = _task.ProjectNo
             });
 
             var message = context.MakeMessage();

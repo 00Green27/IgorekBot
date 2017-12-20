@@ -91,7 +91,7 @@ namespace IgorekBot.Dialogs
 //                if (_tasks.Count != 0)
 //                {
 //                    CancelablePromptChoice<string>.Choice(context, AfterTaskSelected,
-//                        _tasks.Select(t => t.TaskNo.Replace(".", "💩")),
+//                        _tasks.Select(t => t.ProjectNo.Replace(".", "💩")),
 //                        Resources.TimeSheetDialog_Task_Choice_Message,
 //                        descriptions: _tasks.Select(p => p.TaskDescription));
 //                }
@@ -123,11 +123,7 @@ namespace IgorekBot.Dialogs
             //CancelablePromptChoice<string>.Choice(context, AfterTaskActionSelected, list,
             //    Resources.TimeSheetDialog_Main_Message);
 
-            PromptDialog.Confirm(
-                        context,
-                        AfterTaskActionSelected, 
-                    $"Удалить задачу **{_taskDescription}** из стоп-листа?",
-                    promptStyle: PromptStyle.None);
+            PromptDialog.Confirm(context, AfterTaskActionSelected, $"Удалить задачу **{_taskDescription}** из стоп-листа?");
             }
         }
 
