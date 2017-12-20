@@ -126,7 +126,7 @@ namespace IgorekBot.Dialogs
 
                 var hiddenTask = _botSvc.GetUserHiddenTasks(_profile);
 
-                _tasks = response.ProjectTasks.Where(i => hiddenTask.All(e => i.TaskNo != e.TaskNo)).ToList();
+                _tasks = response.ProjectTasks.Where(t => hiddenTask.All(e => t.TaskNo != e.TaskNo) && !string.IsNullOrEmpty(t.AssignmentCode)).ToList();
                 CancelablePromptChoice<string>.Choice(context, AfterTaskSelected, _tasks.Select(t => t.TaskNo.Replace(".", "💩")),
                     Resources.TimeSheetDialog_Task_Choice_Message,
                     descriptions: _tasks.Select(p => p.TaskDescription));
