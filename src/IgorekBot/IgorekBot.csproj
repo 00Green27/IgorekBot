@@ -172,7 +172,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\DateTimeExtensions.cs" />
     <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Models\KeyboardButton.cs" />
     <Compile Include="Modules\MainModule.cs" />
