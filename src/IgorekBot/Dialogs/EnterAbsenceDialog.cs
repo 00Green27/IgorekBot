@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IgorekBot.Helpers;
+using IgorekBot.Models;
 using IgorekBot.Properties;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
@@ -15,14 +16,20 @@ namespace IgorekBot.Dialogs
         private string _type;
         private DateTime _startDate;
         private DateTime _endDate;
+        private readonly KeyboardButton[][] _mainMenu = new KeyboardButton[2][]
+        {
+                    new[] {
+                        new KeyboardButton {Text =  Resources.BackCommand, Value = Resources.BackCommand
+                        }
+                    },
+                    new[] {
+                        new KeyboardButton {Text =  Resources.CreateAbsenceCommand, Value = Resources.CreateAbsenceCommand}
+                    }
+        };
 
         public async Task StartAsync(IDialogContext context)
         {
-            await context.PostAsync(MenuHelper.CreateMenu(context,
-                new List<string> {Resources.BackCommand, Resources.CreateAbsenceCommand}, @"
-**По оплачиваему отпуску** - 31
-**По больничному без больничного** - 10
-            "));
+            await context.PostAsync(MenuHelper.CreateMainMenuMessage(context, _mainMenu, "**По оплачиваему отпуску** - 31\n**По больничному без больничного** - 10"));
             context.Wait(MessageReceivedAsync);
         }
 
@@ -35,6 +42,7 @@ namespace IgorekBot.Dialogs
             }
             else if (message.Text.Equals(Resources.CreateAbsenceCommand, StringComparison.InvariantCultureIgnoreCase))
             {
+                await context.PostAsync(MenuHelper.CreateMenu(context, new List<string>{ Resources.BackCommand }, "Сейчас начнем..."));
                 OnCreate(context);
             }
             else
