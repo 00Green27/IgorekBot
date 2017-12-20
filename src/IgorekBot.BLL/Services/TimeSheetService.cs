@@ -113,7 +113,7 @@ namespace IgorekBot.BLL.Services
             };
         }
 
-        public ServiceResponse AddTimeSheet(AddTimeSheetRequest request, bool doPost = true)
+        public ServiceResponse AddTimeSheet(AddTimeSheetRequest request, bool doPost)
         {
             var errText = string.Empty;
 
