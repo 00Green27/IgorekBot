@@ -117,24 +117,32 @@ namespace IgorekBot.BLL.Services
 
         public ServiceResponse AddTimeSheet(AddTimeSheetRequest request, bool doPost)
         {
-            var errText = string.Empty;
-
-            var result = _client.AddTimeSheet(request.EmployeeNo, request.Date, request.ProjectNo, request.AssignmentCode,
-                request.Hours, request.Comment, ref errText);
-
-            if (string.IsNullOrEmpty(errText) && doPost)
+            try
             {
-                var startOfWeek = request.Date.StartOfWeek();
-                var endOfWeek = startOfWeek.AddDays(6);
+                var errText = string.Empty;
 
-                result = _client.PostTimeSheet(request.EmployeeNo, startOfWeek, endOfWeek, ref errText);
+                var result = _client.AddTimeSheet(request.EmployeeNo, request.Date, request.ProjectNo, request.AssignmentCode,
+                    request.Hours, request.Comment, ref errText);
+
+                if (string.IsNullOrEmpty(errText) && doPost)
+                {
+                    var startOfWeek = request.Date.StartOfWeek();
+                    var endOfWeek = startOfWeek.AddDays(6);
+
+                    result = _client.PostTimeSheet(request.EmployeeNo, startOfWeek, endOfWeek, ref errText);
+                }
+
+                return new ServiceResponse
+                {
+                    Result = result,
+                    ErrorText = errText
+                };
             }
-
-            return new ServiceResponse
+            catch (Exception e)
             {
-                Result = result,
-                ErrorText = errText
-            };
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public ServiceResponse PostTimeSheet(PostTimeSheetRequest request)

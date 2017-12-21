@@ -55,8 +55,14 @@ namespace IgorekBot.Dialogs
                 var workday = _workdays.First(d => d.ToString() == text);
                 _date = workday.Date;
 
+                var h = 1;
+                if (workday.WorkHours < 8)
+                {
+                    h = 8 - (int) workday.WorkHours;
+                }
+
                 CancelablePromptChoice<int>.Choice(context, AfterHoursEntered,
-                    Enumerable.Range(1, 8 - (int) workday.WorkHours), "Количество часов");
+                    Enumerable.Range(1, h), "Количество часов");
             }
         }
 
