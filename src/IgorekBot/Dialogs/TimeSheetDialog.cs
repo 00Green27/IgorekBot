@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
@@ -91,9 +93,7 @@ namespace IgorekBot.Dialogs
                 await context.PostAsync(MenuHelper.CreateMenu(context, new List<string> {Resources.BackCommand},
                     "Получаю список проектов..."));
 
-                var response =
-                    _timeSheetSvc.GetUserProjects(new GetUserProjectsRequest {UserId = _profile.EmployeeNo});
-                _projects = response.Projects.ToList();
+                _projects = GetProjects();
 
                 CancelablePromptChoice<string>.Choice(context, AfterProjectSelected, _projects.Select(p => p.ProjectNo),
                     Resources.TimeSheetDialog_Project_Choice_Message,
@@ -231,6 +231,37 @@ namespace IgorekBot.Dialogs
             reply.Attachments.Add(projectsCard.ToAttachment());
 
             return reply;
+        }
+
+        private List<Projects> GetProjects()
+        {
+            var response = _timeSheetSvc.GetUserProjects(new GetUserProjectsRequest {UserId = _profile.EmployeeNo});
+
+            var projects = response.Projects.ToList();
+
+            var list = new ConcurrentBag<Projects>();
+
+            Parallel.ForEach(projects, p =>
+            {
+                var t = GetTasks(p.ProjectNo);
+                if (t.Any())
+                    list.Add(p);
+            });
+            return list.ToList();
+        }
+
+        private List<ProjectTask> GetTasks(string projectNo)
+        {
+            var response = _timeSheetSvc.GetProjectTasks(new GetProjectTasksRequest
+            {
+                UserId = _profile.EmployeeNo,
+                ProjectId = projectNo
+            });
+
+            var hiddenTask = _botSvc.GetUserHiddenTasks(_profile);
+
+            return response.ProjectTasks.Where(t =>
+                hiddenTask.All(e => t.TaskNo != e.TaskNo) && !string.IsNullOrEmpty(t.AssignmentCode)).ToList();
         }
     }
 }

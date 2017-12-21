@@ -87,13 +87,15 @@ namespace IgorekBot.BLL.Services
             var workdays = new List<Workday>();
             if (result != 1)
             {
-                var days = xmlPort.TimeSheet.Select(t => new Workday
-                {
-                    DayOfWeek = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), t.DayName[0]),
-                    Date = DateTime.ParseExact(t.PostingDate[0], "MM/dd/yy", CultureInfo.InvariantCulture),
-                    WorkHours = double.Parse(t.Quantity[0], CultureInfo.InvariantCulture)
+                var days = xmlPort.TimeSheet
+                    .Where(t => Enum.TryParse(t.DayName[0], out DayOfWeek _)  && DateTime.TryParseExact(t.PostingDate[0], "MM/dd/yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+                    .Select(t => new Workday
+                    {
+                        DayOfWeek = (DayOfWeek) Enum.Parse(typeof(DayOfWeek), t.DayName[0]),
+                        Date = DateTime.ParseExact(t.PostingDate[0], "MM/dd/yy", CultureInfo.InvariantCulture),
+                        WorkHours = double.TryParse(t.Quantity[0], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var tmp) ? tmp : 0
 
-                }).ToList();
+                    }).ToList();
 
 
                 request.StartDate = request.StartDate.AddDays(-1);
