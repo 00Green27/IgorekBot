@@ -20,16 +20,16 @@ namespace IgorekBot
                 builder =>
                 {
                     builder.RegisterModule<MainModule>();
-                    builder.RegisterModule(new AzureModule(Assembly.GetExecutingAssembly()));
-                    var uri = new Uri(ConfigurationManager.AppSettings["DocumentDBUri"]);
-                    var key = ConfigurationManager.AppSettings["DocumentDBKey"];
-
-                    var store = new DocumentDbBotDataStore(uri, key);
-
-                    builder.Register(c => store)
-                        .Keyed<IBotDataStore<BotData>>(AzureModule.Key_DataStore)
-                        .AsSelf()
-                        .SingleInstance();
+//                    builder.RegisterModule(new AzureModule(Assembly.GetExecutingAssembly()));
+//                    var uri = new Uri(ConfigurationManager.AppSettings["DocumentDBUri"]);
+//                    var key = ConfigurationManager.AppSettings["DocumentDBKey"];
+//
+//                    var store = new DocumentDbBotDataStore(uri, key);
+//
+//                    builder.Register(c => store)
+//                        .Keyed<IBotDataStore<BotData>>(AzureModule.Key_DataStore)
+//                        .AsSelf()
+//                        .SingleInstance();
 
                     //var store = new TableBotDataStore(ConfigurationManager.ConnectionStrings["StorageConnectionString"].ConnectionString);
 
