@@ -30,30 +30,46 @@ namespace IgorekBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
             context.UserData.TryGetValue(@"profile", out _profile);
+            await GetStatistics(context, Resources.CurrentWeekCommand, 1);
+        }
 
-            await context.PostAsync(MenuHelper.CreateMenu(context, new List<string> {Resources.BackCommand},
+        private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        {
+            var message = await result;
+            if (message.Text.Equals(Resources.CurrentWeekCommand, StringComparison.InvariantCultureIgnoreCase))
+            {
+                await GetStatistics(context, Resources.PrevWeekCommand);
+            }
+            else if (message.Text.Equals(Resources.PrevWeekCommand, StringComparison.InvariantCultureIgnoreCase))
+            {
+                await GetStatistics(context, Resources.CurrentWeekCommand, 1);
+            } 
+            else
+            {
+                context.Done<object>(null);
+            }
+        }
+
+        private async Task GetStatistics(IDialogContext context, string lastButton, int weekAgo = 0)
+        {
+            await context.PostAsync(MenuHelper.CreateMenu(context, new List<string> { Resources.BackCommand },
                 "Готовлю отчет..."));
 
             var message = context.MakeMessage();
-            var attachment = GenerateStatistics();
-            if (attachment != null)
-                message.Attachments.Add(attachment);
-            else
-                message.Text = "За прошедшую неделю списано 0 часов.";
+            var attachment = GenerateStatistics(lastButton, weekAgo);
+            //if (attachment != null)
+            //    message.Attachments.Add(attachment);
+            //else
+            //    message.Text = "За прошедшую неделю списано 0 часов.";
+            message.Attachments.Add(attachment);
             await context.PostAsync(message);
 
             context.Wait(MessageReceivedAsync);
         }
 
-        private Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
+        private Attachment GenerateStatistics(string lastButton, int weekAgo)
         {
-            context.Done<object>(null);
-            return Task.CompletedTask;
-        }
-
-        private Attachment GenerateStatistics()
-        {
-            var startOfWeek = DateTime.Now.StartOfWeek(1);
+            var startOfWeek = DateTime.Now.StartOfWeek(weekAgo);
             var response = _timeSheetSvc.GetWorkdays(new GetTimeSheetsPerWeekRequest
             {
                 EmployeeNo = _profile.EmployeeNo,
@@ -82,7 +98,11 @@ namespace IgorekBot.Dialogs
             {
                 Title = $"С {startOfWeek:dd.MM.yyyy} по {startOfWeek.AddDays(4):dd.MM.yyyy} списано",
                 Facts = facts,
-                Total = $"{writeOffHours} из 40"
+                Total = $"{writeOffHours} из 40",
+                Buttons = new List<CardAction>
+                {
+                    new  CardAction(ActionTypes.PostBack, lastButton, value: lastButton)
+                }
             };
             return receiptCard.ToAttachment();
         }
