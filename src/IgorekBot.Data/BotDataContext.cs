@@ -16,5 +16,6 @@ namespace IgorekBot.Data
         }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<HiddenTask> HiddenTasks { get; set; }
+        public DbSet<Cookie> Cookies { get; set; }
     }
 }
