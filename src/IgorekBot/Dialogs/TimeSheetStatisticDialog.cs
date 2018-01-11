@@ -75,8 +75,8 @@ namespace IgorekBot.Dialogs
                 return null;
             }).Where(f => f != null).ToList();
             var writeOffHours = facts.Select(f => int.Parse(f.Value)).Sum();
-            if (writeOffHours == 0)
-                return null;
+            //if (writeOffHours == 0)
+            //    return null;
 
             var receiptCard = new ReceiptCard
             {
