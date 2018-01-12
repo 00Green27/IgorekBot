@@ -103,6 +103,10 @@ namespace IgorekBot.Dialogs
             {
                 context.Call(new StoplistDialog(_botSvc, _timeSheetSvc), AfterResume);
             }
+            else if (message.Text.Equals(Resources.NotificationsCommand, StringComparison.InvariantCultureIgnoreCase))
+            {
+                context.Call(new NotificationsDialog(_botSvc, _timeSheetSvc), AfterResume);
+            }
             else
             {
                 await context.PostAsync(Resources.TimeSheetDialog_Didnt_Understand_Message);

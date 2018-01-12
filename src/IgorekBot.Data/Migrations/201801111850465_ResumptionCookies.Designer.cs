@@ -7,13 +7,13 @@ namespace IgorekBot.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Test : IMigrationMetadata
+    public sealed partial class ResumptionCookies : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Test));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ResumptionCookies));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712191630075_Test"; }
+            get { return "201801111850465_ResumptionCookies"; }
         }
         
         string IMigrationMetadata.Source

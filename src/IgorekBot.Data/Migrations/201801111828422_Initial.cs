@@ -3,7 +3,7 @@ namespace IgorekBot.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class HiddenTasks : DbMigration
+    public partial class Initial : DbMigration
     {
         public override void Up()
         {
@@ -13,22 +13,34 @@ namespace IgorekBot.Data.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         TaskNo = c.String(),
+                        ProjectNo = c.String(),
                         UserProfile_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.UserProfiles", t => t.UserProfile_Id)
                 .Index(t => t.UserProfile_Id);
             
-            AddColumn("dbo.UserProfiles", "EmployeeNo", c => c.String());
-            DropColumn("dbo.UserProfiles", "EmployeeCode");
+            CreateTable(
+                "dbo.UserProfiles",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        UserId = c.String(),
+                        UserName = c.String(),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        Email = c.String(),
+                        EmployeeNo = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
         }
         
         public override void Down()
         {
-            AddColumn("dbo.UserProfiles", "EmployeeCode", c => c.String());
             DropForeignKey("dbo.HiddenTasks", "UserProfile_Id", "dbo.UserProfiles");
             DropIndex("dbo.HiddenTasks", new[] { "UserProfile_Id" });
-            DropColumn("dbo.UserProfiles", "EmployeeNo");
+            DropTable("dbo.UserProfiles");
             DropTable("dbo.HiddenTasks");
         }
     }
