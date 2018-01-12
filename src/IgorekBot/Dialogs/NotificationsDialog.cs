@@ -27,7 +27,7 @@ namespace IgorekBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
             context.UserData.TryGetValue(@"profile", out _profile);
-            var cookie = _botSvc.GetCookieAsync(_profile);
+            var cookie = _botSvc.GetCookie(_profile);
             var msg = "Хотите получать оповещения?";
             if(cookie == null)
             {
