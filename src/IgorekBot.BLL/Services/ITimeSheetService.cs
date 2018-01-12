@@ -5,7 +5,7 @@ namespace IgorekBot.BLL.Services
     public interface ITimeSheetService
     {
         AddUserByEMailResponse AddUserByEmail(AddUserByEmailRequest request);
-        ServiceResponse AddTimeSheet(AddTimeSheetRequest request, bool doPost = false);
+        ServiceResponse AddTimeSheet(AddTimeSheetRequest request, bool doPost = true);
         GetUserByIdResponse GetUserById(GetUserByIdRequest request);
         GetUserByPhoneResponse GetUserByPhone(GetUserByPhoneRequest request);
         GetUserProjectsResponse GetUserProjects(GetUserProjectsRequest request);

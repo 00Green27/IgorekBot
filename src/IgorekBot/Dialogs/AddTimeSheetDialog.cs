@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
 using IgorekBot.Data.Models;
@@ -10,7 +9,6 @@ using IgorekBot.Helpers;
 using IgorekBot.Properties;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
-using Microsoft.Bot.Connector;
 
 namespace IgorekBot.Dialogs
 {
@@ -18,14 +16,13 @@ namespace IgorekBot.Dialogs
     public class AddTimeSheetDialog : IDialog<object>
     {
         private readonly IBotService _botSvc;
+        private readonly ProjectTask _task;
         private readonly ITimeSheetService _timeSheetSvc;
-        private UserProfile _profile;
-        private readonly List<string> _mainMenu = new List<string> { Resources.BackCommand, Resources.PrevWeekCommand, Resources.CurrentWeekCommand, Resources.NextWeekCommand };
-        private IEnumerable<Workday> _workdays;
-        private DateTime _date;
-        public int _hours;
         private string _comment;
-        private ProjectTask _task;
+        private DateTime _date;
+        private int _hours;
+        private UserProfile _profile;
+        private IEnumerable<Workday> _workdays;
 
 
         public AddTimeSheetDialog(IBotService botSvc, ITimeSheetService timeSheetSvc, ProjectTask task)
@@ -34,52 +31,45 @@ namespace IgorekBot.Dialogs
             SetField.NotNull(out _timeSheetSvc, nameof(timeSheetSvc), timeSheetSvc);
             SetField.NotNull(out _task, nameof(task), task);
             SetField.NotNull(out _task, nameof(task), task);
-
         }
 
         public async Task StartAsync(IDialogContext context)
         {
             context.UserData.TryGetValue(@"profile", out _profile);
-            await DaysButtons(context, "Текущая неделя", 1);
+            await DaysButtons(context, Resources.CurrentWeekCommand, 1);
         }
 
         private async Task AfterWorkdaySelected(IDialogContext context, IAwaitable<string> result)
         {
             var text = await result;
-            if (text.Equals("Текущая неделя", StringComparison.InvariantCultureIgnoreCase))
+            if (text.Equals(Resources.CurrentWeekCommand, StringComparison.InvariantCultureIgnoreCase))
             {
-                await DaysButtons(context, "Предыдущая неделя");
+                await DaysButtons(context, Resources.PrevWeekCommand);
             }
-            else if(text.Equals("Предыдущая неделя", StringComparison.InvariantCultureIgnoreCase))
+            else if (text.Equals(Resources.PrevWeekCommand, StringComparison.InvariantCultureIgnoreCase))
             {
-                await DaysButtons(context, "Текущая неделя", 1);
+                await DaysButtons(context, Resources.CurrentWeekCommand, 1);
             }
             else
             {
                 var workday = _workdays.First(d => d.ToString() == text);
                 _date = workday.Date;
-                
-                CancelablePromptChoice<int>.Choice(context, AfterHoursEntered, Enumerable.Range(1, 8 - (int) workday.WorkHours), "Количество часов");
 
+                var h = 1;
+                if (workday.WorkHours < 8)
+                {
+                    h = 8 - (int) workday.WorkHours;
+                }
 
-                //                var promptOption = new PromptOptions<long>("Количество часов");
-                //                var prompt = new PromptDialog.PromptInt64(promptOption, min: 1, max: 8);
-                //var prompt = new PromptStringRegex("Количество часов", "[1-8]");
-
-                //context.Call(prompt, AfterHoursEntered);
-                //                var getTimeSheetsPerDayResponse = _timeSheetSvc.GetTimeSheetsPerDay(new GetTimeSheetsPerDayRequest
-                //                {
-                //                    EmployeeNo = _profile.EmployeeNo,
-                //                    Date = _workdays.First(d => d.ToString() == text).Date
-                //                });
+                CancelablePromptChoice<int>.Choice(context, AfterHoursEntered,
+                    Enumerable.Range(1, h), "Количество часов");
             }
-
         }
 
         private async Task AfterHoursEntered(IDialogContext context, IAwaitable<int> result)
         {
             _hours = await result;
-            var prompt = new PromptDialog.PromptString("Коментарий", null, 3);
+            var prompt = new PromptDialog.PromptString("Коментарий к задаче", null, 3);
             context.Call(prompt, AfterCommenEntered);
         }
 
@@ -95,17 +85,12 @@ namespace IgorekBot.Dialogs
                 Hours = _hours,
                 ProjectNo = _task.ProjectNo
             });
-            
+
             var message = context.MakeMessage();
             if (response.Result == 1)
-            {
-                //context.Fail(new Exception(response.ErrorText));
                 message.Text = response.ErrorText;
-            }
             else
-            {
-                message.Text = "ТШ создан";
-            }
+                message.Text = "**ТШ создан**";
             await context.PostAsync(message);
             context.Done<object>(null);
         }

@@ -87,13 +87,15 @@ namespace IgorekBot.BLL.Services
             var workdays = new List<Workday>();
             if (result != 1)
             {
-                var days = xmlPort.TimeSheet.Select(t => new Workday
-                {
-                    DayOfWeek = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), t.DayName[0]),
-                    Date = DateTime.ParseExact(t.PostingDate[0], "MM/dd/yy", CultureInfo.InvariantCulture),
-                    WorkHours = double.Parse(t.Quantity[0], CultureInfo.InvariantCulture)
+                var days = xmlPort.TimeSheet
+                    .Where(t => Enum.TryParse(t.DayName[0], out DayOfWeek _)  && DateTime.TryParseExact(t.PostingDate[0], "MM/dd/yy", CultureInfo.InvariantCulture, DateTimeStyles.None, out _))
+                    .Select(t => new Workday
+                    {
+                        DayOfWeek = (DayOfWeek) Enum.Parse(typeof(DayOfWeek), t.DayName[0]),
+                        Date = DateTime.ParseExact(t.PostingDate[0], "MM/dd/yy", CultureInfo.InvariantCulture),
+                        WorkHours = double.TryParse(t.Quantity[0], NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out var tmp) ? tmp : 0
 
-                }).ToList();
+                    }).ToList();
 
 
                 request.StartDate = request.StartDate.AddDays(-1);
@@ -113,26 +115,34 @@ namespace IgorekBot.BLL.Services
             };
         }
 
-        public ServiceResponse AddTimeSheet(AddTimeSheetRequest request, bool doPost = true)
+        public ServiceResponse AddTimeSheet(AddTimeSheetRequest request, bool doPost)
         {
-            var errText = string.Empty;
-
-            var result = _client.AddTimeSheet(request.EmployeeNo, request.Date, request.ProjectNo, request.AssignmentCode,
-                request.Hours, request.Comment, ref errText);
-
-            if (string.IsNullOrEmpty(errText) && doPost)
+            try
             {
-                var startOfWeek = request.Date.StartOfWeek();
-                var endOfWeek = startOfWeek.AddDays(6);
+                var errText = string.Empty;
 
-                result = _client.PostTimeSheet(request.EmployeeNo, startOfWeek, endOfWeek, ref errText);
+                var result = _client.AddTimeSheet(request.EmployeeNo, request.Date, request.ProjectNo, request.AssignmentCode,
+                    request.Hours, request.Comment, ref errText);
+
+                if (string.IsNullOrEmpty(errText) && doPost)
+                {
+                    var startOfWeek = request.Date.StartOfWeek();
+                    var endOfWeek = startOfWeek.AddDays(6);
+
+                    result = _client.PostTimeSheet(request.EmployeeNo, startOfWeek, endOfWeek, ref errText);
+                }
+
+                return new ServiceResponse
+                {
+                    Result = result,
+                    ErrorText = errText
+                };
             }
-
-            return new ServiceResponse
+            catch (Exception e)
             {
-                Result = result,
-                ErrorText = errText
-            };
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public ServiceResponse PostTimeSheet(PostTimeSheetRequest request)

@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
+using IgorekBot.Properties;
 using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Internals.Fibers;
 using Microsoft.Bot.Connector;
 using NMSService.NMSServiceReference;
-using Microsoft.Bot.Builder.Internals.Fibers;
-using IgorekBot.Properties;
 
 namespace IgorekBot.Dialogs
 {
@@ -26,7 +25,6 @@ namespace IgorekBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-
             await context.PostAsync(CreateReply(context, Resources.AuthenticationDialog_EMail_Prompt));
 
             context.Wait(MessageReceivedEmailRegistration);
@@ -48,13 +46,14 @@ namespace IgorekBot.Dialogs
         }
 
 
-        public async Task MessageReceivedEmailRegistration(IDialogContext context, IAwaitable<IMessageActivity> argument)
+        public async Task MessageReceivedEmailRegistration(IDialogContext context,
+            IAwaitable<IMessageActivity> argument)
         {
             var message = await argument;
 
             if (IsValidEmail(message.Text))
             {
-                var response = _service.AddUserByEmail(new AddUserByEmailRequest { Email = message.Text });
+                var response = _service.AddUserByEmail(new AddUserByEmailRequest {Email = message.Text});
 
                 if (response.Result == 1)
                 {
@@ -64,7 +63,8 @@ namespace IgorekBot.Dialogs
                 else
                 {
                     _email = message.Text;
-                    await context.PostAsync(CreateReply(context, string.Format(Resources.AuthenticationDialog_Code_Prompt, response.FirstName)));
+                    await context.PostAsync(CreateReply(context,
+                        string.Format(Resources.AuthenticationDialog_Code_Prompt, response.FirstName)));
                     context.Wait(MessageReceivedActivationCode);
                 }
             }
@@ -74,7 +74,7 @@ namespace IgorekBot.Dialogs
                 context.Wait(MessageReceivedEmailRegistration);
             }
         }
-        
+
         public async Task MessageReceivedActivationCode(IDialogContext context, IAwaitable<IMessageActivity> argument)
         {
             var code = await argument;
@@ -93,7 +93,7 @@ namespace IgorekBot.Dialogs
 
             context.Wait(MessageReceivedActivationCode);
         }
-        
+
         public static IMessageActivity CreateReply(IDialogContext context, string text)
         {
             var message = context.MakeMessage();
@@ -123,5 +123,4 @@ namespace IgorekBot.Dialogs
             }
         }
     }
-
 }

@@ -65,8 +65,8 @@ namespace IgorekBot.Dialogs
             IReadOnlyList<T> options = null, IReadOnlyList<string> descriptions = null, string speak = null)
         {
             if (!string.IsNullOrEmpty(_promptOptions.CancelPrompt))
-                prompt += Environment.NewLine + _promptOptions.CancelPrompt;
-            //prompt += Environment.NewLine + (_promptOptions.CancelPrompt ?? _promptOptions.DefaultCancelPrompt);
+                prompt += Environment.NewLine + (_promptOptions.CancelPrompt ?? _promptOptions.DefaultCancelPrompt);
+
             return base.MakePrompt(context, prompt, options, descriptions);
         }
     }
