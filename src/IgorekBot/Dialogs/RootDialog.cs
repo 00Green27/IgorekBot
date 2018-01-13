@@ -6,6 +6,7 @@ using IgorekBot.BLL.Services;
 using IgorekBot.Data.Models;
 using IgorekBot.Helpers;
 using IgorekBot.Properties;
+using Microsoft.Bot.Builder.ConnectorEx;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Dialogs.Internals;
 using Microsoft.Bot.Builder.Internals.Fibers;
@@ -39,7 +40,7 @@ namespace IgorekBot.Dialogs
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
-
+            var conversationReference = context.Activity.ToConversationReference();
             using (var scope = DialogModule.BeginLifetimeScope(Conversation.Container, message))
             {
                 if (_profile != null && string.IsNullOrEmpty(_profile.EmployeeNo))
