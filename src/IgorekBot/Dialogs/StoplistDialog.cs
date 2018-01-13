@@ -103,8 +103,7 @@ namespace IgorekBot.Dialogs
                 _taskDescription = _tasks.First(t => t.TaskNo == _taskNo).TaskDescription;
 
                 PromptDialog.Confirm(context, AfterTaskActionSelected,
-                    //$"Удалить задачу **{_taskDescription}** из стоп-листа?");
-                    $"Удалить задачу {_taskDescription} из стоп-листа?");
+                    $"Удалить задачу **{_taskDescription.Replace("_", "-")}** из стоп-листа?");
             }
         }
 
@@ -115,14 +114,11 @@ namespace IgorekBot.Dialogs
             {
                 await _botSvc.ShowTask(new HiddenTask(_profile, _projectNo, _taskNo));
                 await context.PostAsync(
-                    //$"Задача **{_taskDescription}** удалена из стоп-листа.");
-                    $"Задача {_taskDescription} удалена из стоп-листа.");
+                    $"Задача **{_taskDescription.Replace("_", "-")}** удалена из стоп-листа.");
             }
             else
             {
-                await context.PostAsync(
-                    //$"Удаление задачи **{_taskDescription}** из стоп-листа отменено.");
-                    $"Удаление задачи {_taskDescription} из стоп-листа отменено.");
+                await context.PostAsync($"Удаление задачи **{_taskDescription.Replace("_", "-")}** из стоп-листа отменено.");
             }
             context.Done(true);
         }

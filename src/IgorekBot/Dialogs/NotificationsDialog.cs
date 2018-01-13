@@ -45,13 +45,14 @@ namespace IgorekBot.Dialogs
                     var conversationRef = context.Activity.ToConversationReference();
                     var encode = UrlToken.Encode(conversationRef);
                     await _botSvc.SaveConversationReference(_profile, encode);
+                    await context.PostAsync("Вы подписались на уведомление.");
                 }
                 else
                 {
                     await _botSvc.RemoveConversationReference(_profile);
+                    await context.PostAsync("Вы отписались от уведомлений.");
                 }
             }
-            await context.PostAsync($"Хорошо.");
             context.Done(true);
         }
     }
