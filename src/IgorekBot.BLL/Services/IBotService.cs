@@ -15,5 +15,6 @@ namespace IgorekBot.BLL.Services
         Task SaveConversationReference(UserProfile profile, string encodeReference);
         Task RemoveConversationReference(UserProfile profile);
         string GetConversationReference(UserProfile profile);
+        List<string> GetConversationReferences();
     }
 }

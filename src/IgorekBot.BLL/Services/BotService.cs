@@ -90,5 +90,13 @@ namespace IgorekBot.BLL.Services
                 return ctx.ConversationReferences.FirstOrDefault(t => t.Id == profile.Id)?.EncodedReference;
             }
         }
+
+        public List<string> GetConversationReferences()
+        {
+            using (var ctx = new BotDataContext())
+            {
+                return ctx.ConversationReferences.Select(r => r.EncodedReference).ToList();
+            }
+        }
     }
 }

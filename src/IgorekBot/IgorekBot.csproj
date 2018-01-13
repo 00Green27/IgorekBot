@@ -155,6 +155,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Dialogs\AddTimeSheetDialog.cs" />
     <Compile Include="Dialogs\AuthenticationDialog.cs" />
     <Compile Include="Dialogs\CancelablePromptChoice.cs" />
