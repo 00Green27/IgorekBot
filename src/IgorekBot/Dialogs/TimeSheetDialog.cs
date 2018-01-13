@@ -8,6 +8,7 @@ using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
 using IgorekBot.Data.Models;
 using IgorekBot.Helpers;
+using IgorekBot.Models;
 using IgorekBot.Properties;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Builder.Internals.Fibers;
@@ -21,33 +22,33 @@ namespace IgorekBot.Dialogs
     {
         private readonly IBotService _botSvc;
 
-        private readonly IEnumerable<string> _mainMenu = new List<string>
-        {
-            Resources.BackCommand,
-            Resources.HoursCommand,
-            Resources.ProjectsCommand,
-            Resources.NotificationsCommand,
-            Resources.StoplistCommand
-        };
+//        private readonly IEnumerable<string> _mainMenu = new List<string>
+//        {
+//            Resources.BackCommand,
+//            Resources.HoursCommand,
+//            Resources.ProjectsCommand,
+//            Resources.NotificationsCommand,
+//            Resources.StoplistCommand
+//        };
 
         private readonly ITimeSheetService _timeSheetSvc;
         private UserProfile _profile;
 
-//        private readonly KeyboardButton[][] _mainMenu = new KeyboardButton[3][]
-//        {
-//            new[] {
-//                new KeyboardButton {Text =  Resources.BackCommand, Value = Resources.BackCommand
-//                }
-//            },
-//            new[] {
-//                new KeyboardButton {Text =  Resources.HoursCommand, Value = Resources.HoursCommand},
-//                new KeyboardButton {Text =  Resources.ProjectsCommand, Value = Resources.ProjectsCommand}
-//            },
-//            new[] {
-//                new KeyboardButton {Text =  Resources.NotificationsCommand, Value = Resources.NotificationsCommand},
-//                new KeyboardButton {Text =  Resources.StoplistCommand, Value = Resources.StoplistCommand}
-//            }
-//        };
+        private readonly KeyboardButton[][] _mainMenu = new KeyboardButton[3][]
+        {
+            new[] {
+                new KeyboardButton {Text =  Resources.BackCommand, Value = Resources.BackCommand
+                }
+            },
+            new[] {
+                new KeyboardButton {Text =  Resources.HoursCommand, Value = Resources.HoursCommand},
+                new KeyboardButton {Text =  Resources.ProjectsCommand, Value = Resources.ProjectsCommand}
+            },
+            new[] {
+                new KeyboardButton {Text =  Resources.NotificationsCommand, Value = Resources.NotificationsCommand},
+                new KeyboardButton {Text =  Resources.StoplistCommand, Value = Resources.StoplistCommand}
+            }
+        };
 
 
         private string _projectNo;
@@ -64,7 +65,8 @@ namespace IgorekBot.Dialogs
 
         public async Task StartAsync(IDialogContext context)
         {
-            var reply = MenuHelper.CreateMenu(context, _mainMenu, Resources.TimeSheetDialog_Main_Message);
+//            var reply = MenuHelper.CreateMenu(context, _mainMenu, Resources.TimeSheetDialog_Main_Message);
+            var reply = MenuHelper.CreateMainMenuMessage(context, _mainMenu, Resources.TimeSheetDialog_Main_Message);
             await context.PostAsync(reply);
 
             context.Wait(MessageReceivedAsync);
