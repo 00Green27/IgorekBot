@@ -56,7 +56,7 @@ namespace IgorekBot.Controllers
         private async Task<int> GetWriteOffHoursAsync(string userId)
         {
             var profile = await _botSvc.GetUserProfileByUserId(userId);
-            int weekAgo = DateTime.Today.DayOfWeek > DayOfWeek.Friday ? 0 : 1;
+            int weekAgo = 0;// DateTime.Today.DayOfWeek > DayOfWeek.Friday ? 0 : 1;
             var startOfWeek = DateTime.Now.StartOfWeek(weekAgo);
             var response = _timeSheetSvc.GetWorkdays(new GetTimeSheetsPerWeekRequest
             {
