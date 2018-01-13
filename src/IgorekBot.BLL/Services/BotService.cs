@@ -52,26 +52,42 @@ namespace IgorekBot.BLL.Services
             using (var ctx = new BotDataContext())
             {
                 var taskForRemove = ctx.HiddenTasks.FirstOrDefault(t => t.ProjectNo == task.ProjectNo && t.TaskNo == task.TaskNo && t.UserProfile.Id == task.UserProfile.Id);
-                if(taskForRemove != null)
+                if (taskForRemove != null)
+                {
                     ctx.HiddenTasks.Remove(taskForRemove);
+                    await ctx.SaveChangesAsync();
+                }
+            }
+        }
+
+        public async Task SaveConversationReference(UserProfile profile, string encodedReference)
+        {
+            using (var ctx = new BotDataContext())
+            {
+                ctx.UserProfiles.Attach(profile);
+                ctx.ConversationReferences.Add(new ConversationReference { UserProfile = profile, EncodedReference = encodedReference});
                 await ctx.SaveChangesAsync();
             }
         }
 
-        public async Task SaveCookie(UserProfile profile, Cookie cookie)
+        public async Task RemoveConversationReference(UserProfile profile)
         {
             using (var ctx = new BotDataContext())
             {
-
-                await ctx.SaveChangesAsync();
-            }
+                var conversationRef = ctx.ConversationReferences.FirstOrDefault(r => r.UserProfile.Id == profile.Id);
+                if (conversationRef != null)
+                {
+                    ctx.ConversationReferences.Remove(conversationRef);
+                    await ctx.SaveChangesAsync();
+                }
+        }
         }
 
-        public Cookie GetCookie(UserProfile profile)
+        public string GetConversationReference(UserProfile profile)
         {
             using (var ctx = new BotDataContext())
             {
-                return ctx.Cookies.FirstOrDefault(t => t.Id == profile.Id);
+                return ctx.ConversationReferences.FirstOrDefault(t => t.Id == profile.Id)?.EncodedReference;
             }
         }
     }

@@ -12,7 +12,8 @@ namespace IgorekBot.BLL.Services
         Task HideTask(HiddenTask hiddenTask);
         List<HiddenTask> GetUserHiddenTasks(UserProfile profile);
         Task ShowTask(HiddenTask hiddenTask);
-        Task SaveCookie(UserProfile profile, Cookie cookie);
-        Cookie GetCookie(UserProfile profile);
+        Task SaveConversationReference(UserProfile profile, string encodeReference);
+        Task RemoveConversationReference(UserProfile profile);
+        string GetConversationReference(UserProfile profile);
     }
 }

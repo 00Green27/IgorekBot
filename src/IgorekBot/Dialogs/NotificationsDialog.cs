@@ -1,13 +1,10 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Threading.Tasks;
-using Microsoft.Bot.Builder.Internals.Fibers;
 using IgorekBot.BLL.Services;
 using IgorekBot.Data.Models;
-using Microsoft.Bot.Connector;
+using Microsoft.Bot.Builder.ConnectorEx;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Builder.Internals.Fibers;
 
 namespace IgorekBot.Dialogs
 {
@@ -16,6 +13,7 @@ namespace IgorekBot.Dialogs
     {
         private readonly IBotService _botSvc;
         private readonly ITimeSheetService _timeSheetSvc;
+        private bool _doSubscribe;
         private UserProfile _profile;
 
         public NotificationsDialog(IBotService botSvc, ITimeSheetService timeSheetSvc)
@@ -27,11 +25,12 @@ namespace IgorekBot.Dialogs
         public async Task StartAsync(IDialogContext context)
         {
             context.UserData.TryGetValue(@"profile", out _profile);
-            var cookie = _botSvc.GetCookie(_profile);
-            var msg = "Хотите получать оповещения?";
-            if(cookie == null)
+            var reference = _botSvc.GetConversationReference(_profile);
+            var msg = "Хотите отключить оповещения?";
+            if (reference == null)
             {
-                msg = "Хотите отключить оповещения?";
+                _doSubscribe = true;
+                msg = "Хотите получать оповещения?"; 
             }
             PromptDialog.Confirm(context, AfterNotificationsSelected, msg);
         }
@@ -41,7 +40,16 @@ namespace IgorekBot.Dialogs
             var confirm = await result;
             if (confirm)
             {
-                //await _botSvc.GetCookieAsync();
+                if (_doSubscribe)
+                {
+                    var conversationRef = context.Activity.ToConversationReference();
+                    var encode = UrlToken.Encode(conversationRef);
+                    await _botSvc.SaveConversationReference(_profile, encode);
+                }
+                else
+                {
+                    await _botSvc.RemoveConversationReference(_profile);
+                }
             }
             await context.PostAsync($"Хорошо.");
             context.Done(true);

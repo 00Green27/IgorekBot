@@ -14,6 +14,6 @@ namespace IgorekBot.Data.Models
         public string Email { get; set; }
         public string EmployeeNo { get; set; }
         public List<HiddenTask> HiddenTasks { get; set; }
-        public Cookie Cookie { get; set; }
+        public ConversationReference ConversationReference { get; set; }
     }
 }
