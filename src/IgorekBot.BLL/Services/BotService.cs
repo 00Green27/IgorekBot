@@ -58,7 +58,7 @@ namespace IgorekBot.BLL.Services
             }
         }
 
-        public async Task SaveCookieAsync(UserProfile profile, Cookie cookie)
+        public async Task SaveCookie(UserProfile profile, Cookie cookie)
         {
             using (var ctx = new BotDataContext())
             {
@@ -67,11 +67,11 @@ namespace IgorekBot.BLL.Services
             }
         }
 
-        public async Task<Cookie> GetCookieAsync(UserProfile profile)
+        public Cookie GetCookie(UserProfile profile)
         {
             using (var ctx = new BotDataContext())
             {
-                return await ctx.Cookies.Where(t => t.Id == profile.Id).FirstOrDefaultAsync();
+                return ctx.Cookies.FirstOrDefault(t => t.Id == profile.Id);
             }
         }
     }
