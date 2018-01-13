@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using IgorekBot.BLL.Models;
 using IgorekBot.BLL.Services;
+using IgorekBot.Helpers;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 
@@ -21,10 +24,12 @@ namespace IgorekBot.Controllers
             = ConfigurationManager.AppSettings["MicrosoftAppPassword"];
 
         private readonly IBotService _botSvc;
+        private readonly ITimeSheetService _timeSheetSvc;
 
         public NotificationController()
         {
             _botSvc = new BotService();
+            _timeSheetSvc = new TimeSheetService();
         }
 
         [HttpGet]
@@ -40,10 +45,27 @@ namespace IgorekBot.Controllers
 
                 var connector = new ConnectorClient(serviceUrl, MicrosoftAppId, MicrosoftAppPassword);
                 var existingConversationMessage = convRef.GetPostToUserMessage();
-                existingConversationMessage.Text = "Не забудь заполнить таймшит за текущую неделю.";
+                var writeOffHours = await GetWriteOffHoursAsync(convRef.User.Id);
+                existingConversationMessage.Text = $"Не забудь заполнить таймшит за текущую неделю. Списано часов: {writeOffHours}";
                 connector.Conversations.SendToConversation(existingConversationMessage);
             }
             return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+
+        private async Task<int> GetWriteOffHoursAsync(string userId)
+        {
+            var profile = await _botSvc.GetUserProfileByUserId(userId);
+            int weekAgo = DateTime.Today.DayOfWeek > DayOfWeek.Friday ? 0 : 1;
+            var startOfWeek = DateTime.Now.StartOfWeek(weekAgo);
+            var response = _timeSheetSvc.GetWorkdays(new GetTimeSheetsPerWeekRequest
+            {
+                EmployeeNo = profile.EmployeeNo,
+                StartDate = startOfWeek,
+                EndDate = startOfWeek.AddDays(4)
+            });
+
+            return (int) response.Workdays.Select(t => t.WorkHours).Sum();
         }
     }
 }
