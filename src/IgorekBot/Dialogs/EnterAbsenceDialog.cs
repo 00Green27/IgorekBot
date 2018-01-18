@@ -75,8 +75,11 @@ namespace IgorekBot.Dialogs
         private async Task AfterDeptSelected(IDialogContext context, IAwaitable<string> result)
         {
             _dept = await result;
-            if(_dept == null)
+            if (_dept == null)
+            {
                 context.Done<object>(null);
+                return;
+            }
 
             var list = new List<string>
             {
@@ -97,7 +100,10 @@ namespace IgorekBot.Dialogs
         {
             _type = await result;
             if (_type == null)
+            {
                 context.Done<object>(null);
+                return;
+            }
 
             var dialog = new PromptDateTime("Дата начала отсутствия (первый день)");
             context.Call(dialog, AfterStartDateEntered);
@@ -107,7 +113,10 @@ namespace IgorekBot.Dialogs
         {
             _startDate = await result;
             if (_startDate == null)
+            {
                 context.Done<object>(null);
+                return;
+            }
 
             var dialog = new PromptDateTime("Дата окончания отсутствия (последний день)");
             context.Call(dialog, AfterEndDateEntered);
@@ -117,7 +126,10 @@ namespace IgorekBot.Dialogs
         {
             _endDate = await result;
             if (_endDate == null)
+            {
                 context.Done<object>(null);
+                return;
+            }
 
             await context.PostAsync("Заявка на отсутсвие создана");
             context.Done<object>(null);
