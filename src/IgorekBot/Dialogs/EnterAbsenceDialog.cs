@@ -27,6 +27,8 @@ namespace IgorekBot.Dialogs
                     }
         };
 
+        private string _pms;
+
         public async Task StartAsync(IDialogContext context)
         {
             await context.PostAsync(MenuHelper.CreateMainMenuMessage(context, _mainMenu, "**По оплачиваему отпуску** - 31\n**По больничному без больничного** - 10"));
@@ -126,6 +128,19 @@ namespace IgorekBot.Dialogs
         {
             _endDate = await result;
             if (_endDate == null)
+            {
+                context.Done<object>(null);
+                return;
+            }
+
+            var dialog = new PromptDialog.PromptString("Введите адреса электронной почты руководителей текущих проектов через точку с запятой:", "Попробуйте еще раз", 2);
+            context.Call(dialog, AfterProjectManagersEntered);
+        }
+
+        private async Task AfterProjectManagersEntered(IDialogContext context, IAwaitable<string> result)
+        {
+            _pms = await result;
+            if (_pms == null)
             {
                 context.Done<object>(null);
                 return;
